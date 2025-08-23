@@ -4,7 +4,7 @@ import { ParticleBackground } from "@/components/ParticleBackground";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Clock, Heart, Users, Shield, BedDouble } from "lucide-react";
+import { MapPin, Clock, Heart, Users, Shield, BedDouble, Camera, Utensils, Activity, Navigation, Lightbulb } from "lucide-react";
 import { usePlans } from "@/contexts/PlanContext";
 import { useToast } from "@/hooks/use-toast";
 import { bangaloreDestinations, keralaDestinations, tamilNaduDestinations, type Destination } from "@/data/destinations";
@@ -102,6 +102,20 @@ const DestinationDetail = () => {
     toast({ title: "Added to plans!", description: `${destination.name} has been added to your travel dashboard.` });
   };
 
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'temple': return '🏛️';
+      case 'nature': return '🌿';
+      case 'adventure': return '🏔️';
+      case 'cultural': return '🎭';
+      case 'beach': return '🏖️';
+      case 'historical': return '📜';
+      case 'shopping': return '🛍️';
+      case 'food': return '🍽️';
+      default: return '📍';
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background relative pt-16">
       <ParticleBackground theme="minimal" />
@@ -179,6 +193,105 @@ const DestinationDetail = () => {
               </Card>
             )}
 
+            {destination.touristPlaces && destination.touristPlaces.length > 0 && (
+              <Card className="bg-card/80 backdrop-blur-sm">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <Camera className="w-5 h-5 mr-2" />
+                    Must-Visit Tourist Places
+                  </h3>
+                  <div className="grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
+                    {destination.touristPlaces.map((place, i) => (
+                      <div key={i} className="p-4 rounded-lg border border-border/50 bg-background/50 hover:bg-background/70 transition-colors">
+                        <div className="flex items-start gap-3">
+                          <span className="text-2xl">{getCategoryIcon(place.category)}</span>
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-foreground mb-1">{place.name}</h4>
+                            <p className="text-sm text-muted-foreground leading-relaxed">{place.description}</p>
+                            <Badge variant="outline" className="mt-2 text-xs capitalize">
+                              {place.category}
+                            </Badge>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {destination.activities && destination.activities.length > 0 && (
+              <Card className="bg-card/80 backdrop-blur-sm">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold mb-3 flex items-center">
+                    <Activity className="w-5 h-5 mr-2" />
+                    Things to Do
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {destination.activities.map((activity, i) => (
+                      <Badge key={i} variant="secondary" className="text-sm">
+                        {activity}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {destination.localCuisine && destination.localCuisine.length > 0 && (
+              <Card className="bg-card/80 backdrop-blur-sm">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold mb-3 flex items-center">
+                    <Utensils className="w-5 h-5 mr-2" />
+                    Local Cuisine & Specialties
+                  </h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    {destination.localCuisine.map((food, i) => (
+                      <div key={i} className="p-3 rounded-md bg-muted/50 text-center">
+                        <span className="text-sm font-medium">{food}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {destination.nearbyAttractions && destination.nearbyAttractions.length > 0 && (
+              <Card className="bg-card/80 backdrop-blur-sm">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold mb-3 flex items-center">
+                    <Navigation className="w-5 h-5 mr-2" />
+                    Nearby Attractions
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {destination.nearbyAttractions.map((attraction, i) => (
+                      <Badge key={i} variant="outline" className="text-sm">
+                        📍 {attraction}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {destination.travelTips && destination.travelTips.length > 0 && (
+              <Card className="bg-card/80 backdrop-blur-sm">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-semibold mb-3 flex items-center">
+                    <Lightbulb className="w-5 h-5 mr-2" />
+                    Travel Tips
+                  </h3>
+                  <ul className="space-y-2">
+                    {destination.travelTips.map((tip, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <span className="text-primary mt-1">💡</span>
+                        <span>{tip}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            )}
           </div>
 
           <div className="space-y-6">

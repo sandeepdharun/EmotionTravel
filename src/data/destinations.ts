@@ -15,6 +15,15 @@ export type Destination = {
   idealGroupSize?: string;
   groupDescription?: string;
   topSpots?: string[];
+  touristPlaces?: {
+    name: string;
+    description: string;
+    category: "temple" | "nature" | "adventure" | "cultural" | "beach" | "historical" | "shopping" | "food";
+  }[];
+  localCuisine?: string[];
+  activities?: string[];
+  nearbyAttractions?: string[];
+  travelTips?: string[];
 };
 
 export const tamilNaduDestinations: Destination[] = [
@@ -28,7 +37,18 @@ export const tamilNaduDestinations: Destination[] = [
     culturalHighlights: ["Tea Garden Tours", "Toy Train Ride", "Rose Garden"],
     safetyLevel: "high" as const,
     bestTime: "Apr-Jun",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "Botanical Garden", description: "240-acre garden with over 1,000 species of plants and trees", category: "nature" },
+      { name: "Ooty Lake", description: "Artificial lake perfect for boating and peaceful walks", category: "nature" },
+      { name: "Doddabetta Peak", description: "Highest peak in the Nilgiris offering panoramic views", category: "nature" },
+      { name: "Tea Museum", description: "Learn about tea processing and enjoy fresh tea tastings", category: "cultural" },
+      { name: "Rose Garden", description: "Beautiful garden with thousands of rose varieties", category: "nature" }
+    ],
+    localCuisine: ["Nilgiri Tea", "Homemade Chocolates", "Varkey (local biscuit)", "Eucalyptus Honey"],
+    activities: ["Toy Train Ride", "Trekking", "Boating", "Photography", "Tea Garden Tours"],
+    nearbyAttractions: ["Coonoor", "Kotagiri", "Pykara Falls", "Emerald Lake"],
+    travelTips: ["Carry warm clothes even in summer", "Book toy train tickets in advance", "Best photography during early morning"]
   },
   {
     name: "Mahabalipuram",
@@ -40,7 +60,18 @@ export const tamilNaduDestinations: Destination[] = [
     culturalHighlights: ["Shore Temple", "Rock Sculptures", "Beach Meditation"],
     safetyLevel: "high" as const,
     bestTime: "Nov-Mar",
-    priceRange: "$" as const
+    priceRange: "$" as const,
+    touristPlaces: [
+      { name: "Shore Temple", description: "7th-century structural temple facing the Bay of Bengal", category: "temple" },
+      { name: "Pancha Rathas", description: "Five monolithic rock-cut temples shaped like chariots", category: "historical" },
+      { name: "Arjuna's Penance", description: "Massive rock relief depicting scenes from Hindu mythology", category: "historical" },
+      { name: "Krishna's Butter Ball", description: "Giant natural rock boulder balancing on a slope", category: "nature" },
+      { name: "Mahabalipuram Beach", description: "Pristine beach perfect for relaxation and water sports", category: "beach" }
+    ],
+    localCuisine: ["Fresh Seafood", "Filter Coffee", "Masala Dosa", "Coconut Rice"],
+    activities: ["Rock Climbing", "Beach Volleyball", "Sculpture Workshops", "Sunrise Meditation"],
+    nearbyAttractions: ["Covelong Beach", "Dakshinachitra", "Crocodile Bank", "Vedanthangal Bird Sanctuary"],
+    travelTips: ["Visit early morning to avoid crowds", "Hire local guides for historical insights", "Carry sun protection"]
   },
   {
     name: "Kodaikanal",
@@ -52,7 +83,18 @@ export const tamilNaduDestinations: Destination[] = [
     culturalHighlights: ["Kodai Lake", "Coaker's Walk", "Pine Forest"],
     safetyLevel: "high" as const,
     bestTime: "Apr-Jun",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "Kodai Lake", description: "Star-shaped artificial lake perfect for boating and cycling", category: "nature" },
+      { name: "Coaker's Walk", description: "1-km pedestrian path with stunning valley views", category: "nature" },
+      { name: "Bryant Park", description: "Botanical garden with colorful flowers and greenhouse", category: "nature" },
+      { name: "Pillar Rocks", description: "Three giant rock pillars standing 400 feet high", category: "nature" },
+      { name: "Silver Cascade Falls", description: "165-foot waterfall cascading down rocky terrain", category: "nature" }
+    ],
+    localCuisine: ["Homemade Chocolates", "Plums", "Pears", "Eucalyptus Oil", "Pine Forest Honey"],
+    activities: ["Boating", "Horse Riding", "Trekking", "Cycling", "Nature Photography"],
+    nearbyAttractions: ["Berijam Lake", "Dolphin's Nose", "Green Valley View", "Fairy Falls"],
+    travelTips: ["Book accommodation in advance during peak season", "Carry warm clothes", "Try local homemade chocolates"]
   },
   {
     name: "Kanyakumari",
@@ -139,7 +181,18 @@ export const keralaDestinations: Destination[] = [
     culturalHighlights: ["Houseboat Experience", "Backwater Villages", "Coir Making"],
     safetyLevel: "high" as const,
     bestTime: "Nov-Feb",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "Alleppey Backwaters", description: "Network of canals, rivers, and lakes perfect for houseboat cruises", category: "nature" },
+      { name: "Alleppey Beach", description: "Beautiful beach with lighthouse and pier", category: "beach" },
+      { name: "Krishnapuram Palace", description: "18th-century palace with traditional Kerala architecture", category: "historical" },
+      { name: "Marari Beach", description: "Pristine beach village with coconut groves", category: "beach" },
+      { name: "Pathiramanal Island", description: "Small island in Vembanad Lake, bird watcher's paradise", category: "nature" }
+    ],
+    localCuisine: ["Karimeen Fish Curry", "Appam with Stew", "Toddy", "Coconut Water", "Banana Chips"],
+    activities: ["Houseboat Cruising", "Canoeing", "Village Walks", "Bird Watching", "Ayurvedic Massage"],
+    nearbyAttractions: ["Kumarakom", "Vembanad Lake", "Champakulam", "Edathua Church"],
+    travelTips: ["Book houseboats in advance", "Carry mosquito repellent", "Respect local customs during village visits"]
   },
   {
     name: "Munnar",
@@ -151,7 +204,18 @@ export const keralaDestinations: Destination[] = [
     culturalHighlights: ["Tea Plantations", "Spice Gardens", "Wildlife Sanctuary"],
     safetyLevel: "high" as const,
     bestTime: "Dec-Mar",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "Tea Gardens", description: "Endless rolling hills covered with lush green tea plantations", category: "nature" },
+      { name: "Eravikulam National Park", description: "Home to endangered Nilgiri Tahr and stunning landscapes", category: "nature" },
+      { name: "Mattupetty Dam", description: "Concrete arch dam with boating facilities and scenic views", category: "nature" },
+      { name: "Top Station", description: "Highest point offering panoramic views of Western Ghats", category: "nature" },
+      { name: "Tea Museum", description: "Learn about tea processing and history of Munnar's tea industry", category: "cultural" }
+    ],
+    localCuisine: ["Fresh Tea", "Cardamom", "Spices", "Banana Chips", "Kerala Sadya"],
+    activities: ["Tea Plantation Tours", "Trekking", "Wildlife Spotting", "Photography", "Spice Shopping"],
+    nearbyAttractions: ["Thekkady", "Vagamon", "Kumily", "Cardamom Hills"],
+    travelTips: ["Carry warm clothes for early morning", "Book wildlife sanctuary permits in advance", "Buy fresh spices from local markets"]
   },
   {
     name: "Thekkady",
@@ -257,7 +321,18 @@ export const bangaloreDestinations: Destination[] = [
     culturalHighlights: ["Glass House", "Flower Shows", "Rock Garden"],
     safetyLevel: "high" as const,
     bestTime: "Oct-Mar",
-    priceRange: "$" as const
+    priceRange: "$" as const,
+    touristPlaces: [
+      { name: "Lalbagh Botanical Garden", description: "240-acre botanical garden with Glass House and rare plant species", category: "nature" },
+      { name: "Lalbagh Rock", description: "3000-million-year-old rock formation, one of the oldest on Earth", category: "nature" },
+      { name: "Glass House", description: "Victorian-style conservatory hosting flower shows", category: "cultural" },
+      { name: "Bonsai Garden", description: "Beautiful collection of miniature trees and plants", category: "nature" },
+      { name: "Rose Garden", description: "Dedicated section with various species of roses", category: "nature" }
+    ],
+    localCuisine: ["South Indian Breakfast", "Filter Coffee", "Street Food", "Masala Dosa"],
+    activities: ["Morning Walks", "Photography", "Yoga", "Jogging", "Nature Study"],
+    nearbyAttractions: ["Cubbon Park", "Bangalore Palace", "Bull Temple", "Tipu Sultan's Palace"],
+    travelTips: ["Visit early morning for peaceful experience", "Carry water bottle", "Best during flower show seasons"]
   },
   {
     name: "Nandi Hills",
@@ -269,7 +344,18 @@ export const bangaloreDestinations: Destination[] = [
     culturalHighlights: ["Sunrise Point", "Tipu's Drop", "Ancient Temples"],
     safetyLevel: "high" as const,
     bestTime: "Oct-Feb",
-    priceRange: "$" as const
+    priceRange: "$" as const,
+    touristPlaces: [
+      { name: "Tipu's Drop", description: "Cliff from where Tipu Sultan used to push prisoners", category: "historical" },
+      { name: "Nandi Temple", description: "Ancient temple dedicated to Nandi, Shiva's bull", category: "temple" },
+      { name: "Sunrise Point", description: "Popular spot for watching spectacular sunrises", category: "nature" },
+      { name: "Yoga Nandeeshwara Temple", description: "9th-century temple complex with intricate carvings", category: "temple" },
+      { name: "Bhoga Nandeeshwara Temple", description: "Ancient temple showcasing Chola and Hoysala architecture", category: "temple" }
+    ],
+    localCuisine: ["Local Breakfast Items", "Fresh Fruit Juices", "South Indian Snacks", "Filter Coffee"],
+    activities: ["Sunrise Viewing", "Cycling", "Trekking", "Photography", "Paragliding"],
+    nearbyAttractions: ["Skandagiri", "Muddenahalli", "Lepakshi", "Chikballapur"],
+    travelTips: ["Start early for sunrise", "Carry warm clothes", "Book cycling tours in advance", "Avoid weekends for less crowd"]
   },
   {
     name: "Cubbon Park",
