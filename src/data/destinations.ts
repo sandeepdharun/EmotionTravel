@@ -106,7 +106,18 @@ export const tamilNaduDestinations: Destination[] = [
     culturalHighlights: ["Sunrise Point", "Vivekananda Rock", "Thiruvalluvar Statue"],
     safetyLevel: "high" as const,
     bestTime: "Oct-Mar",
-    priceRange: "$" as const
+    priceRange: "$" as const,
+    touristPlaces: [
+      { name: "Vivekananda Rock Memorial", description: "Sacred rock where Swami Vivekananda meditated, accessible by ferry", category: "temple" },
+      { name: "Thiruvalluvar Statue", description: "133-foot tall statue of the great Tamil poet and philosopher", category: "cultural" },
+      { name: "Kanyakumari Beach", description: "Unique beach where you can see sunrise and sunset from the same spot", category: "beach" },
+      { name: "Kumari Amman Temple", description: "Ancient temple dedicated to the virgin goddess Kanyakumari", category: "temple" },
+      { name: "Gandhi Memorial", description: "Memorial built at the spot where Mahatma Gandhi's ashes were kept", category: "historical" }
+    ],
+    localCuisine: ["Fresh Seafood", "Banana Chips", "Coconut Water", "Tamil Meals", "Jackfruit Chips"],
+    activities: ["Sunrise Viewing", "Sunset Watching", "Ferry Rides", "Temple Visits", "Beach Walks", "Photography"],
+    nearbyAttractions: ["Padmanabhapuram Palace", "Courtallam Falls", "Suchindram Temple", "Nagercoil"],
+    travelTips: ["Visit during full moon for best sunrise/sunset views", "Book ferry tickets early for Vivekananda Rock", "Carry sun protection and water"]
   },
   {
     name: "Yercaud",
@@ -118,7 +129,18 @@ export const tamilNaduDestinations: Destination[] = [
     culturalHighlights: ["Coffee Plantations", "Emerald Lake", "Servaroyan Temple"],
     safetyLevel: "high" as const,
     bestTime: "Dec-May",
-    priceRange: "$" as const
+    priceRange: "$" as const,
+    touristPlaces: [
+      { name: "Yercaud Lake", description: "Scenic lake surrounded by hills, perfect for boating and peaceful walks", category: "nature" },
+      { name: "Shevaroy Temple", description: "Hilltop temple dedicated to Lord Shevaroyan with panoramic views", category: "temple" },
+      { name: "Lady's Seat", description: "Popular viewpoint offering stunning views of the plains below", category: "nature" },
+      { name: "Gent's Seat", description: "Another scenic viewpoint with beautiful sunrise and sunset views", category: "nature" },
+      { name: "Kiliyur Falls", description: "300-foot waterfall cascading down rocky terrain", category: "nature" }
+    ],
+    localCuisine: ["Fresh Coffee", "Orange Marmalade", "Honey", "Tribal Cuisine", "Hill Station Snacks"],
+    activities: ["Coffee Plantation Tours", "Boating", "Trekking", "Nature Photography", "Temple Visits"],
+    nearbyAttractions: ["Salem", "Mettur Dam", "Hogenakkal Falls", "Kolli Hills"],
+    travelTips: ["Best visited during orange season (April-June)", "Carry warm clothes for early morning", "Try local orange products"]
   },
   {
     name: "Thanjavur",
@@ -130,7 +152,18 @@ export const tamilNaduDestinations: Destination[] = [
     culturalHighlights: ["Brihadeeswarar Temple", "Thanjavur Paintings", "Classical Music"],
     safetyLevel: "high" as const,
     bestTime: "Nov-Feb",
-    priceRange: "$" as const
+    priceRange: "$" as const,
+    touristPlaces: [
+      { name: "Brihadeeswarar Temple", description: "UNESCO World Heritage Site, masterpiece of Chola architecture", category: "temple" },
+      { name: "Thanjavur Palace", description: "Royal palace complex with art gallery and library", category: "historical" },
+      { name: "Saraswathi Mahal Library", description: "Ancient library with rare manuscripts and palm leaf books", category: "cultural" },
+      { name: "Art Gallery", description: "Collection of Chola bronzes and traditional paintings", category: "cultural" },
+      { name: "Schwartz Church", description: "Historic Danish church built in 1779", category: "historical" }
+    ],
+    localCuisine: ["Thanjavur Meals", "Puliyodarai", "Curd Rice", "Traditional Sweets", "Filter Coffee"],
+    activities: ["Temple Architecture Tours", "Art Gallery Visits", "Classical Music Concerts", "Painting Workshops", "Heritage Walks"],
+    nearbyAttractions: ["Kumbakonam", "Darasuram", "Gangaikonda Cholapuram", "Thiruvaiyaru"],
+    travelTips: ["Hire a guide for temple architecture insights", "Visit during music season (Dec-Jan)", "Respect temple dress codes"]
   },
   {
     name: "Madurai",
@@ -142,7 +175,18 @@ export const tamilNaduDestinations: Destination[] = [
     culturalHighlights: ["Meenakshi Temple", "Temple Festivals", "Local Markets"],
     safetyLevel: "high" as const,
     bestTime: "Oct-Mar",
-    priceRange: "$" as const
+    priceRange: "$" as const,
+    touristPlaces: [
+      { name: "Meenakshi Amman Temple", description: "Magnificent temple complex with towering gopurams and intricate carvings", category: "temple" },
+      { name: "Thirumalai Nayakkar Palace", description: "17th-century palace showcasing Dravidian architecture", category: "historical" },
+      { name: "Gandhi Memorial Museum", description: "Museum dedicated to Mahatma Gandhi with historical artifacts", category: "cultural" },
+      { name: "Alagar Kovil", description: "Temple dedicated to Lord Vishnu, located in scenic hills", category: "temple" },
+      { name: "Vandiyur Mariamman Teppakulam", description: "Large temple tank used for float festivals", category: "cultural" }
+    ],
+    localCuisine: ["Madurai Jigarthanda", "Paruthi Paal", "Kari Dosa", "Mutton Chukka", "Filter Coffee"],
+    activities: ["Temple Tours", "Evening Aarti", "Heritage Walks", "Local Market Shopping", "Cultural Performances"],
+    nearbyAttractions: ["Rameswaram", "Kodaikanal", "Dindigul", "Palani"],
+    travelTips: ["Visit temple early morning to avoid crowds", "Try famous Jigarthanda drink", "Respect temple traditions and dress codes"]
   },
   {
     name: "Rameswaram",
@@ -154,7 +198,18 @@ export const tamilNaduDestinations: Destination[] = [
     culturalHighlights: ["Ramanathaswamy Temple", "Pamban Bridge", "Sacred Baths"],
     safetyLevel: "high" as const,
     bestTime: "Oct-Apr",
-    priceRange: "$" as const
+    priceRange: "$" as const,
+    touristPlaces: [
+      { name: "Ramanathaswamy Temple", description: "Sacred temple with the longest corridor in the world and 22 holy wells", category: "temple" },
+      { name: "Pamban Bridge", description: "Engineering marvel connecting Rameswaram to mainland India", category: "historical" },
+      { name: "Dhanushkodi Beach", description: "Ghost town and pristine beach at the tip of India", category: "beach" },
+      { name: "Adam's Bridge", description: "Chain of limestone shoals connecting India and Sri Lanka", category: "nature" },
+      { name: "Gandhamadhana Parvatham", description: "Highest point in Rameswaram with Rama's footprints", category: "temple" }
+    ],
+    localCuisine: ["Fresh Seafood", "Coconut Rice", "Fish Curry", "Prawn Fry", "Traditional Meals"],
+    activities: ["Temple Visits", "Sacred Baths", "Beach Walks", "Pilgrimage Tours", "Photography", "Meditation"],
+    nearbyAttractions: ["Madurai", "Kanyakumari", "Tuticorin", "Tiruchendur"],
+    travelTips: ["Carry towels for sacred baths", "Visit Dhanushkodi early morning", "Respect pilgrimage traditions"]
   },
   {
     name: "Pondicherry",
@@ -166,7 +221,18 @@ export const tamilNaduDestinations: Destination[] = [
     culturalHighlights: ["French Quarter", "Auroville", "Promenade Beach"],
     safetyLevel: "high" as const,
     bestTime: "Oct-Mar",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "French Quarter", description: "Colonial architecture with colorful buildings and cobblestone streets", category: "cultural" },
+      { name: "Auroville", description: "International township dedicated to human unity and spiritual growth", category: "cultural" },
+      { name: "Promenade Beach", description: "Long stretch of beach perfect for evening walks and relaxation", category: "beach" },
+      { name: "Sri Aurobindo Ashram", description: "Spiritual center founded by Sri Aurobindo and The Mother", category: "cultural" },
+      { name: "Paradise Beach", description: "Pristine beach accessible by boat, perfect for water sports", category: "beach" }
+    ],
+    localCuisine: ["French Pastries", "Crepes", "Fresh Seafood", "South Indian Meals", "Continental Cuisine"],
+    activities: ["Heritage Walks", "Beach Activities", "Yoga Sessions", "Cycling Tours", "Art Gallery Visits", "Meditation"],
+    nearbyAttractions: ["Mahabalipuram", "Chidambaram", "Cuddalore", "Villupuram"],
+    travelTips: ["Rent a bicycle to explore the French Quarter", "Visit Auroville for spiritual experiences", "Try French bakeries for authentic pastries"]
   }
 ];
 
@@ -227,7 +293,18 @@ export const keralaDestinations: Destination[] = [
     culturalHighlights: ["Periyar Wildlife", "Spice Plantations", "Bamboo Rafting"],
     safetyLevel: "high" as const,
     bestTime: "Oct-Mar",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "Periyar National Park", description: "Wildlife sanctuary famous for elephants, tigers, and boat safaris", category: "nature" },
+      { name: "Periyar Lake", description: "Artificial lake perfect for wildlife spotting and boat rides", category: "nature" },
+      { name: "Spice Plantations", description: "Aromatic plantations growing cardamom, pepper, and other spices", category: "nature" },
+      { name: "Mangla Devi Temple", description: "Ancient temple accessible through forest trekking", category: "temple" },
+      { name: "Elephant Junction", description: "Elephant training center where you can interact with elephants", category: "adventure" }
+    ],
+    localCuisine: ["Spice-infused Dishes", "Kerala Fish Curry", "Appam", "Fresh Spices", "Herbal Teas"],
+    activities: ["Wildlife Safari", "Boat Rides", "Spice Plantation Tours", "Bamboo Rafting", "Trekking", "Elephant Rides"],
+    nearbyAttractions: ["Munnar", "Kumily", "Vagamon", "Idukki Dam"],
+    travelTips: ["Book wildlife safari in advance", "Carry binoculars for wildlife spotting", "Buy fresh spices from local markets"]
   },
   {
     name: "Kochi",
@@ -239,7 +316,18 @@ export const keralaDestinations: Destination[] = [
     culturalHighlights: ["Chinese Fishing Nets", "Fort Kochi", "Kathakali Performances"],
     safetyLevel: "high" as const,
     bestTime: "Oct-Mar",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "Chinese Fishing Nets", description: "Iconic fishing nets introduced by Chinese traders, symbol of Kochi", category: "cultural" },
+      { name: "Fort Kochi Beach", description: "Historic beach with colonial architecture and sunset views", category: "beach" },
+      { name: "Mattancherry Palace", description: "Portuguese palace with beautiful murals and artifacts", category: "historical" },
+      { name: "Jewish Synagogue", description: "Oldest active synagogue in Commonwealth countries", category: "cultural" },
+      { name: "St. Francis Church", description: "Oldest European church in India where Vasco da Gama was buried", category: "historical" }
+    ],
+    localCuisine: ["Kerala Fish Curry", "Appam with Stew", "Puttu", "Seafood Specialties", "Spiced Tea"],
+    activities: ["Heritage Walks", "Kathakali Shows", "Backwater Cruises", "Spice Market Tours", "Art Gallery Visits"],
+    nearbyAttractions: ["Alleppey", "Munnar", "Kumarakom", "Cherai Beach"],
+    travelTips: ["Watch Kathakali performance in the evening", "Explore Jew Town for antiques", "Take sunset photos at Chinese fishing nets"]
   },
   {
     name: "Wayanad",
@@ -252,13 +340,17 @@ export const keralaDestinations: Destination[] = [
     safetyLevel: "high" as const,
     bestTime: "Oct-May",
     priceRange: "$" as const,
-    topSpots: [
-      "Edakkal Caves",
-      "Soochipara (Sentinel Rock) Falls",
-      "Banasura Sagar Dam",
-      "Chembra Peak",
-      "Kuruvadweep (Kuruva Island)"
-    ]
+    touristPlaces: [
+      { name: "Edakkal Caves", description: "Prehistoric caves with ancient petroglyphs dating back 6000 years", category: "historical" },
+      { name: "Soochipara Falls", description: "Three-tiered waterfall perfect for swimming and rock climbing", category: "nature" },
+      { name: "Banasura Sagar Dam", description: "Largest earthen dam in India with beautiful surroundings", category: "nature" },
+      { name: "Chembra Peak", description: "Highest peak in Wayanad with heart-shaped lake", category: "adventure" },
+      { name: "Kuruva Island", description: "Uninhabited island with dense forests and rare flora", category: "nature" }
+    ],
+    localCuisine: ["Tribal Cuisine", "Bamboo Rice", "Wild Honey", "Spiced Coffee", "Traditional Kerala Meals"],
+    activities: ["Trekking", "Cave Exploration", "Waterfall Visits", "Wildlife Spotting", "Tribal Village Tours", "Photography"],
+    nearbyAttractions: ["Ooty", "Coorg", "Kozhikode", "Mysore"],
+    travelTips: ["Carry trekking gear for Chembra Peak", "Visit tribal villages with local guides", "Best time for waterfalls is post-monsoon"]
   },
   {
     name: "Varkala",
@@ -270,7 +362,18 @@ export const keralaDestinations: Destination[] = [
     culturalHighlights: ["Cliff Beach", "Ayurvedic Spas", "Janardhana Temple"],
     safetyLevel: "high" as const,
     bestTime: "Nov-Mar",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "Varkala Beach", description: "Dramatic cliff-backed beach with natural springs and healing properties", category: "beach" },
+      { name: "Janardhana Swamy Temple", description: "2000-year-old temple dedicated to Lord Vishnu", category: "temple" },
+      { name: "Sivagiri Mutt", description: "Ashram and pilgrimage center founded by social reformer Sree Narayana Guru", category: "cultural" },
+      { name: "Anjengo Fort", description: "Historic fort built by the East India Company", category: "historical" },
+      { name: "Kappil Beach", description: "Serene beach where backwaters meet the Arabian Sea", category: "beach" }
+    ],
+    localCuisine: ["Fresh Seafood", "Ayurvedic Food", "Coconut-based Dishes", "Herbal Teas", "Organic Meals"],
+    activities: ["Beach Relaxation", "Ayurvedic Treatments", "Yoga Sessions", "Temple Visits", "Cliff Walking", "Meditation"],
+    nearbyAttractions: ["Kovalam", "Thiruvananthapuram", "Kollam", "Alleppey"],
+    travelTips: ["Try Ayurvedic treatments for wellness", "Visit temple early morning", "Respect the spiritual atmosphere of the place"]
   },
   {
     name: "Kumarakom",
@@ -282,7 +385,18 @@ export const keralaDestinations: Destination[] = [
     culturalHighlights: ["Bird Sanctuary", "Backwater Cruises", "Village Walks"],
     safetyLevel: "high" as const,
     bestTime: "Nov-Feb",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "Kumarakom Bird Sanctuary", description: "14-acre sanctuary home to migratory birds and local species", category: "nature" },
+      { name: "Vembanad Lake", description: "Largest lake in Kerala, perfect for houseboat cruises", category: "nature" },
+      { name: "Bay Island Driftwood Museum", description: "Unique museum showcasing driftwood sculptures", category: "cultural" },
+      { name: "Pathiramanal Island", description: "Small island accessible by boat, bird watcher's paradise", category: "nature" },
+      { name: "Aruvikkuzhi Waterfall", description: "Scenic waterfall surrounded by rubber plantations", category: "nature" }
+    ],
+    localCuisine: ["Karimeen Fish", "Backwater Prawns", "Coconut Curry", "Toddy", "Traditional Kerala Meals"],
+    activities: ["Bird Watching", "Houseboat Cruises", "Village Tours", "Fishing", "Photography", "Ayurvedic Spa"],
+    nearbyAttractions: ["Alleppey", "Kottayam", "Thekkady", "Munnar"],
+    travelTips: ["Best bird watching time is early morning", "Book houseboat in advance", "Carry binoculars for bird watching"]
   },
   {
     name: "Kovalam",
@@ -294,7 +408,18 @@ export const keralaDestinations: Destination[] = [
     culturalHighlights: ["Lighthouse Beach", "Ayurvedic Centers", "Fishing Villages"],
     safetyLevel: "high" as const,
     bestTime: "Oct-Mar",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "Lighthouse Beach", description: "Most popular beach with iconic red and white striped lighthouse", category: "beach" },
+      { name: "Hawah Beach", description: "Secluded beach perfect for sunbathing and relaxation", category: "beach" },
+      { name: "Samudra Beach", description: "Less crowded beach ideal for peaceful walks", category: "beach" },
+      { name: "Vizhinjam Marine Aquarium", description: "Aquarium showcasing marine life of the Arabian Sea", category: "cultural" },
+      { name: "Halcyon Castle", description: "Historic palace turned heritage hotel with beautiful architecture", category: "historical" }
+    ],
+    localCuisine: ["Fresh Seafood", "Coconut-based Curries", "Appam", "Fish Molee", "Tropical Fruits"],
+    activities: ["Beach Relaxation", "Ayurvedic Massages", "Water Sports", "Lighthouse Climbing", "Fishing", "Sunset Viewing"],
+    nearbyAttractions: ["Thiruvananthapuram", "Varkala", "Kanyakumari", "Poovar"],
+    travelTips: ["Try authentic Ayurvedic treatments", "Visit lighthouse for panoramic views", "Respect local fishing community traditions"]
   },
   {
     name: "Athirappilly",
@@ -306,7 +431,18 @@ export const keralaDestinations: Destination[] = [
     culturalHighlights: ["Athirappilly Falls", "Rainforest Trekking", "River Rafting"],
     safetyLevel: "high" as const,
     bestTime: "Jun-Sep",
-    priceRange: "$" as const
+    priceRange: "$" as const,
+    touristPlaces: [
+      { name: "Athirappilly Falls", description: "80-foot waterfall known as the 'Niagara of India'", category: "nature" },
+      { name: "Vazhachal Falls", description: "Scenic waterfall surrounded by dense forests", category: "nature" },
+      { name: "Sholayar Dam", description: "Large dam with beautiful reservoir and mountain views", category: "nature" },
+      { name: "Thumboormuzhi Dam", description: "Butterfly garden and elephant training center nearby", category: "nature" },
+      { name: "Charpa Falls", description: "Hidden waterfall accessible through trekking", category: "adventure" }
+    ],
+    localCuisine: ["Traditional Kerala Meals", "Fresh River Fish", "Bamboo Rice", "Wild Honey", "Herbal Teas"],
+    activities: ["Waterfall Viewing", "Trekking", "River Rafting", "Photography", "Bird Watching", "Nature Walks"],
+    nearbyAttractions: ["Thrissur", "Chalakudy", "Munnar", "Kochi"],
+    travelTips: ["Visit during monsoon for full flow", "Wear non-slip shoes near waterfalls", "Carry rain gear during monsoon season"]
   }
 ];
 
@@ -367,7 +503,18 @@ export const bangaloreDestinations: Destination[] = [
     culturalHighlights: ["State Library", "Museum", "Bandstand"],
     safetyLevel: "high" as const,
     bestTime: "Year-round",
-    priceRange: "$" as const
+    priceRange: "$" as const,
+    touristPlaces: [
+      { name: "State Central Library", description: "Historic red building housing vast collection of books", category: "cultural" },
+      { name: "Government Museum", description: "Museum with archaeological and geological exhibits", category: "cultural" },
+      { name: "Seshadri Iyer Memorial Hall", description: "Beautiful colonial architecture building", category: "historical" },
+      { name: "Bandstand", description: "Open-air venue for cultural performances", category: "cultural" },
+      { name: "Sheshadri Iyer Memorial", description: "Memorial dedicated to former Dewan of Mysore", category: "historical" }
+    ],
+    localCuisine: ["Street Food", "South Indian Breakfast", "Filter Coffee", "Chaat", "Fresh Juices"],
+    activities: ["Morning Walks", "Jogging", "Yoga", "Reading", "Photography", "Cultural Events"],
+    nearbyAttractions: ["Vidhana Soudha", "High Court", "UB City Mall", "Commercial Street"],
+    travelTips: ["Best time is early morning", "Carry water bottle", "Perfect for morning exercise routines"]
   },
   {
     name: "UB City Mall",
@@ -379,7 +526,18 @@ export const bangaloreDestinations: Destination[] = [
     culturalHighlights: ["Fine Dining", "Luxury Shopping", "Rooftop Views"],
     safetyLevel: "high" as const,
     bestTime: "Year-round",
-    priceRange: "$$$" as const
+    priceRange: "$$$" as const,
+    touristPlaces: [
+      { name: "Luxury Retail Stores", description: "International and Indian luxury brands under one roof", category: "shopping" },
+      { name: "Fine Dining Restaurants", description: "World-class restaurants with diverse cuisines", category: "food" },
+      { name: "Rooftop Bars", description: "Sky-high bars with panoramic city views", category: "food" },
+      { name: "Art Galleries", description: "Contemporary art exhibitions and installations", category: "cultural" },
+      { name: "Wellness Centers", description: "Premium spas and wellness facilities", category: "cultural" }
+    ],
+    localCuisine: ["International Cuisine", "Gourmet Food", "Craft Cocktails", "Fine Dining", "Artisanal Coffee"],
+    activities: ["Luxury Shopping", "Fine Dining", "Art Gallery Visits", "Rooftop Dining", "Spa Treatments"],
+    nearbyAttractions: ["Cubbon Park", "Vidhana Soudha", "Bangalore Palace", "Commercial Street"],
+    travelTips: ["Dress code applies for some restaurants", "Make reservations for fine dining", "Valet parking available"]
   },
   {
     name: "Bangalore Palace",
@@ -391,7 +549,18 @@ export const bangaloreDestinations: Destination[] = [
     culturalHighlights: ["Royal Architecture", "Palace Grounds", "Historical Tours"],
     safetyLevel: "high" as const,
     bestTime: "Oct-Mar",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "Palace Interior", description: "Opulent rooms with vintage furniture and royal artifacts", category: "historical" },
+      { name: "Durbar Hall", description: "Grand hall used for royal ceremonies and events", category: "historical" },
+      { name: "Palace Grounds", description: "Venue for concerts and cultural events", category: "cultural" },
+      { name: "Royal Gardens", description: "Well-maintained gardens surrounding the palace", category: "nature" },
+      { name: "Vintage Car Collection", description: "Collection of classic cars owned by the royal family", category: "cultural" }
+    ],
+    localCuisine: ["Royal Cuisine", "Traditional South Indian", "Continental Food", "High Tea", "Gourmet Snacks"],
+    activities: ["Palace Tours", "Photography", "Cultural Events", "Garden Walks", "Historical Learning"],
+    nearbyAttractions: ["Cubbon Park", "Lalbagh", "UB City", "Vidhana Soudha"],
+    travelTips: ["Audio guides available for detailed history", "Photography allowed with extra fee", "Check for special events and concerts"]
   },
   {
     name: "Innovative Film City",
@@ -403,7 +572,18 @@ export const bangaloreDestinations: Destination[] = [
     culturalHighlights: ["Film Studios", "Theme Park", "Cultural Shows"],
     safetyLevel: "high" as const,
     bestTime: "Oct-Mar",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "Film Studio Tours", description: "Behind-the-scenes look at movie making process", category: "cultural" },
+      { name: "Theme Park Rides", description: "Exciting rides and attractions for all ages", category: "adventure" },
+      { name: "Wax Museum", description: "Life-like wax figures of celebrities and historical figures", category: "cultural" },
+      { name: "Cartoon City", description: "Themed area dedicated to popular cartoon characters", category: "adventure" },
+      { name: "Adventure Sports", description: "Zip-lining, rock climbing, and other adventure activities", category: "adventure" }
+    ],
+    localCuisine: ["Theme Park Food", "South Indian Snacks", "Fast Food", "Ice Creams", "Beverages"],
+    activities: ["Studio Tours", "Theme Park Rides", "Adventure Sports", "Cultural Shows", "Photography", "Family Entertainment"],
+    nearbyAttractions: ["Nandi Hills", "Bangalore", "Chikballapur", "Devanahalli"],
+    travelTips: ["Full day required to explore everything", "Carry comfortable shoes", "Book combo packages for better deals"]
   },
   {
     name: "Chikballapur",
@@ -415,7 +595,18 @@ export const bangaloreDestinations: Destination[] = [
     culturalHighlights: ["Nandi Hills Extension", "Ancient Temples", "Trekking Trails"],
     safetyLevel: "high" as const,
     bestTime: "Oct-Mar",
-    priceRange: "$" as const
+    priceRange: "$" as const,
+    touristPlaces: [
+      { name: "Skandagiri Hills", description: "Popular trekking destination with night trek options", category: "adventure" },
+      { name: "Bhoga Nandeeshwara Temple", description: "Ancient temple complex with beautiful Dravidian architecture", category: "temple" },
+      { name: "Gudibande Fort", description: "Hilltop fort with panoramic views and historical significance", category: "historical" },
+      { name: "Nandi Hills", description: "Extension of the famous hill station with sunrise views", category: "nature" },
+      { name: "Avalabetta Hilltop", description: "Lesser-known trekking spot with stunning views", category: "adventure" }
+    ],
+    localCuisine: ["Local Village Food", "Traditional Breakfast", "Fresh Fruits", "Sugarcane Juice", "Regional Snacks"],
+    activities: ["Trekking", "Temple Visits", "Photography", "Sunrise Viewing", "Rock Climbing", "Nature Walks"],
+    nearbyAttractions: ["Nandi Hills", "Bangalore", "Lepakshi", "Muddenahalli"],
+    travelTips: ["Start early for sunrise treks", "Carry water and snacks", "Wear proper trekking shoes"]
   },
   {
     name: "Wonderla",
@@ -427,7 +618,18 @@ export const bangaloreDestinations: Destination[] = [
     culturalHighlights: ["Water Rides", "Roller Coasters", "Family Entertainment"],
     safetyLevel: "high" as const,
     bestTime: "Year-round",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "High Thrill Rides", description: "Roller coasters and extreme rides for adrenaline junkies", category: "adventure" },
+      { name: "Water Park", description: "Wave pools, water slides, and aquatic attractions", category: "adventure" },
+      { name: "Family Rides", description: "Gentle rides suitable for all age groups", category: "adventure" },
+      { name: "Kids Zone", description: "Special area with rides designed for children", category: "adventure" },
+      { name: "Rain Disco", description: "Unique dancing experience in artificial rain", category: "adventure" }
+    ],
+    localCuisine: ["Theme Park Food", "Multi-cuisine Restaurant", "Fast Food", "Ice Creams", "Snacks"],
+    activities: ["Thrill Rides", "Water Sports", "Family Entertainment", "Photography", "Dancing", "Games"],
+    nearbyAttractions: ["Bangalore", "Electronic City", "Bannerghatta", "Anekal"],
+    travelTips: ["Carry extra clothes for water rides", "Book online for discounts", "Follow height restrictions for rides"]
   },
   {
     name: "Bannerghatta National Park",
@@ -439,6 +641,17 @@ export const bangaloreDestinations: Destination[] = [
     culturalHighlights: ["Wildlife Safari", "Butterfly Park", "Zoo Experience"],
     safetyLevel: "high" as const,
     bestTime: "Oct-Mar",
-    priceRange: "$$" as const
+    priceRange: "$$" as const,
+    touristPlaces: [
+      { name: "Safari Park", description: "Open safari experience with lions, tigers, and other wildlife", category: "nature" },
+      { name: "Butterfly Park", description: "Conservatory with hundreds of butterfly species", category: "nature" },
+      { name: "Zoo", description: "Traditional zoo with diverse animal species", category: "nature" },
+      { name: "Rescue Center", description: "Wildlife rescue and rehabilitation facility", category: "nature" },
+      { name: "Nature Trails", description: "Walking trails through natural forest habitat", category: "nature" }
+    ],
+    localCuisine: ["Picnic Food", "Local Snacks", "Fresh Juices", "South Indian Meals", "Packed Lunches"],
+    activities: ["Wildlife Safari", "Nature Photography", "Educational Tours", "Butterfly Watching", "Trekking", "Picnicking"],
+    nearbyAttractions: ["Bangalore", "Wonderla", "Turahalli Forest", "Jayadeva Cardiology Hospital"],
+    travelTips: ["Book safari tickets in advance", "Carry binoculars for better wildlife viewing", "Follow park rules and maintain silence during safari"]
   }
 ];
