@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
+import { PageTransition } from "./components/PageTransition";
 import Index from "./pages/Index";
 import TamilNadu from "./pages/TamilNadu";
 import Kerala from "./pages/Kerala";
@@ -24,17 +25,19 @@ const App = () => (
       <PlanProvider>
         <BrowserRouter>
           <Navigation />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/tamil-nadu" element={<TamilNadu />} />
-            <Route path="/kerala" element={<Kerala />} />
-            <Route path="/bangalore" element={<Bangalore />} />
-            <Route path="/discover" element={<Discover />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/destination/:country/:name" element={<DestinationDetail />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <PageTransition>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/tamil-nadu" element={<TamilNadu />} />
+              <Route path="/kerala" element={<Kerala />} />
+              <Route path="/bangalore" element={<Bangalore />} />
+              <Route path="/discover" element={<Discover />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/destination/:country/:name" element={<DestinationDetail />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </PageTransition>
         </BrowserRouter>
       </PlanProvider>
     </TooltipProvider>
