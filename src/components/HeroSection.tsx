@@ -62,20 +62,20 @@ export const HeroSection = () => {
 
       {/* Main Content */}
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-        {/* AI Badge */}
+        {/* Emotion Badge */}
         <div 
-          className="mb-12 inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 backdrop-blur-xl rounded-full border border-cyan-400/20 shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/30 transition-all duration-500 hover:scale-105 cursor-pointer group"
+          className="mb-12 inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-rose-500/10 to-purple-500/10 backdrop-blur-xl rounded-full border border-rose-400/20 shadow-lg shadow-rose-500/10 hover:shadow-rose-500/30 transition-all duration-500 hover:scale-105 cursor-pointer group"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
           <div className="relative">
-            <Brain className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300 transition-colors" />
+            <Heart className="w-5 h-5 text-rose-400 group-hover:text-rose-300 transition-colors" />
             <Sparkles className="w-3 h-3 text-purple-400 absolute -top-1 -right-1 animate-pulse" />
           </div>
           <span className="text-white text-sm font-medium tracking-wide">
-            Neural Emotional Intelligence • AI-Powered
+            Emotional Travel Intelligence • Feel-First Journey
           </span>
-          <Zap className="w-4 h-4 text-purple-400 animate-pulse" />
+          <Compass className="w-4 h-4 text-purple-400 animate-pulse" />
         </div>
 
         {/* Main Heading with Advanced Animation */}
@@ -108,10 +108,10 @@ export const HeroSection = () => {
         {/* Subtitle with Typewriter Effect */}
         <div className="mb-12 max-w-4xl mx-auto">
           <p className="text-lg md:text-xl lg:text-2xl text-slate-300 leading-relaxed font-light tracking-wide">
-            <span className="text-cyan-400 font-semibold">Neural algorithms</span> decode your emotional spectrum, 
-            <span className="text-purple-400 font-semibold"> crafting immersive journeys</span> that transcend traditional travel. 
+            <span className="text-rose-400 font-semibold">Discover your emotional compass</span> and let your feelings guide you to 
+            <span className="text-purple-400 font-semibold"> extraordinary destinations</span>. 
             <br className="hidden md:block" />
-            Experience destinations that <span className="text-pink-400 font-semibold hover:text-pink-300 transition-colors cursor-default">resonate with your soul</span>.
+            Experience travel that <span className="text-pink-400 font-semibold hover:text-pink-300 transition-colors cursor-default">heals, inspires, and transforms</span> your soul.
           </p>
         </div>
 
@@ -119,32 +119,32 @@ export const HeroSection = () => {
         <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
           <Button 
             size="lg" 
-            className="relative overflow-hidden bg-gradient-to-r from-cyan-500 to-purple-600 border-0 text-white hover:from-cyan-400 hover:to-purple-500 transition-all duration-500 px-10 py-6 text-lg font-bold rounded-full shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/50 hover:scale-105 group"
+            className="relative overflow-hidden bg-gradient-to-r from-rose-500 to-purple-600 border-0 text-white hover:from-rose-400 hover:to-purple-500 transition-all duration-500 px-10 py-6 text-lg font-bold rounded-full shadow-lg shadow-rose-500/25 hover:shadow-rose-500/50 hover:scale-105 group"
           >
-            <span className="relative z-10">Initiate Neural Scan</span>
-            <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+            <span className="relative z-10">Start Your Journey</span>
+            <Heart className="ml-3 w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
             <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Button>
           
           <Button 
             size="lg" 
             variant="outline" 
-            className="border-2 border-cyan-400/40 bg-slate-900/40 backdrop-blur-xl text-cyan-100 hover:bg-cyan-500/10 hover:border-cyan-400/80 transition-all duration-500 px-10 py-6 text-lg font-semibold rounded-full hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20"
+            className="border-2 border-rose-400/40 bg-slate-900/40 backdrop-blur-xl text-rose-100 hover:bg-rose-500/10 hover:border-rose-400/80 transition-all duration-500 px-10 py-6 text-lg font-semibold rounded-full hover:scale-105 hover:shadow-lg hover:shadow-rose-500/20"
           >
-            Explore Technology
+            Discover Emotions
           </Button>
         </div>
 
         {/* Enhanced Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
           {[
-            { value: "50K+", label: "Neural Journeys", icon: Brain, color: "cyan" },
-            { value: "300+", label: "Emotion Zones", icon: MapPin, color: "purple" },
-            { value: "99.2%", label: "Sync Accuracy", icon: Zap, color: "pink" }
+            { value: "50K+", label: "Emotional Journeys", icon: Heart, color: "rose" },
+            { value: "300+", label: "Soul Destinations", icon: MapPin, color: "purple" },
+            { value: "99.2%", label: "Heart Connection", icon: Sparkles, color: "pink" }
           ].map((stat, index) => (
             <div 
               key={index}
-              className="text-center p-6 bg-slate-900/30 backdrop-blur-md rounded-2xl border border-slate-700/50 hover:border-cyan-400/50 transition-all duration-300 hover:scale-105 hover:bg-slate-900/50 group cursor-default"
+              className="text-center p-6 bg-slate-900/30 backdrop-blur-md rounded-2xl border border-slate-700/50 hover:border-rose-400/50 transition-all duration-300 hover:scale-105 hover:bg-slate-900/50 group cursor-default"
             >
               <div className="mb-3 flex justify-center">
                 <stat.icon className={`w-8 h-8 text-${stat.color}-400 group-hover:text-${stat.color}-300 transition-colors`} />
@@ -163,9 +163,9 @@ export const HeroSection = () => {
       {/* Enhanced Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
         <div className="flex flex-col items-center gap-2 animate-bounce cursor-pointer hover:scale-110 transition-transform">
-          <div className="w-1 h-6 bg-gradient-to-b from-cyan-400 to-purple-400 rounded-full animate-pulse" />
-          <div className="w-6 h-10 border-2 border-cyan-400/60 rounded-full flex justify-center backdrop-blur-sm">
-            <div className="w-1.5 h-4 bg-gradient-to-b from-cyan-400 to-purple-400 rounded-full mt-2 animate-pulse" />
+          <div className="w-1 h-6 bg-gradient-to-b from-rose-400 to-purple-400 rounded-full animate-pulse" />
+          <div className="w-6 h-10 border-2 border-rose-400/60 rounded-full flex justify-center backdrop-blur-sm">
+            <div className="w-1.5 h-4 bg-gradient-to-b from-rose-400 to-purple-400 rounded-full mt-2 animate-pulse" />
           </div>
           <span className="text-xs text-slate-400 font-medium tracking-wider">EXPLORE</span>
         </div>
