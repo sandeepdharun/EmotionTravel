@@ -27,10 +27,14 @@ export const Navigation = () => {
     const activeIndex = navItems.findIndex(item => isActive(item.path));
     if (activeIndex !== -1 && itemRefs.current[activeIndex]) {
       const activeElement = itemRefs.current[activeIndex];
-      setSelectorStyle({
-        width: activeElement.offsetWidth,
-        left: activeElement.offsetLeft
-      });
+      
+      // Add a small delay to ensure DOM is updated
+      setTimeout(() => {
+        setSelectorStyle({
+          width: activeElement.offsetWidth,
+          left: activeElement.offsetLeft
+        });
+      }, 50);
     }
   }, [location.pathname]);
 
@@ -53,11 +57,27 @@ export const Navigation = () => {
           top: 50%;
           transform: translateY(-50%);
           height: 40px;
-          background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+          background: linear-gradient(135deg, #3b82f6, #1d4ed8, #7c3aed);
           border-radius: 20px;
-          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+          transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
           z-index: 1;
           box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+          animation: selectorPulse 0.6s ease-out;
+        }
+
+        @keyframes selectorPulse {
+          0% {
+            transform: translateY(-50%) scale(0.95);
+            opacity: 0.8;
+          }
+          50% {
+            transform: translateY(-50%) scale(1.02);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-50%) scale(1);
+            opacity: 1;
+          }
         }
         
         .nav-item-link {
@@ -67,7 +87,7 @@ export const Navigation = () => {
           gap: 8px;
           padding: 10px 16px;
           border-radius: 20px;
-          transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
           color: #6b7280;
           text-decoration: none;
           font-weight: 500;
@@ -77,6 +97,23 @@ export const Navigation = () => {
         
         .nav-item-link.active {
           color: white;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+          animation: textGlow 0.6s ease-out;
+        }
+
+        @keyframes textGlow {
+          0% {
+            color: #6b7280;
+            text-shadow: none;
+          }
+          50% {
+            color: #e0e7ff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+          }
+          100% {
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+          }
         }
         
         .nav-item-link:not(.active):hover {
@@ -84,20 +121,44 @@ export const Navigation = () => {
           background: rgba(59, 130, 246, 0.08);
           transform: translateY(-1px);
         }
+
+        .nav-item-link:not(.active) {
+          transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+        }
         
         .nav-icon {
           width: 16px;
           height: 16px;
-          transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
         
         .nav-item-link.active .nav-icon {
           color: white;
           filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+          animation: iconGlow 0.6s ease-out;
+        }
+
+        @keyframes iconGlow {
+          0% {
+            color: #6b7280;
+            filter: none;
+            transform: scale(1);
+          }
+          50% {
+            color: #e0e7ff;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+            transform: scale(1.1);
+          }
+          100% {
+            color: white;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+            transform: scale(1);
+          }
         }
 
         .nav-item-link:not(.active):hover .nav-icon {
           transform: scale(1.1);
+          color: #3b82f6;
         }
 
         @keyframes fade-in {
@@ -116,7 +177,7 @@ export const Navigation = () => {
         }
 
         .mobile-nav-item {
-          transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .mobile-nav-item.active {
@@ -124,6 +185,22 @@ export const Navigation = () => {
           color: #3b82f6;
           border-left: 3px solid #3b82f6;
           transform: translateX(4px);
+          animation: mobileActiveSlide 0.5s ease-out;
+        }
+
+        @keyframes mobileActiveSlide {
+          0% {
+            background: transparent;
+            color: #6b7280;
+            border-left: 3px solid transparent;
+            transform: translateX(0);
+          }
+          100% {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(29, 78, 216, 0.15));
+            color: #3b82f6;
+            border-left: 3px solid #3b82f6;
+            transform: translateX(4px);
+          }
         }
 
         .mobile-nav-item:not(.active):hover {
