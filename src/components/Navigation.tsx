@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Home, MapPin, Mountain, Waves, Building, LayoutDashboard, Compass } from "lucide-react";
@@ -12,17 +12,35 @@ const navItems = [
   { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard }
 ];
 
+// Named export - make sure you're importing it as { Navigation }
 export const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [selectorStyle, setSelectorStyle] = useState({ width: 0, left: 0 });
   const location = useLocation();
+  const navRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<{ [key: number]: HTMLElement }>({});
 
   const isActive = (path: string) => location.pathname === path;
+
+  // Update selector position when route changes
+  useEffect(() => {
+    const activeIndex = navItems.findIndex(item => isActive(item.path));
+    if (activeIndex !== -1 && itemRefs.current[activeIndex]) {
+      const activeElement = itemRefs.current[activeIndex];
+      setSelectorStyle({
+        width: activeElement.offsetWidth,
+        left: activeElement.offsetLeft
+      });
+    }
+  }, [location.pathname]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-border/50">
       <style jsx>{`
         .animated-nav {
           position: relative;
+          display: flex;
+          align-items: center;
         }
         
         .nav-item {
@@ -35,11 +53,11 @@ export const Navigation = () => {
           top: 50%;
           transform: translateY(-50%);
           height: 40px;
-          background: linear-gradient(135deg, hsl(var(--ocean)), hsl(var(--ocean-light)));
+          background: linear-gradient(135deg, #3b82f6, #1d4ed8);
           border-radius: 20px;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
           z-index: 1;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
         }
         
         .nav-item-link {
@@ -47,13 +65,14 @@ export const Navigation = () => {
           display: flex;
           align-items: center;
           gap: 8px;
-          padding: 8px 16px;
+          padding: 10px 16px;
           border-radius: 20px;
-          transition: all 0.3s ease;
-          color: hsl(var(--muted-foreground));
+          transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+          color: #6b7280;
           text-decoration: none;
           font-weight: 500;
           z-index: 2;
+          white-space: nowrap;
         }
         
         .nav-item-link.active {
@@ -61,48 +80,91 @@ export const Navigation = () => {
         }
         
         .nav-item-link:not(.active):hover {
-          color: hsl(var(--primary));
-          background: hsl(var(--primary) / 0.05);
+          color: #3b82f6;
+          background: rgba(59, 130, 246, 0.08);
+          transform: translateY(-1px);
         }
         
         .nav-icon {
           width: 16px;
           height: 16px;
-          transition: all 0.3s ease;
+          transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
         
         .nav-item-link.active .nav-icon {
           color: white;
+          filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+        }
+
+        .nav-item-link:not(.active):hover .nav-icon {
+          transform: scale(1.1);
+        }
+
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.3s ease-out;
+        }
+
+        .mobile-nav-item {
+          transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .mobile-nav-item.active {
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(29, 78, 216, 0.15));
+          color: #3b82f6;
+          border-left: 3px solid #3b82f6;
+          transform: translateX(4px);
+        }
+
+        .mobile-nav-item:not(.active):hover {
+          background: rgba(59, 130, 246, 0.05);
+          color: #3b82f6;
+          transform: translateX(2px);
         }
       `}</style>
+      
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-ocean rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg flex items-center justify-center shadow-lg">
               <MapPin className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold bg-gradient-nature bg-clip-text text-transparent">
+            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               EmotiTravel
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center animated-nav" style={{ position: 'relative' }}>
+          <div className="hidden md:flex items-center animated-nav" ref={navRef}>
             <div 
               className="nav-selector"
               style={{
-                width: `${getActiveItemWidth()}px`,
-                left: `${getActiveItemOffset()}px`,
+                width: `${selectorStyle.width}px`,
+                left: `${selectorStyle.left}px`,
+                opacity: selectorStyle.width > 0 ? 1 : 0
               }}
             />
-            {navItems.map((item) => {
+            {navItems.map((item, index) => {
               const Icon = item.icon;
               const active = isActive(item.path);
               return (
                 <Link
                   key={item.path}
                   to={item.path}
+                  ref={(el: HTMLAnchorElement | null) => {
+                    if (el) itemRefs.current[index] = el;
+                  }}
                   className={`nav-item-link nav-item ${active ? 'active' : ''}`}
                 >
                   <Icon className="nav-icon" />
@@ -116,7 +178,7 @@ export const Navigation = () => {
           <Button
             variant="outline"
             size="sm"
-            className="md:hidden"
+            className="md:hidden border-gray-200 hover:bg-blue-50 hover:border-blue-300 transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -129,15 +191,14 @@ export const Navigation = () => {
             <div className="flex flex-col space-y-2">
               {navItems.map((item) => {
                 const Icon = item.icon;
+                const active = isActive(item.path);
                 return (
                   <Link
                     key={item.path}
                     to={item.path}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 ${
-                      isActive(item.path)
-                        ? "bg-primary/10 text-primary"
-                        : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                    className={`mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-lg ${
+                      active ? "active" : ""
                     }`}
                   >
                     <Icon className="w-5 h-5" />
@@ -151,43 +212,7 @@ export const Navigation = () => {
       </div>
     </nav>
   );
-  
-  function getActiveItemWidth() {
-    const activeItem = navItems.find(item => isActive(item.path));
-    if (!activeItem) return 80;
-    
-    // Approximate widths based on label length
-    const widths = {
-      "Home": 80,
-      "Tamil Nadu": 110,
-      "Kerala": 85,
-      "Bangalore": 105,
-      "Discover": 95,
-      "Dashboard": 110
-    };
-    
-    return widths[activeItem.label as keyof typeof widths] || 80;
-  }
-  
-  function getActiveItemOffset() {
-    const activeIndex = navItems.findIndex(item => isActive(item.path));
-    if (activeIndex === -1) return 0;
-    
-    // Calculate cumulative offset
-    let offset = 0;
-    for (let i = 0; i < activeIndex; i++) {
-      const item = navItems[i];
-      const widths = {
-        "Home": 80,
-        "Tamil Nadu": 110,
-        "Kerala": 85,
-        "Bangalore": 105,
-        "Discover": 95,
-        "Dashboard": 110
-      };
-      offset += widths[item.label as keyof typeof widths] || 80;
-    }
-    
-    return offset;
-  }
-};   
+};
+
+// If you want to use default export instead, uncomment this line and comment out the named export above:
+// export default Navigation;
