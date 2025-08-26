@@ -58,4 +58,4 @@ export const HeroSection = () => {
       </div>
     </section>
   );
-}; 
+};    
