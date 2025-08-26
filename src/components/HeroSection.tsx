@@ -95,7 +95,7 @@ export const HeroSection = () => {
             <br />
             <div className="relative inline-block group cursor-default">
               <span 
-                className="inline-block bg-gradient-to-r from-rose-400 via-purple-500 to-pink-500 bg-clip-text text-transparent transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-3 group-hover:translate-y-[-10px] group-hover:drop-shadow-[0_0_35px_rgba(236,72,153,0.8)] animate-pulse"
+                className="inline-block bg-gradient-to-r from-rose-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse"
               >
                 Emotions
               </span>
