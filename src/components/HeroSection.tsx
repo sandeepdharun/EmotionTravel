@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Heart, Compass, MapPin, Sparkles } from "lucide-react";
+import { Heart, Compass } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 export const HeroSection = () => {
@@ -15,10 +15,9 @@ export const HeroSection = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Create orbiting particles (stars/satellites around Earth)
   useEffect(() => {
     if (!particleContainerRef.current) return;
-    const particles = particleContainerRef.current.querySelectorAll<HTMLDivElement>(".earth-particle");
+    const particles = particleContainerRef.current.querySelectorAll<HTMLDivElement>(".geo-particle");
 
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
@@ -26,14 +25,22 @@ export const HeroSection = () => {
       const offsetY = (e.clientY / innerHeight - 0.5) * 40;
 
       particles.forEach((p, i) => {
-        const speed = 3 + (i % 5); // different speed per particle
-        p.style.transform = `translate(${offsetX / speed}px, ${offsetY / speed}px) scale(${p.dataset.scale})`;
+        const speed = 3 + (i % 6);
+        p.style.transform = `translate(${offsetX / speed}px, ${offsetY / speed}px) scale(${p.dataset.scale}) rotate(${i * 45}deg)`;
       });
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
+
+  const shapes = [
+    "polygon(50% 0%, 0% 100%, 100% 100%)", // triangle
+    "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)", // octagon
+    "circle(50% at 50% 50%)", // circle
+    "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)", // hexagon
+    "ellipse(40% 60% at 50% 50%)" // ellipse
+  ];
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white">
@@ -43,25 +50,25 @@ export const HeroSection = () => {
       {/* Earth Glow in Center */}
       <div className="absolute left-1/2 top-1/2 w-[400px] h-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-blue-600/40 to-green-400/30 blur-3xl animate-pulse" />
 
-      {/* Orbiting Particles */}
+      {/* Geometric Floating Particles */}
       <div ref={particleContainerRef} className="absolute inset-0 overflow-hidden">
-        {Array.from({ length: 50 }).map((_, i) => (
+        {Array.from({ length: 25 }).map((_, i) => (
           <div
             key={i}
-            className="earth-particle absolute rounded-full"
-            data-scale={(0.4 + Math.random() * 1.5).toFixed(2)}
+            className="geo-particle absolute"
+            data-scale={(0.6 + Math.random() * 1.2).toFixed(2)}
             style={{
-              width: `${2 + Math.random() * 4}px`,
-              height: `${2 + Math.random() * 4}px`,
+              width: `${12 + Math.random() * 20}px`,
+              height: `${12 + Math.random() * 20}px`,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              background: ["#3BAFDA", "#4CAF50", "#FF7043", "#60A5FA"][i % 4], // ocean, forest, sunset, sky
-              opacity: 0.6,
-              boxShadow: `0 0 ${2 + Math.random() * 8}px rgba(59,130,246,0.6)`,
-              borderRadius: "50%",
-              transition: "transform 0.25s ease-out",
-              animation: `orbit ${10 + Math.random() * 20}s linear infinite`,
-              animationDelay: `${i * 0.3}s`,
+              background: ["#3BAFDA", "#4CAF50", "#FF7043", "#60A5FA"][i % 4],
+              opacity: 0.7,
+              clipPath: shapes[i % shapes.length],
+              boxShadow: `0 0 ${6 + Math.random() * 12}px rgba(255,255,255,0.4)`,
+              transition: "transform 0.3s ease-out",
+              animation: `floaty ${6 + Math.random() * 6}s ease-in-out infinite`,
+              animationDelay: `${i * 0.4}s`,
             }}
           />
         ))}
@@ -81,7 +88,7 @@ export const HeroSection = () => {
           <Compass className="w-4 h-4 text-teal-400 animate-pulse" />
         </div>
 
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] tracking-tight mb-8">
+        <h1 className="text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tight mb-8">
           Journey <br /> Beyond <br />
           <span className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 bg-clip-text text-transparent animate-pulse">
             Emotions
@@ -104,15 +111,11 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* Orbit animation keyframes */}
+      {/* Animations */}
       <style jsx>{`
-        @keyframes orbit {
-          0% {
-            transform: rotate(0deg) translateX(20px) rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg) translateX(20px) rotate(-360deg);
-          }
+        @keyframes floaty {
+          0%, 100% { transform: translateY(0px) scale(1); opacity: 0.8; }
+          50% { transform: translateY(-20px) scale(1.1); opacity: 1; }
         }
       `}</style>
     </section>
