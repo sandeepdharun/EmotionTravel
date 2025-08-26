@@ -1,40 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Heart, Compass } from "lucide-react";
-import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useState } from "react";
-import worldMap from "@/assets/worldmap.png"; // use your uploaded PNG/SVG
 
 export const HeroSection = () => {
   const [isHovering, setIsHovering] = useState(false);
 
-  // Mouse reactive motion values
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useTransform(mouseY, [0, window.innerHeight], [15, -15]);
-  const rotateY = useTransform(mouseX, [0, window.innerWidth], [-15, 15]);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    mouseX.set(e.clientX);
-    mouseY.set(e.clientY);
-  };
-
   return (
-    <section
-      onMouseMove={handleMouseMove}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white"
-    >
-      {/* Glowing World Map Background */}
-      <motion.img
-        src={worldMap}
-        alt="World Map"
-        className="absolute inset-0 w-full h-full object-cover opacity-70 pointer-events-none"
-        style={{ rotateX, rotateY }}
-        transition={{ type: "spring", stiffness: 50, damping: 20 }}
-      />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white">
+      {/* Background Space Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-black to-slate-950 -z-10" />
 
-      {/* Neon Glow Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-600/20 via-black/60 to-teal-600/20 mix-blend-screen blur-2xl -z-10" />
+      {/* Earth Glow in Center */}
+      <div className="absolute left-1/2 top-1/2 w-[400px] h-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-blue-600/40 to-green-400/30 blur-3xl animate-pulse" />
 
       {/* Main Content */}
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
@@ -81,4 +58,5 @@ export const HeroSection = () => {
       </div>
     </section>
   );
-};
+};    
+ 
