@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Home, MapPin, Mountain, Waves, Building, LayoutDashboard } from "lucide-react";
+import { Menu, X, Home, MapPin, Mountain, Waves, Building, LayoutDashboard, Compass } from "lucide-react";
 
 const navItems = [
   { path: "/", label: "Home", icon: Home },
   { path: "/tamil-nadu", label: "Tamil Nadu", icon: Mountain },
   { path: "/kerala", label: "Kerala", icon: Waves },
   { path: "/bangalore", label: "Bangalore", icon: Building },
-  { path: "/discover", label: "Discover", icon: MapPin },
+  { path: "/discover", label: "Discover", icon: Compass },
   { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard }
 ];
 
@@ -20,6 +20,61 @@ export const Navigation = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-border/50">
+      <style jsx>{`
+        .animated-nav {
+          position: relative;
+        }
+        
+        .nav-item {
+          position: relative;
+          z-index: 2;
+        }
+        
+        .nav-selector {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 40px;
+          background: linear-gradient(135deg, hsl(var(--ocean)), hsl(var(--ocean-light)));
+          border-radius: 20px;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 1;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-item-link {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          border-radius: 20px;
+          transition: all 0.3s ease;
+          color: hsl(var(--muted-foreground));
+          text-decoration: none;
+          font-weight: 500;
+          z-index: 2;
+        }
+        
+        .nav-item-link.active {
+          color: white;
+        }
+        
+        .nav-item-link:not(.active):hover {
+          color: hsl(var(--primary));
+          background: hsl(var(--primary) / 0.05);
+        }
+        
+        .nav-icon {
+          width: 16px;
+          height: 16px;
+          transition: all 0.3s ease;
+        }
+        
+        .nav-item-link.active .nav-icon {
+          color: white;
+        }
+      `}</style>
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -33,21 +88,25 @@ export const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center animated-nav" style={{ position: 'relative' }}>
+            <div 
+              className="nav-selector"
+              style={{
+                width: `${getActiveItemWidth()}px`,
+                left: `${getActiveItemOffset()}px`,
+              }}
+            />
             {navItems.map((item) => {
               const Icon = item.icon;
+              const active = isActive(item.path);
               return (
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 group ${
-                    isActive(item.path)
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:text-primary hover:bg-primary/5"
-                  }`}
+                  className={`nav-item-link nav-item ${active ? 'active' : ''}`}
                 >
-                  <Icon className={`w-4 h-4 ${isActive(item.path) ? "text-primary" : "group-hover:text-primary"}`} />
-                  <span className="font-medium">{item.label}</span>
+                  <Icon className="nav-icon" />
+                  <span>{item.label}</span>
                 </Link>
               );
             })}
@@ -92,4 +151,43 @@ export const Navigation = () => {
       </div>
     </nav>
   );
+  
+  function getActiveItemWidth() {
+    const activeItem = navItems.find(item => isActive(item.path));
+    if (!activeItem) return 80;
+    
+    // Approximate widths based on label length
+    const widths = {
+      "Home": 80,
+      "Tamil Nadu": 110,
+      "Kerala": 85,
+      "Bangalore": 105,
+      "Discover": 95,
+      "Dashboard": 110
+    };
+    
+    return widths[activeItem.label as keyof typeof widths] || 80;
+  }
+  
+  function getActiveItemOffset() {
+    const activeIndex = navItems.findIndex(item => isActive(item.path));
+    if (activeIndex === -1) return 0;
+    
+    // Calculate cumulative offset
+    let offset = 0;
+    for (let i = 0; i < activeIndex; i++) {
+      const item = navItems[i];
+      const widths = {
+        "Home": 80,
+        "Tamil Nadu": 110,
+        "Kerala": 85,
+        "Bangalore": 105,
+        "Discover": 95,
+        "Dashboard": 110
+      };
+      offset += widths[item.label as keyof typeof widths] || 80;
+    }
+    
+    return offset;
+  }
 };

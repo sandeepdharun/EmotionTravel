@@ -15,23 +15,6 @@ export const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
       </div>
 
-      {/* Floating Elements */}
-      <div className="absolute top-20 left-10 animate-bounce delay-300">
-        <div className="p-4 bg-white/20 backdrop-blur-md rounded-full shadow-glow">
-          <Heart className="w-6 h-6 text-white" />
-        </div>
-      </div>
-      <div className="absolute top-32 right-20 animate-bounce delay-700">
-        <div className="p-4 bg-white/20 backdrop-blur-md rounded-full shadow-glow">
-          <Compass className="w-6 h-6 text-white" />
-        </div>
-      </div>
-      <div className="absolute bottom-32 left-20 animate-bounce delay-1000">
-        <div className="p-4 bg-white/20 backdrop-blur-md rounded-full shadow-glow">
-          <MapPin className="w-6 h-6 text-white" />
-        </div>
-      </div>
-
       {/* Main Content */}
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
         <div className="mb-8 inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
