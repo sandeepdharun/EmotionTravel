@@ -99,7 +99,7 @@ export const HeroSection = () => {
               >
                 Emotions
               </span>
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-rose-400 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out group-hover:w-full rounded-full shadow-lg shadow-purple-500/50"></div>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-rose-400 via-purple-500 to-pink-500 transition-all duration-500 ease-out group-hover:w-full group-hover:opacity-100 opacity-0 rounded-full shadow-lg shadow-purple-500/50"></div>
             </div>
           </h1>
         </div>
