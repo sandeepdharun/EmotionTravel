@@ -1,90 +1,183 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Heart } from "lucide-react";
-import heroImage from "@/assets/hero-travel.jpg";
+import { ArrowRight, Heart, Compass, MapPin, Sparkles, Brain, Zap } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export const HeroSection = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  const floatingElements = Array.from({ length: 8 }, (_, i) => ({
+    id: i,
+    delay: i * 0.5,
+    duration: 3 + (i % 3),
+  }));
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={heroImage}
-          alt="Calm travel destination"
-          className="w-full h-full object-cover"
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-purple-950 to-slate-900">
+      {/* Animated Background Grid */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.1)_1px,transparent_1px)] bg-[size:50px_50px] animate-pulse"></div>
+      </div>
+
+      {/* Dynamic Gradient Orbs */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div 
+          className="absolute w-96 h-96 bg-gradient-to-r from-cyan-400/30 to-purple-600/30 rounded-full blur-3xl animate-pulse"
+          style={{
+            transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
+            transition: 'transform 0.3s ease-out'
+          }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" />
+        <div 
+          className="absolute top-1/2 right-1/4 w-64 h-64 bg-gradient-to-r from-pink-500/20 to-orange-500/20 rounded-full blur-2xl animate-bounce"
+          style={{ animationDuration: '4s' }}
+        />
+        <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-gradient-to-r from-blue-500/20 to-teal-500/20 rounded-full blur-3xl animate-pulse" />
+      </div>
+
+      {/* Floating Particles */}
+      <div className="absolute inset-0">
+        {floatingElements.map((element) => (
+          <div
+            key={element.id}
+            className="absolute w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-full opacity-60"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `float ${element.duration}s ease-in-out infinite`,
+              animationDelay: `${element.delay}s`,
+            }}
+          />
+        ))}
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-        {/* Badge */}
-        <div className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
-          <Heart className="w-4 h-4 text-white/80" />
-          <span className="text-white/90 text-sm font-medium">
-            AI-Powered Emotional Travel
+      <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
+        {/* AI Badge */}
+        <div 
+          className="mb-12 inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 backdrop-blur-xl rounded-full border border-cyan-400/20 shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/30 transition-all duration-500 hover:scale-105 cursor-pointer group"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
+          <div className="relative">
+            <Brain className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300 transition-colors" />
+            <Sparkles className="w-3 h-3 text-purple-400 absolute -top-1 -right-1 animate-pulse" />
+          </div>
+          <span className="text-white text-sm font-medium tracking-wide">
+            Neural Emotional Intelligence • AI-Powered
           </span>
+          <Zap className="w-4 h-4 text-purple-400 animate-pulse" />
         </div>
 
-        {/* Heading */}
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-          Travel with{" "}
-          <span className="relative group inline-block">
-            <span className="bg-gradient-to-r from-sky-400 to-blue-300 bg-clip-text text-transparent transition-colors duration-300">
-              Emotions
-            </span>
-            {/* Underline on hover */}
-            <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-sky-300 transition-all duration-300 group-hover:w-full" />
-          </span>
-        </h1>
+        {/* Main Heading with Advanced Animation */}
+        <div className="mb-8 overflow-hidden">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-purple-200 mb-6 leading-[0.9] tracking-tight">
+            <div className="inline-block hover:scale-105 transition-transform duration-300 cursor-default">
+              <span 
+                className="inline-block hover:text-cyan-300 transition-colors duration-300"
+                style={{ 
+                  textShadow: isHovering ? '0 0 30px rgba(34, 211, 238, 0.5)' : 'none',
+                  transition: 'text-shadow 0.3s ease'
+                }}
+              >
+                Journey
+              </span>
+            </div>
+            <br />
+            <div className="inline-block hover:scale-105 transition-transform duration-300 cursor-default">
+              <span className="text-white hover:text-purple-300 transition-colors duration-300">Beyond</span>
+            </div>
+            <br />
+            <div className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
+              <span className="inline-block hover:scale-110 transition-transform duration-300 cursor-default hover:animate-bounce">
+                Emotions
+              </span>
+            </div>
+          </h1>
+        </div>
 
-        {/* Description */}
-        <p className="text-lg md:text-xl text-white/80 mb-10 max-w-3xl mx-auto leading-relaxed">
-          Discover destinations that resonate with your feelings. 
-          Our AI understands your emotional state and creates 
-          journeys that inspire, heal, and transform.
-        </p>
+        {/* Subtitle with Typewriter Effect */}
+        <div className="mb-12 max-w-4xl mx-auto">
+          <p className="text-lg md:text-xl lg:text-2xl text-slate-300 leading-relaxed font-light tracking-wide">
+            <span className="text-cyan-400 font-semibold">Neural algorithms</span> decode your emotional spectrum, 
+            <span className="text-purple-400 font-semibold"> crafting immersive journeys</span> that transcend traditional travel. 
+            <br className="hidden md:block" />
+            Experience destinations that <span className="text-pink-400 font-semibold hover:text-pink-300 transition-colors cursor-default">resonate with your soul</span>.
+          </p>
+        </div>
 
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            size="lg"
-            className="bg-sky-500 hover:bg-sky-600 text-white transition-all duration-300 px-8 py-6 text-lg font-semibold"
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+          <Button 
+            size="lg" 
+            className="relative overflow-hidden bg-gradient-to-r from-cyan-500 to-purple-600 border-0 text-white hover:from-cyan-400 hover:to-purple-500 transition-all duration-500 px-10 py-6 text-lg font-bold rounded-full shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/50 hover:scale-105 group"
           >
-            Start Your Journey
-            <ArrowRight className="ml-2 w-5 h-5" />
+            <span className="relative z-10">Initiate Neural Scan</span>
+            <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="border border-white/40 bg-white/10 backdrop-blur-md text-white hover:bg-white/20 transition-all duration-300 px-8 py-6 text-lg font-semibold"
+          
+          <Button 
+            size="lg" 
+            variant="outline" 
+            className="border-2 border-cyan-400/40 bg-slate-900/40 backdrop-blur-xl text-cyan-100 hover:bg-cyan-500/10 hover:border-cyan-400/80 transition-all duration-500 px-10 py-6 text-lg font-semibold rounded-full hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20"
           >
-            Learn More
+            Explore Technology
           </Button>
         </div>
 
-        {/* Stats */}
-        <div className="mt-16 flex flex-col sm:flex-row justify-center gap-10">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-white mb-1">10K+</div>
-            <div className="text-white/70">Happy Travelers</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-white mb-1">150+</div>
-            <div className="text-white/70">Destinations</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-white mb-1">98%</div>
-            <div className="text-white/70">Satisfaction Rate</div>
-          </div>
+        {/* Enhanced Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
+          {[
+            { value: "50K+", label: "Neural Journeys", icon: Brain, color: "cyan" },
+            { value: "300+", label: "Emotion Zones", icon: MapPin, color: "purple" },
+            { value: "99.2%", label: "Sync Accuracy", icon: Zap, color: "pink" }
+          ].map((stat, index) => (
+            <div 
+              key={index}
+              className="text-center p-6 bg-slate-900/30 backdrop-blur-md rounded-2xl border border-slate-700/50 hover:border-cyan-400/50 transition-all duration-300 hover:scale-105 hover:bg-slate-900/50 group cursor-default"
+            >
+              <div className="mb-3 flex justify-center">
+                <stat.icon className={`w-8 h-8 text-${stat.color}-400 group-hover:text-${stat.color}-300 transition-colors`} />
+              </div>
+              <div className={`text-4xl font-bold text-${stat.color}-400 mb-2 group-hover:scale-110 transition-transform`}>
+                {stat.value}
+              </div>
+              <div className="text-slate-400 font-medium tracking-wide group-hover:text-slate-300 transition-colors">
+                {stat.label}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Enhanced Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse" />
+        <div className="flex flex-col items-center gap-2 animate-bounce cursor-pointer hover:scale-110 transition-transform">
+          <div className="w-1 h-6 bg-gradient-to-b from-cyan-400 to-purple-400 rounded-full animate-pulse" />
+          <div className="w-6 h-10 border-2 border-cyan-400/60 rounded-full flex justify-center backdrop-blur-sm">
+            <div className="w-1.5 h-4 bg-gradient-to-b from-cyan-400 to-purple-400 rounded-full mt-2 animate-pulse" />
+          </div>
+          <span className="text-xs text-slate-400 font-medium tracking-wider">EXPLORE</span>
         </div>
       </div>
+
+      {/* CSS for custom animations */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+          50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+      `}</style>
     </section>
   );
 };
