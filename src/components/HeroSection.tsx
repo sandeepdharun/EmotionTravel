@@ -93,9 +93,9 @@ export const HeroSection = () => {
               <span className="text-white transition-all duration-500 group-hover:text-purple-300 group-hover:drop-shadow-[0_0_30px_rgba(196,181,253,0.7)]">Beyond</span>
             </div>
             <br />
-            <div className="relative inline-block bg-gradient-to-r from-rose-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse group cursor-default">
+            <div className="relative inline-block group cursor-default">
               <span 
-                className="inline-block transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-3 group-hover:translate-y-[-10px] group-hover:drop-shadow-[0_0_35px_rgba(236,72,153,0.8)]"
+                className="inline-block bg-gradient-to-r from-rose-400 via-purple-500 to-pink-500 bg-clip-text text-transparent transition-all duration-500 ease-out group-hover:scale-110 group-hover:rotate-3 group-hover:translate-y-[-10px] group-hover:drop-shadow-[0_0_35px_rgba(236,72,153,0.8)] animate-pulse"
               >
                 Emotions
               </span>
