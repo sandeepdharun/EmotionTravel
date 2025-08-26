@@ -39,7 +39,7 @@ export const HeroSection = () => {
         {/* Description */}
         <p className="max-w-2xl mx-auto text-lg text-gray-300 leading-relaxed mb-12">
           <span className="text-blue-400 font-semibold">Discover your emotional compass</span> and let your feelings
-          guide you to <span className="text-teal-400 font-semibold">extraordinary destinations</span>. <br />
+          guide you to <span className="text-teal-400 font-semibold">extraordinary destinations for you sandeep</span>. <br />
           Travel that <span className="text-emerald-400 font-semibold">heals, inspires & transforms</span> your soul.
         </p>
 
