@@ -80,27 +80,26 @@ export const HeroSection = () => {
 
         {/* Main Heading with Advanced Animation */}
         <div className="mb-8 overflow-hidden">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-purple-200 mb-6 leading-[0.9] tracking-tight">
-            <div className="inline-block hover:scale-105 transition-transform duration-300 cursor-default">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-rose-200 to-purple-200 mb-6 leading-[0.9] tracking-tight">
+            <div className="inline-block transition-all duration-700 ease-out cursor-default hover:translate-y-[-8px] hover:rotate-1 group">
               <span 
-                className="inline-block hover:text-cyan-300 transition-colors duration-300"
-                style={{ 
-                  textShadow: isHovering ? '0 0 30px rgba(34, 211, 238, 0.5)' : 'none',
-                  transition: 'text-shadow 0.3s ease'
-                }}
+                className="inline-block text-white transition-all duration-500 group-hover:text-rose-300 group-hover:drop-shadow-[0_0_25px_rgba(251,113,133,0.6)]"
               >
                 Journey
               </span>
             </div>
             <br />
-            <div className="inline-block hover:scale-105 transition-transform duration-300 cursor-default">
-              <span className="text-white hover:text-purple-300 transition-colors duration-300">Beyond</span>
+            <div className="inline-block transition-all duration-700 ease-out cursor-default hover:translate-y-[-12px] hover:rotate-[-2deg] hover:skew-x-2 group">
+              <span className="text-white transition-all duration-500 group-hover:text-purple-300 group-hover:drop-shadow-[0_0_30px_rgba(196,181,253,0.7)]">Beyond</span>
             </div>
             <br />
-            <div className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse">
-              <span className="inline-block hover:scale-110 transition-transform duration-300 cursor-default hover:animate-bounce">
+            <div className="relative inline-block bg-gradient-to-r from-rose-400 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-pulse group cursor-default">
+              <span 
+                className="inline-block transition-all duration-700 ease-out group-hover:scale-110 group-hover:rotate-3 group-hover:translate-y-[-10px] group-hover:drop-shadow-[0_0_35px_rgba(236,72,153,0.8)]"
+              >
                 Emotions
               </span>
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-rose-400 via-purple-500 to-pink-500 transition-all duration-700 ease-out group-hover:w-full rounded-full shadow-lg shadow-purple-500/50"></div>
             </div>
           </h1>
         </div>
