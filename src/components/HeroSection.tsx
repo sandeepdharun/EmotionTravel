@@ -1,61 +1,63 @@
-import { Button } from "@/components/ui/button";
-import { Heart, Compass } from "lucide-react";
-import { useState } from "react";
+import { motion } from "framer-motion";
 
-export const HeroSection = () => {
-  const [isHovering, setIsHovering] = useState(false);
-
+export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white">
-      {/* Background Space Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-black to-slate-950 -z-10" />
+    <section className="relative flex items-center justify-center h-screen overflow-hidden bg-gradient-to-b from-black via-[#020617] to-black">
+      {/* Earth Glow */}
+      <motion.div
+        className="absolute w-[300px] h-[300px] rounded-full bg-gradient-to-r from-blue-500 via-green-400 to-blue-700 shadow-[0_0_60px_20px_rgba(0,150,255,0.5)]"
+        animate={{
+          rotate: [0, 360],
+        }}
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
 
-      {/* Earth Glow in Center */}
-      <div className="absolute left-1/2 top-1/2 w-[400px] h-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-blue-600/40 to-green-400/30 blur-3xl animate-pulse" />
-
-      {/* Main Content */}
-      <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-        {/* Tagline */}
-        <div
-          className="mb-12 inline-flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-xl rounded-full border border-blue-400/50 shadow-lg hover:scale-105 transition-transform cursor-pointer"
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-        >
-          <Heart className="w-5 h-5 text-blue-400" />
-          <span className="text-white text-sm font-medium tracking-wide">
-            Emotional Travel Intelligence • Feel-First Journey
-          </span>
-          <Compass className="w-4 h-4 text-teal-400 animate-pulse" />
-        </div>
-
-        {/* Heading */}
-        <h1 className="text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tight mb-8">
-          Journey <br /> Beyond <br />
-          <span className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 bg-clip-text text-transparent animate-pulse">
-            Emotions
-          </span>
-        </h1>
-
-        {/* Description */}
-        <p className="max-w-2xl mx-auto text-lg text-gray-300 leading-relaxed mb-12">
-          <span className="text-blue-400 font-semibold">Discover your emotional compass</span> and let your feelings
-          guide you to <span className="text-teal-400 font-semibold">extraordinary destinations</span>. <br />
-          Travel that <span className="text-emerald-400 font-semibold">heals, inspires & transforms</span> your soul.
-        </p>
-
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
-          <Button className="bg-gradient-to-r from-blue-600 to-teal-600 text-white px-10 py-6 rounded-full shadow-lg hover:scale-105 transition-transform">
-            Start Your Journey
-          </Button>
-          <Button
-            variant="outline"
-            className="border-2 border-blue-400/60 bg-white/10 text-white px-10 py-6 rounded-full hover:scale-105 transition-transform"
-          >
-            Discover Emotions
-          </Button>
-        </div>
+      {/* Floating Particles */}
+      <div className="absolute inset-0">
+        {Array.from({ length: 25 }).map((_, i) => (
+          <motion.span
+            key={i}
+            className="absolute w-1 h-1 rounded-full bg-white/80 shadow-[0_0_6px_2px_rgba(255,255,255,0.6)]"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -10, 0],
+              opacity: [0.3, 1, 0.3],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
       </div>
+
+      {/* Content */}
+      <motion.div
+        className="relative text-center z-10 text-white"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <h1 className="text-5xl font-bold mb-4">Explore the World</h1>
+        <p className="text-lg text-gray-300 mb-6">
+          Discover destinations, adventures, and cultures.
+        </p>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="px-6 py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 transition"
+        >
+          Start Journey
+        </motion.button>
+      </motion.div>
     </section>
   );
-};
+}
