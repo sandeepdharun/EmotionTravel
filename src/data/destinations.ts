@@ -263,7 +263,7 @@ export const keralaDestinations: Destination[] = [
   {
     name: "Munnar",
     country: "Kerala",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+    image: "https://www.munnar.holiday/munnartourism/wp-content/uploads/2024/11/what-is-munnar-famous-for.jpg",
     emotionalMatch: "Refreshing & Energizing",
     matchPercentage: 93,
     description: "Breathe fresh mountain air amidst rolling tea plantations and misty hills, perfect for rejuvenating your spirit.",
