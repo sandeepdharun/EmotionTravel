@@ -145,7 +145,7 @@ export const tamilNaduDestinations: Destination[] = [
   {
     name: "Thanjavur",
     country: "Tamil Nadu",
-    image: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=800&q=80",
+    image: "https://letusdiscoverindia.com/wp-content/uploads/2023/03/pexels-photo-5124396.jpeg",
     emotionalMatch: "Cultural & Inspiring",
     matchPercentage: 88,
     description: "Immerse yourself in the rich Chola heritage with magnificent temples, classical music, and traditional art forms.",
