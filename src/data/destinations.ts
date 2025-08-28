@@ -168,7 +168,7 @@ export const tamilNaduDestinations: Destination[] = [
   {
     name: "Madurai",
     country: "Tamil Nadu",
-    image: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=800&q=80",
+    image: "https://hblimg.mmtcdn.com/content/hubble/img/desttvimg/mmt/destination/m_Madurai_tv_destination_img_1_l_542_967.jpg",
     emotionalMatch: "Spiritual & Vibrant",
     matchPercentage: 91,
     description: "Experience the divine energy of Meenakshi Temple and immerse in the vibrant temple city culture and traditions.",
