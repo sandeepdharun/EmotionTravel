@@ -122,7 +122,7 @@ export const tamilNaduDestinations: Destination[] = [
   {
     name: "Yercaud",
     country: "Tamil Nadu",
-    image: "https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?w=800&q=80",
+    image: "https://bestplaces.blog/wp-content/uploads/2025/03/Best-Places-to-Visit-in-Yercaud.webp",
     emotionalMatch: "Refreshing & Energizing",
     matchPercentage: 85,
     description: "A lesser-known gem in the Shevaroy Hills, perfect for those seeking solitude amidst coffee plantations and serene lakes.",
