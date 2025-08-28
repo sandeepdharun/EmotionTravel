@@ -286,7 +286,7 @@ export const keralaDestinations: Destination[] = [
   {
     name: "Thekkady",
     country: "Kerala",
-    image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80",
+    image: "https://keralatourism.travel/images//tourist-places/ramakkalmedu-thekkady/ramakkalmedu-thekkady-tourism-entry-ticket-price.jpg",
     emotionalMatch: "Adventurous & Wild",
     matchPercentage: 90,
     description: "Embark on wildlife adventures in Periyar National Park, where nature's raw beauty awakens your adventurous spirit.",
@@ -309,7 +309,7 @@ export const keralaDestinations: Destination[] = [
   {
     name: "Kochi",
     country: "Kerala",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80",
+    image: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202501/kochi-water-metro-244106949-16x9_0.jpg?VersionId=XJlI7DwEJ5TImeAo9ZHsnUL0oNw.ekzO",
     emotionalMatch: "Cultural & Inspiring",
     matchPercentage: 88,
     description: "Explore the historic port city where Portuguese, Dutch, and British influences blend with local culture in fascinating harmony.",
@@ -332,7 +332,7 @@ export const keralaDestinations: Destination[] = [
   {
     name: "Wayanad",
     country: "Kerala",
-    image: "https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?w=800&q=80",
+    image: "https://res.cloudinary.com/dyiffrkzh/image/upload/c_fill,f_auto,fl_progressive.strip_profile,g_center,h_400,q_auto,w_700/v1704969274/bbj/njqtfztadcu9xf4tahht.jpg",
     emotionalMatch: "Peaceful & Nature-loving",
     matchPercentage: 91,
     description: "Disconnect from the world in Wayanad's pristine forests, waterfalls, and tribal culture for a soul-cleansing experience.",
@@ -355,7 +355,7 @@ export const keralaDestinations: Destination[] = [
   {
     name: "Varkala",
     country: "Kerala",
-    image: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=800&q=80",
+    image: "https://irisholidays.com/keralatourism/wp-content/uploads/2014/06/best-things-to-do-in-varkala.jpg",
     emotionalMatch: "Spiritual & Relaxing",
     matchPercentage: 94,
     description: "Find spiritual solace on Varkala's dramatic clifftop beaches, where ancient temples meet healing Ayurvedic traditions.",
@@ -378,7 +378,7 @@ export const keralaDestinations: Destination[] = [
   {
     name: "Kumarakom",
     country: "Kerala",
-    image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&q=80",
+    image: "https://www.theraviz.com/wp-content/uploads/2024/04/The-Enchanting-Backwaters-of-Kumarakom.jpg",
     emotionalMatch: "Peaceful & Bird-watching",
     matchPercentage: 93,
     description: "Experience serenity at Kumarakom Bird Sanctuary and backwater cruises, perfect for nature lovers seeking tranquil moments.",
@@ -401,7 +401,7 @@ export const keralaDestinations: Destination[] = [
   {
     name: "Kovalam",
     country: "Kerala",
-    image: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=800&q=80",
+    image: "https://s3.india.com/wp-content/uploads/2025/06/Kovalam-hidden-gems-1.jpg##image/jpg",
     emotionalMatch: "Relaxing & Beach Therapy",
     matchPercentage: 91,
     description: "Unwind on pristine crescent beaches with Ayurvedic massages and lighthouse views, ideal for stress relief and rejuvenation.",
@@ -424,7 +424,7 @@ export const keralaDestinations: Destination[] = [
   {
     name: "Athirappilly",
     country: "Kerala",
-    image: "https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?w=800&q=80",
+    image: "https://www.wowabouts.com/z-media/2018/10/Athirappilly%20Falls.jpg",
     emotionalMatch: "Adventurous & Nature's Power",
     matchPercentage: 89,
     description: "Marvel at Kerala's Niagara - the powerful Athirappilly Falls surrounded by lush rainforests, perfect for adventure seekers.",
@@ -450,7 +450,7 @@ export const bangaloreDestinations: Destination[] = [
   {
     name: "Lalbagh Botanical Garden",
     country: "Bangalore",
-    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
+    image: "https://media1.thrillophilia.com/filestore/63znh36mzyxi2gmmbn4c38mekupu_1562854402_lal_bagh.jpg",
     emotionalMatch: "Peaceful & Rejuvenating",
     matchPercentage: 92,
     description: "Find tranquility in this 240-acre botanical paradise with over 1,000 species of flora, perfect for morning meditation walks.",
@@ -473,7 +473,7 @@ export const bangaloreDestinations: Destination[] = [
   {
     name: "Nandi Hills",
     country: "Near Bangalore",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+    image: "https://www.treksandtrails.org/blog/wp-content/uploads/2020/08/Nandi-Hills.jpg",
     emotionalMatch: "Adventurous & Refreshing",
     matchPercentage: 89,
     description: "Watch breathtaking sunrises from this ancient hill fortress, just 60km from Bangalore - perfect for weekend escapes and cycling.",
@@ -496,7 +496,7 @@ export const bangaloreDestinations: Destination[] = [
   {
     name: "Cubbon Park",
     country: "Bangalore",
-    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
+    image: "https://www.shutterstock.com/image-photo/tree-garden-cubbon-park-bangalore-600nw-1504042868.jpg",
     emotionalMatch: "Urban Peace & Wellness",
     matchPercentage: 88,
     description: "Escape city stress in this 300-acre urban oasis in the heart of Bangalore, ideal for jogging, yoga, and peaceful reflection.",
