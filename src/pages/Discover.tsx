@@ -2,7 +2,6 @@ import { ParticleBackground } from "@/components/ParticleBackground";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { InteractiveMap } from "@/components/InteractiveMap";
 import { MapPin, Heart, Compass, Globe, ArrowRight, Users, Calendar, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -116,23 +115,6 @@ const Discover = () => {
               </Card>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Interactive Map Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-6">
-              Discover
-              <span className="bg-gradient-ocean bg-clip-text text-transparent"> Hidden Gems</span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Explore the map and click anywhere to discover unique destinations tailored to your emotional journey
-            </p>
-          </div>
-          
-          <InteractiveMap />
         </div>
       </section>
 
