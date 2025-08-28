@@ -217,9 +217,10 @@ export const Navigation = () => {
             <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg flex items-center justify-center shadow-lg">
               <MapPin className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Emotion Escapes
-            </span>
+            <span className="text-xl font-bold bg-gradient-to-r from-teal-500 to-orange-400 bg-clip-text text-transparent">
+  Emotion Escapes
+</span>
+
           </Link>
 
           {/* Desktop Navigation */}
