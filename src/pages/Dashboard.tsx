@@ -135,9 +135,9 @@ const Dashboard = () => {
         </p>
         
         <div className="flex flex-wrap gap-2 mb-4">
-          {plan.culturalHighlights.slice(0, 2).map((highlight: string, index: number) => (
+          {plan.culturalHighlights.slice(0, 2).map((highlight: any, index: number) => (
             <Badge key={index} variant="outline" className="text-xs">
-              {highlight}
+              {typeof highlight === 'string' ? highlight : (highlight.name || highlight.description || 'Cultural Highlight')}
             </Badge>
           ))}
         </div>
