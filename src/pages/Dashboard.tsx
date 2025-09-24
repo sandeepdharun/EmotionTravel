@@ -135,9 +135,9 @@ const Dashboard = () => {
         </p>
         
         <div className="flex flex-wrap gap-2 mb-4">
-          {plan.culturalHighlights.slice(0, 2).map((highlight: any, index: number) => (
+          {plan.culturalHighlights.slice(0, 2).map((highlight: string, index: number) => (
             <Badge key={index} variant="outline" className="text-xs">
-              {typeof highlight === 'string' ? highlight : (highlight.name || highlight.description || 'Cultural Highlight')}
+              {highlight}
             </Badge>
           ))}
         </div>
@@ -198,6 +198,15 @@ const Dashboard = () => {
                 { state: { destination: plan } }
               )
             }
+            onClick={() => {
+              navigate(`/destination/${encodeURIComponent(plan.region)}/${encodeURIComponent(plan.name)}`,
+                { state: { destination: plan } }
+              );
+              // Scroll to top after navigation
+              setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }, 100);
+            }}
           >
             View Details
           </Button>
