@@ -1,17 +1,30 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+
+import { useEffect, useLayoutEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
 
   useEffect(() => {
-    // Scroll to top when pathname changes
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
+    if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    // Disable smooth scroll temporarily for instant reset
+    document.documentElement.style.scrollBehavior = "auto";
+    
+    // Force scroll to top
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+
+    // Re-enable smooth scroll after a frame
+    requestAnimationFrame(() => {
+      document.documentElement.style.scrollBehavior = "";
     });
-  }, [pathname]);
+  }, [pathname, search]);
 
   return null;
 };

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 interface ParticleBackgroundProps {
-  theme?: "ocean" | "forest" | "sunset" | "minimal";
+  theme?: "ocean" | "forest" | "sunset" | "minimal" | "nature" | "mountain";
 }
 
 export const ParticleBackground = ({ theme = "minimal" }: ParticleBackgroundProps) => {
@@ -13,9 +13,12 @@ export const ParticleBackground = ({ theme = "minimal" }: ParticleBackgroundProp
       case "ocean":
         return "#3BAFDA"; // ocean blue
       case "forest":
+      case "nature":
         return "#4CAF50"; // forest green
       case "sunset":
         return "#FF7043"; // sunset orange
+      case "mountain":
+        return "#8B5CF6"; // mountain purple
       default:
         return "#888"; // minimal gray
     }
@@ -47,7 +50,7 @@ export const ParticleBackground = ({ theme = "minimal" }: ParticleBackgroundProp
       ref={containerRef}
       className="absolute inset-0 -z-10 overflow-hidden"
       style={{
-        background: "radial-gradient(circle at center, #0d0d0d, #000)", // space-like bg
+        background: "transparent",
       }}
     >
       {/* Earth center glow */}
@@ -73,8 +76,7 @@ export const ParticleBackground = ({ theme = "minimal" }: ParticleBackgroundProp
         />
       ))}
 
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-background/20 pointer-events-none" />
+
     </div>
   );
 };

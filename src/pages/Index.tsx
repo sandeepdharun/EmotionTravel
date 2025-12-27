@@ -25,16 +25,16 @@ const Index = () => {
       <HeroSection />
       <EmotionForm />
       <FeatureCards />
-      
+
       {/* Recommended Destinations */}
-      <section className="py-20 px-6 bg-muted/30">
+      <section className="py-20 px-6 bg-slate-900/95">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Destinations for Your
               <span className="bg-gradient-ocean bg-clip-text text-transparent"> Soul</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
               Discover places that understand and nurture your emotional journey
             </p>
           </div>

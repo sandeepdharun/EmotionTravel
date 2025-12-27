@@ -24,6 +24,7 @@ import {
   Calendar as CalendarIcon
 } from "lucide-react";
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { StepWizard } from "@/components/plan/StepWizard";
 
 const Dashboard = () => {
   const { selectedPlans, updatePlanStatus, removePlan, getPlansByStatus } = usePlans();
@@ -74,171 +75,95 @@ const Dashboard = () => {
     }
   };
 
-  const PlanCard = ({ plan }: { plan: any }) => (
-    <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col h-full">
-      <div className="relative">
-        <img 
-          src={plan.image} 
-          alt={plan.name}
-          className="w-full h-48 object-cover"
-        />
-        <div className="absolute top-4 right-4">
-          <Badge className={`${getStatusColor(plan.status)} font-medium`}>
-            {plan.status}
-          </Badge>
-        </div>
-        <div className="absolute top-4 left-4">
-          <Badge variant="secondary" className="bg-black/50 text-white">
-            {plan.region}
-          </Badge>
-        </div>
-      </div>
-      <CardContent className="p-6 flex flex-col h-full">
-        {/* Progress Section for Ongoing Plans */}
-        {plan.status === 'ongoing' && (
-          <div className="mb-4 p-4 bg-amber-50 rounded-lg border border-amber-200">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-semibold text-amber-800">Journey in Progress</span>
-              <Target className="w-4 h-4 text-amber-600" />
-            </div>
-            <Progress value={getStepProgress(plan.status)} className="mb-3" />
-            <div className="text-xs text-amber-700">
-              <div className="font-medium mb-1">Current Phase: Explore & Experience</div>
-              <div>Visit attractions • Try local cuisine • Immerse in culture</div>
-            </div>
-          </div>
-        )}
+  const PlanCard = ({ plan }: { plan: any }) => {
+    const { computePlanProgress } = usePlans();
+    const progress = computePlanProgress(plan.id);
+    const [open, setOpen] = useState(false);
 
-        {/* Completed Journey Summary */}
-        {plan.status === 'completed' && (
-          <div className="mb-4 p-4 bg-green-50 rounded-lg border border-green-200">
-            <div className="flex items-center gap-2 mb-2">
-              <CheckCircle className="w-4 h-4 text-green-600" />
-              <span className="text-sm font-semibold text-green-800">Journey Completed!</span>
-            </div>
-            <div className="text-xs text-green-700">
-              Congratulations on completing your emotional journey to {plan.name}
-            </div>
-          </div>
-        )}
-
-        <div className="flex justify-between items-start mb-3">
-          <h3 className="text-xl font-semibold text-foreground">{plan.name}</h3>
-          <div className="flex items-center space-x-1">
-            <Star className="w-4 h-4 text-yellow-500 fill-current" />
-            <span className="text-sm font-medium">{plan.matchPercentage}%</span>
-          </div>
-        </div>
-        
-        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-          {plan.description}
-        </p>
-        
-        <div className="flex flex-wrap gap-2 mb-4">
-          {plan.culturalHighlights.slice(0, 2).map((highlight: string, index: number) => (
-            <Badge key={index} variant="outline" className="text-xs">
-              {highlight}
+    return (
+      <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+        <div className="relative">
+          <img
+            src={plan.image}
+            alt={plan.name}
+            className="w-full h-48 object-cover"
+          />
+          <div className="absolute top-4 left-4">
+            <Badge variant="secondary" className="bg-black/50 text-white">
+              {plan.region}
             </Badge>
-          ))}
+          </div>
         </div>
-        
-        <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
-          <span className="flex items-center">
-            <Calendar className="w-4 h-4 mr-1" />
-            {plan.bestTime}
-          </span>
-          <span>{plan.priceRange}</span>
-        </div>
-        
-        <Separator className="my-4" />
-        
-        <div className="flex items-center justify-between">
-          <div className="flex space-x-2">
+        <CardContent className="p-6 flex flex-col h-full">
+          <div className="mb-4 p-4 bg-muted/40 rounded-lg border">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-semibold">Plan Progress</span>
+              <span className="text-xs text-muted-foreground">{Math.round(progress)}%</span>
+            </div>
+            <Progress value={progress} />
+            <div className="mt-2 text-[11px] text-muted-foreground">Transport • Room • Emotion • Awareness • Culture • Report</div>
+          </div>
+
+          {plan.status === 'completed' && (
+            <div className="mb-4 p-4 bg-green-50 rounded-lg border border-green-200">
+              <div className="flex items-center gap-2 mb-2">
+                <CheckCircle className="w-4 h-4 text-green-600" />
+                <span className="text-sm font-semibold text-green-800">Journey Completed!</span>
+              </div>
+              <div className="text-xs text-green-700">
+                Congratulations on completing your journey to {plan.name}
+              </div>
+            </div>
+          )}
+
+          <div className="flex justify-between items-start mb-2">
+            <h3 className="text-xl font-semibold text-foreground">{plan.name}</h3>
+          </div>
+
+          <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+            {plan.description}
+          </p>
+
+
+
+
+          <div className="mt-4 grid grid-cols-2 gap-3 items-stretch">
             <Button
-              size="sm"
-              variant={plan.status === 'selected' ? 'default' : 'outline'}
-              onClick={() => handleStatusChange(plan.id, 'selected')}
-              className="text-xs"
+              className="bg-gradient-ocean text-white hover:shadow-glow transition-all duration-300"
+              aria-label={`View details about ${plan.name} in ${plan.region}`}
+              onClick={() =>
+                navigate(`/destination/${encodeURIComponent(plan.region)}/${encodeURIComponent(plan.name)}`,
+                  { state: { destination: plan } }
+                )
+              }
             >
-              Selected
+              View Details
             </Button>
+            <div className="flex gap-2 justify-end">
+              <Button variant="outline" onClick={() => setOpen(true)} className="w-full">Plan Steps</Button>
+            </div>
+          </div>
+          <div className="mt-2 flex justify-end">
             <Button
               size="sm"
-              variant={plan.status === 'ongoing' ? 'default' : 'outline'}
-              onClick={() => handleStatusChange(plan.id, 'ongoing')}
-              className="text-xs"
+              variant="ghost"
+              onClick={() => removePlan(plan.id)}
+              className="text-red-500 hover:text-red-700 hover:bg-red-50"
             >
-              Ongoing
-            </Button>
-            <Button
-              size="sm"
-              variant={plan.status === 'completed' ? 'default' : 'outline'}
-              onClick={() => handleStatusChange(plan.id, 'completed')}
-              className="text-xs"
-            >
-              Completed
+              <X className="w-4 h-4" />
             </Button>
           </div>
-          <Button 
-            size="sm" 
-            variant="ghost" 
-            onClick={() => removePlan(plan.id)}
-            className="text-red-500 hover:text-red-700 hover:bg-red-50"
-          >
-            <X className="w-4 h-4" />
-          </Button>
-        </div>
 
-        <div className="mt-4 flex gap-3 items-stretch">
-          <Button
-            className="flex-1 bg-gradient-ocean text-white hover:shadow-glow transition-all duration-300"
-            aria-label={`View details about ${plan.name} in ${plan.region}`}
-            onClick={() =>
-              navigate(`/destination/${encodeURIComponent(plan.region)}/${encodeURIComponent(plan.name)}`,
-                { state: { destination: plan } }
-              )
-            }
-            onClick={() => {
-              navigate(`/destination/${encodeURIComponent(plan.region)}/${encodeURIComponent(plan.name)}`,
-                { state: { destination: plan } }
-              );
-              // Scroll to top after navigation
-              setTimeout(() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }, 100);
-            }}
-          >
-            View Details
-          </Button>
-          {plan.status === 'selected' && (
-            <Button
-              variant="secondary"
-              className="flex-1"
-              onClick={() => {
-                handleStatusChange(plan.id, 'ongoing');
-                navigate('/dashboard?tab=ongoing');
-              }}
-              aria-label="Start journey and move to ongoing"
-            >
-              Start Journey
-            </Button>
+          {/* Wizard */}
+          {open && (
+            <StepWizard planId={plan.id} open={open} onOpenChange={setOpen} />
           )}
-          {plan.status === 'ongoing' && (
-            <Button
-              variant="secondary"
-              className="flex-1"
-              onClick={() => {
-                handleStatusChange(plan.id, 'completed');
-              }}
-              aria-label="Mark journey as completed"
-            >
-              Complete
-            </Button>
-          )}
-        </div>
-      </CardContent>
-    </Card>
-  );
+        </CardContent>
+      </Card>
+    );
+  };
+
+
 
   return (
     <div className="min-h-screen bg-background relative pt-16">
@@ -392,43 +317,7 @@ const Dashboard = () => {
             
             <TabsContent value="ongoing" className="mt-8">
               <div className="space-y-6">
-                {/* Travel Guide for Ongoing Plans */}
-                {getPlansByStatus('ongoing').length > 0 && (
-                  <Card className="bg-gradient-nature text-white">
-                    <CardContent className="p-6">
-                      <h3 className="text-2xl font-bold mb-4 flex items-center">
-                        <Target className="w-6 h-6 mr-2" />
-                        Your Active Journeys Guide
-                      </h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <h4 className="font-semibold mb-3 flex items-center">
-                            <CalendarIcon className="w-4 h-4 mr-2" />
-                            Travel Checklist
-                          </h4>
-                          <ul className="space-y-2 text-sm opacity-90">
-                            <li>✅ Research completed</li>
-                            <li>✅ Bookings confirmed</li>
-                            <li>🎯 Currently exploring destinations</li>
-                            <li>📸 Capturing memories</li>
-                          </ul>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold mb-3 flex items-center">
-                            <ArrowRight className="w-4 h-4 mr-2" />
-                            Next Steps
-                          </h4>
-                          <ul className="space-y-2 text-sm opacity-90">
-                            <li>• Visit cultural highlights</li>
-                            <li>• Try local cuisines</li>
-                            <li>• Follow travel tips</li>
-                            <li>• Mark as complete when done</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
+
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {getPlansByStatus('ongoing').map((plan) => (

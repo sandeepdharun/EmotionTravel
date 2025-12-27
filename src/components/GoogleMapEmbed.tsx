@@ -8,7 +8,7 @@ import { usePlans } from "@/contexts/PlanContext";
 import { useToast } from "@/hooks/use-toast";
 
 interface GoogleMapEmbedProps {
-  region: "Tamil Nadu" | "Kerala" | "Bangalore";
+  region: string;
   embedUrl: string;
   searchBounds: {
     lat: number;
@@ -148,6 +148,9 @@ export const GoogleMapEmbed = ({ region, embedUrl, searchBounds }: GoogleMapEmbe
   };
 
   const handleAddToPlans = (place: PlaceResult) => {
+    const normalizedRegion = region.includes("Tamil") ? "Tamil Nadu" : 
+                             region.includes("Kerala") ? "Kerala" : "Bangalore";
+    
     const newPlan = {
       name: place.name,
       country: region,
@@ -159,7 +162,7 @@ export const GoogleMapEmbed = ({ region, embedUrl, searchBounds }: GoogleMapEmbe
       safetyLevel: "high" as const,
       bestTime: "Year-round",
       priceRange: "$$" as const,
-      region: region,
+      region: normalizedRegion as "Tamil Nadu" | "Kerala" | "Bangalore",
     };
 
     addPlan(newPlan);
