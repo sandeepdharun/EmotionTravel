@@ -81,14 +81,30 @@ const DestinationDetail = () => {
     );
   }
 
-  // Determine background theme based on destination region
+  // Determine background theme and region path based on destination region
   const getBackgroundTheme = () => {
     const region = destination.country.toLowerCase();
-    if (region.includes('kerala')) return 'nature';
-    if (region.includes('bangalore')) return 'ocean';
-    return 'mountain'; // Tamil Nadu
+    if (region.includes("kerala")) return "nature";
+    if (region.includes("bangalore")) return "ocean";
+    return "mountain"; // Tamil Nadu and others
   };
 
+  const getRegionPath = () => {
+    const region = destination.country.toLowerCase();
+    if (region.includes("tamil")) return "/tamil-nadu";
+    if (region.includes("kerala")) return "/kerala";
+    if (region.includes("bangalore")) return "/bangalore";
+    return "/";
+  };
+
+  const handleBack = () => {
+    // If there's real history, go back; otherwise fallback to region page
+    if (window.history.length > 2) {
+      navigate(-1);
+    } else {
+      navigate(getRegionPath());
+    }
+  };
   return (
     <div className="min-h-screen bg-background">
       {/* SEO Tags */}
@@ -103,7 +119,7 @@ const DestinationDetail = () => {
           <div className="flex items-center justify-between">
             <Button
               variant="ghost"
-              onClick={() => navigate(-1)}
+              onClick={handleBack}
               className="flex items-center gap-2 hover:bg-primary/10"
               data-testid="button-back"
             >

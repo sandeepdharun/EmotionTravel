@@ -20,7 +20,30 @@ export const Navigation = () => {
   const navRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<{ [key: number]: HTMLElement }>({});
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => {
+    const currentPath = location.pathname;
+
+    // Handle destination detail routes so the parent region stays highlighted
+    if (currentPath.startsWith("/destination/Tamil%20Nadu")) {
+      return path === "/tamil-nadu";
+    }
+    if (currentPath.startsWith("/destination/Kerala")) {
+      return path === "/kerala";
+    }
+    if (currentPath.startsWith("/destination/Bangalore")) {
+      return path === "/bangalore";
+    }
+
+    // If current route isn't one of the main nav items (e.g. /signup),
+    // keep Home highlighted as the default active item
+    const isKnownNavRoute = navItems.some((item) => item.path === currentPath);
+
+    if (!isKnownNavRoute) {
+      return path === "/";
+    }
+
+    return currentPath === path;
+  };
 
   // Update selector position when route changes
   useEffect(() => {
@@ -39,7 +62,7 @@ export const Navigation = () => {
   }, [location.pathname]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-border/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border/50 shadow-md">
       <style>{`
         .animated-nav {
           position: relative;

@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Heart, Compass } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const HeroSection = () => {
+  const navigate = useNavigate();
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -96,12 +98,13 @@ export const HeroSection = () => {
           </Button>
           <Button 
             variant="outline" 
+            onClick={() => navigate("/signup")}
             className="border-2 border-blue-400/60 bg-white/10 text-white px-10 py-6 rounded-full hover:scale-105 hover:border-blue-400/80 hover:bg-white/20 transition-all duration-300 animate-bounce-subtle"
             style={{
               animationDelay: '0.2s'
             }}
           >
-            Discover Emotions
+            Sign Up
           </Button>
         </div>
       </div>

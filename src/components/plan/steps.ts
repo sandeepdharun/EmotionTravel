@@ -31,7 +31,7 @@ export const STEP_DEFINITIONS: StepDefinition[] = [
   {
     id: "emotion",
     title: "Emotion",
-    subtitle: "Personalize for your mood",
+    subtitle: "Design the perfect vibe for your trip",
     icon: Smile,
   },
   {

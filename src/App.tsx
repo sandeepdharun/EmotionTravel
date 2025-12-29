@@ -11,6 +11,7 @@ import Bangalore from "./pages/Bangalore";
 import Discover from "./pages/Discover";
 import Dashboard from "./pages/Dashboard";
 import DestinationDetail from "./pages/DestinationDetail";
+import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import { PlanProvider } from "./contexts/PlanContext";
 import { ScrollToTop } from "./components/ScrollToTop";
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/discover" element={<Discover />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/destination/:country/:name" element={<DestinationDetail />} />
+            <Route path="/signup" element={<Signup />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -204,9 +204,9 @@ export const MapSection = ({ destination }: { destination: Destination }) => {
         <div className="rounded-xl overflow-hidden border border-border">
           <GoogleMapEmbed
             region={destination.country}
-            embedUrl={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dO7ClMX0B4IqPY&q=${encodeURIComponent(
+            embedUrl={`https://www.google.com/maps?q=${encodeURIComponent(
               destination.name + ", " + destination.country
-            )}`}
+            )}&output=embed`}
             searchBounds={getSearchBounds()}
           />
         </div>
