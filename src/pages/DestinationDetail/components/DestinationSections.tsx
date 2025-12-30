@@ -24,17 +24,24 @@ interface DestinationSectionsProps {
 }
 
 export const AboutSection = ({ destination }: { destination: Destination }) => (
-  <Card className="border shadow-sm">
-    <CardContent className="p-4 md:p-6">
-      <h2 className="text-2xl font-semibold mb-3 flex items-center gap-2">
-        <div className="p-2 bg-primary/10 rounded-lg">
-          <Info className="w-5 h-5 text-primary" />
-        </div>
-        About {destination.name}
-      </h2>
-      <p className="text-sm md:text-base leading-relaxed text-muted-foreground">
-        {destination.description}
-      </p>
+  <Card className="border bg-background/80 backdrop-blur-sm text-foreground shadow-sm">
+    <CardContent className="p-5 md:p-8 space-y-6">
+      {/* Minimal, calm destination intro */}
+      <div className="text-center space-y-3 max-w-2xl mx-auto">
+        <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+          <Info className="w-3.5 h-3.5 text-primary" />
+          <span>{destination.country} • {destination.emotionalMatch}</span>
+        </p>
+        <h2 className="text-xl md:text-2xl font-semibold leading-snug">
+          {destination.name} is where the noise in your head finally goes quiet.
+        </h2>
+        <p className="text-sm md:text-base text-foreground/90 max-w-xl mx-auto leading-relaxed">
+          {destination.description}
+        </p>
+        <p className="text-xs md:text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed">
+          A calm corner of {destination.country} for people who want to slow down, not do more.
+        </p>
+      </div>
     </CardContent>
   </Card>
 );
@@ -183,6 +190,12 @@ export const MapSection = ({ destination }: { destination: Destination }) => {
            { lat: 11.0, lng: 77.0, radius: 50000 };
   };
 
+  const mapEmbedUrl = destination.name === "Pondicherry"
+    ? "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d72624.2633302847!2d79.82120989246204!3d11.936286365839566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1756863984310!5m2!1sen!2sin"
+    : `https://www.google.com/maps?q=${encodeURIComponent(
+        destination.name + ", " + destination.country
+      )}&output=embed`;
+
   return (
     <Card className="border shadow-sm">
       <CardContent className="p-4 md:p-6">
@@ -203,11 +216,10 @@ export const MapSection = ({ destination }: { destination: Destination }) => {
 
         <div className="rounded-xl overflow-hidden border border-border">
           <GoogleMapEmbed
-            region={destination.country}
-            embedUrl={`https://www.google.com/maps?q=${encodeURIComponent(
-              destination.name + ", " + destination.country
-            )}&output=embed`}
+            region={destination.name}
+            embedUrl={mapEmbedUrl}
             searchBounds={getSearchBounds()}
+            showHeader={false}
           />
         </div>
       </CardContent>

@@ -15,6 +15,7 @@ interface GoogleMapEmbedProps {
     lng: number;
     radius: number;
   };
+  showHeader?: boolean;
 }
 
 interface PlaceResult {
@@ -34,7 +35,7 @@ interface PlaceResult {
   }>;
 }
 
-export const GoogleMapEmbed = ({ region, embedUrl, searchBounds }: GoogleMapEmbedProps) => {
+export const GoogleMapEmbed = ({ region, embedUrl, searchBounds, showHeader = true }: GoogleMapEmbedProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<PlaceResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -186,12 +187,14 @@ export const GoogleMapEmbed = ({ region, embedUrl, searchBounds }: GoogleMapEmbe
     <div className="space-y-6">
       {/* Search Section */}
       <Card className="bg-card/80 backdrop-blur-sm">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Search className="w-5 h-5" />
-            Explore {region} on Map
-          </CardTitle>
-        </CardHeader>
+        {showHeader && (
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Search className="w-5 h-5" />
+              Explore {region} on Map
+            </CardTitle>
+          </CardHeader>
+        )}
         <CardContent>
           <form onSubmit={handleSearch} className="flex gap-3 mb-4">
             <Input

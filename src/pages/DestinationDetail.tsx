@@ -10,7 +10,6 @@ import { SEOTags } from "./DestinationDetail/components/SEOTags";
 import { HeroHeader } from "./DestinationDetail/components/HeroHeader";
 import { StickyActions } from "./DestinationDetail/components/StickyActions";
 import { CulturalHighlightsGrid } from "./DestinationDetail/components/CulturalHighlightsGrid";
-import { TravelStepsTimeline } from "./DestinationDetail/components/TravelStepsTimeline";
 import {
   AboutSection,
   MapSection
@@ -150,13 +149,6 @@ const DestinationDetail = () => {
               {/* Cultural Highlights */}
               <CulturalHighlightsGrid destination={destination} />
 
-              {/* Travel Timeline - Only show if user has plans */}
-              <TravelStepsTimeline 
-                travelSteps={travelSteps}
-                currentStepIndex={currentStepIndex}
-                currentPlan={currentPlan}
-                progress={progress}
-              />
 
               {/* Map Section */}
               <MapSection destination={destination} />
