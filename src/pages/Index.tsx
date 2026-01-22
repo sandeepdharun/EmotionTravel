@@ -3,13 +3,11 @@ import { HeroSection } from "@/components/HeroSection";
 import { EmotionForm } from "@/components/EmotionForm";
 import { FeatureCards } from "@/components/FeatureCards";
 import { DestinationCard } from "@/components/DestinationCard";
-import { tamilNaduDestinations, keralaDestinations, bangaloreDestinations } from "@/data/destinations";
+import { tamilNaduDestinations } from "@/data/destinations";
 
 const getLocalSuggestions = () => {
   const pool = [
     ...tamilNaduDestinations,
-    ...keralaDestinations,
-    ...bangaloreDestinations,
   ];
   const sorted = pool.sort((a, b) => b.matchPercentage - a.matchPercentage);
   const top = sorted.slice(0, Math.min(9, sorted.length));

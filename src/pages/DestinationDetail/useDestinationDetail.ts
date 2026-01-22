@@ -3,8 +3,6 @@ import { useLocation, useParams } from "react-router-dom";
 import { usePlans } from "@/contexts/PlanContext";
 import { useToast } from "@/hooks/use-toast";
 import {
-  bangaloreDestinations,
-  keralaDestinations,
   tamilNaduDestinations,
   type Destination,
 } from "@/data/destinations";
@@ -19,8 +17,6 @@ import {
 
 const allDestinations: Destination[] = [
   ...tamilNaduDestinations,
-  ...keralaDestinations,
-  ...bangaloreDestinations,
 ];
 
 export const useDestinationDetail = () => {
@@ -155,7 +151,7 @@ export const useDestinationDetail = () => {
   // Handlers
   const handleAddToPlan = () => {
     if (!destination) return;
-    
+
     if (currentPlan) {
       toast({
         title: "Already added",
@@ -163,7 +159,7 @@ export const useDestinationDetail = () => {
       });
       return;
     }
-    
+
     addPlan({
       name: destination.name,
       country: destination.country,
@@ -177,7 +173,7 @@ export const useDestinationDetail = () => {
       priceRange: destination.priceRange,
       region: destination.country as "Tamil Nadu" | "Kerala" | "Bangalore",
     });
-    
+
     toast({
       title: "Added to plans!",
       description: `${destination.name} has been added to your travel dashboard.`,
@@ -186,7 +182,7 @@ export const useDestinationDetail = () => {
 
   const handleStartJourney = () => {
     if (!currentPlan || !destination) return;
-    
+
     updatePlanStatus(currentPlan.id, "ongoing");
     toast({
       title: "Journey started!",
@@ -196,7 +192,7 @@ export const useDestinationDetail = () => {
 
   const handleCompleteJourney = () => {
     if (!currentPlan || !destination) return;
-    
+
     updatePlanStatus(currentPlan.id, "completed");
     toast({
       title: "Journey completed!",

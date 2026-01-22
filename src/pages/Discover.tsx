@@ -11,7 +11,7 @@ const emotionalJourneys = [
     emotion: "Stressed & Overwhelmed",
     icon: "😰",
     color: "from-blue-500/20 to-cyan-500/20",
-    recommendations: ["Kerala Backwaters", "Ooty Tea Gardens", "Bangalore Parks"],
+    recommendations: ["Ooty Tea Gardens", "Yercaud Lake", "Kodaikanal"],
     description: "Find peace in nature's embrace",
     gradient: "bg-gradient-to-br from-blue-600/30 to-cyan-600/30"
   },
@@ -19,7 +19,7 @@ const emotionalJourneys = [
     emotion: "Adventurous & Excited",
     icon: "🚀",
     color: "from-orange-500/20 to-red-500/20",
-    recommendations: ["Nandi Hills Cycling", "Thekkady Wildlife", "Mahabalipuram Exploration"],
+    recommendations: ["Mahabalipuram Exploration", "Kolli Hills Trek", "Courtallam Falls"],
     description: "Channel your energy into exploration",
     gradient: "bg-gradient-to-br from-orange-600/30 to-red-600/30"
   },
@@ -27,7 +27,7 @@ const emotionalJourneys = [
     emotion: "Reflective & Contemplative",
     icon: "🧘",
     color: "from-purple-500/20 to-indigo-500/20",
-    recommendations: ["Thanjavur Temples", "Kanyakumari Sunsets", "Lalbagh Gardens"],
+    recommendations: ["Thanjavur Temples", "Kanyakumari Sunsets", "Rameswaram"],
     description: "Spaces for deep introspection",
     gradient: "bg-gradient-to-br from-purple-600/30 to-indigo-600/30"
   },
@@ -35,7 +35,7 @@ const emotionalJourneys = [
     emotion: "Joyful & Celebratory",
     icon: "🎉",
     color: "from-yellow-500/20 to-pink-500/20",
-    recommendations: ["Kochi Cultural Shows", "Bangalore Film City", "Varkala Beach"],
+    recommendations: ["Madurai Festivals", "Chennai Music Season", "Marina Beach"],
     description: "Amplify your happiness",
     gradient: "bg-gradient-to-br from-yellow-600/30 to-pink-600/30"
   }
@@ -241,27 +241,27 @@ const Discover = () => {
             {[
               {
                 emoji: "🏛️",
-                title: "Tamil Nadu",
-                description: "Ancient temples, hill stations, and cultural heritage that speaks to your soul through millennia of wisdom",
+                title: "Heritage Tamil Nadu",
+                description: "Ancient temples, cultural heritage, and architectural marvels that speak to your soul.",
                 link: "/tamil-nadu",
                 gradient: "from-purple-600/30 to-indigo-600/30",
                 buttonGradient: "from-purple-600 to-indigo-600"
               },
               {
-                emoji: "🛶",
-                title: "Kerala",
-                description: "Backwaters, Ayurveda, and natural beauty for complete emotional healing and spiritual awakening",
-                link: "/kerala",
+                emoji: "⛰️",
+                title: "The Nilgiris",
+                description: "Misty mountains, tea gardens, and cool climate for complete emotional rejuvenation.",
+                link: "/tamil-nadu",
                 gradient: "from-emerald-600/30 to-teal-600/30",
                 buttonGradient: "from-emerald-600 to-teal-600"
               },
               {
-                emoji: "🌳",
-                title: "Bangalore",
-                description: "Perfect climate, innovation energy, and urban wellness for modern stress relief and inspiration",
-                link: "/bangalore",
-                gradient: "from-orange-600/30 to-amber-600/30",
-                buttonGradient: "from-orange-600 to-amber-600"
+                emoji: "🌊",
+                title: "Coastal Tamil Nadu",
+                description: "Serene beaches, spiritual sunrises, and calming ocean waves for inner peace.",
+                link: "/tamil-nadu",
+                gradient: "from-blue-600/30 to-cyan-600/30",
+                buttonGradient: "from-blue-600 to-cyan-600"
               }
             ].map((region, index) => (
               <div key={index} className={`glass-hero rounded-3xl overflow-hidden hover-lift group transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`} style={{ transitionDelay: `${2000 + index * 200}ms` }}>
