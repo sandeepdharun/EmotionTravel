@@ -2,23 +2,20 @@ import { ParticleBackground } from "@/components/ParticleBackground";
 import { DestinationCard } from "@/components/DestinationCard";
 import { GoogleMapEmbed } from "@/components/GoogleMapEmbed";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Calendar, Star, Users, Globe, Award, Sparkles, ArrowRight } from "lucide-react";
+import { MapPin, Calendar, Star, Users, Globe, Award, Sparkles } from "lucide-react";
 import { tamilNaduDestinations } from "@/data/destinations";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { useEffect, useState } from "react";
 
 const TamilNadu = () => {
-  // Intersection observers for different sections
-  const heroObserver = useIntersectionObserver();
-  const cultureObserver = useIntersectionObserver({ threshold: 0.1 });
-  const destinationsObserver = useIntersectionObserver({ threshold: 0.05 });
-  const mapObserver = useIntersectionObserver({ threshold: 0.1 });
-  const insightsObserver = useIntersectionObserver({ threshold: 0.1 });
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   return (
-    <div className="hero-section bg-black text-white relative pt-16 overflow-hidden content-container">
+    <div className="min-h-screen bg-black text-white relative pt-16 overflow-hidden">
       {/* Cinematic Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-black" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.3),transparent_50%)]" />
@@ -32,10 +29,10 @@ const TamilNadu = () => {
       <div className="absolute bottom-40 left-1/4 w-40 h-40 bg-green-500/10 rounded-full blur-xl animate-float" style={{ animationDelay: '4s' }} />
 
       {/* Hero Section with Glassmorphism */}
-      <section ref={heroObserver.ref} className="relative section-padding-sm parallax-container">
+      <section className="relative section-padding parallax-container">
         <div className="max-w-7xl mx-auto">
-          {/* Glass Hero Panel - Apple Style */}
-          <div className={`glass-apple rounded-3xl p-12 md:p-16 text-center animate-on-scroll ${heroObserver.isVisible ? 'is-visible' : ''}`}>
+          {/* Glass Hero Panel */}
+          <div className={`glass-hero rounded-3xl p-12 md:p-16 text-center transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
             <div className="mb-8">
               <Badge className="mb-6 px-6 py-3 bg-gradient-to-r from-purple-500/20 to-blue-500/20 backdrop-blur-md text-white border-white/30 text-lg">
                 <MapPin className="w-5 h-5 mr-3" />
@@ -55,23 +52,31 @@ const TamilNadu = () => {
               every stone tells a story and every landscape heals the soul.
             </p>
 
-            {/* Call to Action - Glass Apple Style */}
-            <div className={`mt-12 animate-on-scroll ${heroObserver.isVisible ? 'is-visible' : ''}`} style={{ transitionDelay: '400ms' }}>
-              <Link to="/discover">
-                <Button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-12 py-6 text-xl font-semibold rounded-2xl hover:shadow-glow-purple transition-all duration-500 group hover:scale-105">
-                  Explore Heritage
-                  <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
-                </Button>
-              </Link>
+            {/* Floating Stats */}
+            <div className="flex flex-col sm:flex-row justify-center gap-8 sm:gap-16">
+              {[
+                { number: "9+", label: "Sacred Destinations", icon: Award },
+                { number: "2000+", label: "Years of Heritage", icon: Globe },
+                { number: "100%", label: "Cultural Immersion", icon: Star }
+              ].map((stat, index) => {
+                const Icon = stat.icon;
+                return (
+                  <div key={index} className={`glass-premium rounded-2xl p-6 hover-glow transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: `${index * 200}ms` }}>
+                    <Icon className="w-8 h-8 text-purple-400 mx-auto mb-3" />
+                    <div className="text-3xl font-bold text-white mb-2">{stat.number}</div>
+                    <div className="text-white/70 text-sm font-medium">{stat.label}</div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
       {/* Cultural Essence Section */}
-      <section ref={cultureObserver.ref} className="section-padding-sm relative">
+      <section className="section-padding-sm relative">
         <div className="max-w-7xl mx-auto">
-          <div className={`glass-apple rounded-3xl p-12 animate-on-scroll ${cultureObserver.isVisible ? 'is-visible' : ''}`}>
+          <div className={`glass-premium rounded-3xl p-12 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`} style={{ transitionDelay: '400ms' }}>
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-cinematic text-white mb-6 flex items-center justify-center gap-4">
                 <Sparkles className="w-10 h-10 text-purple-400" />
@@ -103,15 +108,11 @@ const TamilNadu = () => {
                   gradient: "from-green-500/20 to-blue-500/20"
                 }
               ].map((item, index) => (
-                <div
-                  key={index}
-                  className={`card-premium rounded-2xl p-8 text-center border-t border-white/10 animate-on-scroll ${cultureObserver.isVisible ? 'is-visible' : ''}`}
-                  style={{ transitionDelay: `${600 + index * 150}ms` }}
-                >
-                  <div className="text-5xl mb-6 drop-shadow-md transform transition-transform duration-500 hover:scale-110">{item.icon}</div>
-                  <h3 className="text-xl font-bold text-white mb-4 drop-shadow-md">{item.title}</h3>
-                  <p className="text-white/80 leading-relaxed font-luxury text-[0.95rem]">{item.description}</p>
-                  <div className={`mt-6 h-1 w-full bg-gradient-to-r ${item.gradient} rounded-full opacity-80`} />
+                <div key={index} className={`glass rounded-2xl p-8 text-center hover-lift transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`} style={{ transitionDelay: `${600 + index * 150}ms` }}>
+                  <div className="text-5xl mb-6">{item.icon}</div>
+                  <h3 className="text-xl font-bold text-white mb-4">{item.title}</h3>
+                  <p className="text-white/70 leading-relaxed font-luxury">{item.description}</p>
+                  <div className={`mt-6 h-1 w-full bg-gradient-to-r ${item.gradient} rounded-full`} />
                 </div>
               ))}
             </div>
@@ -119,28 +120,23 @@ const TamilNadu = () => {
         </div>
       </section>
 
-      {/* Destinations Section - NO GLASS EFFECTS on Cards */}
-      <section ref={destinationsObserver.ref} className="section-padding-sm relative">
+      {/* Destinations Section */}
+      <section className="section-padding-sm relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className={`text-5xl md:text-6xl font-cinematic text-white mb-8 animate-on-scroll ${destinationsObserver.isVisible ? 'is-visible' : ''}`}>
+            <h2 className={`text-5xl md:text-6xl font-cinematic text-white mb-8 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`} style={{ transitionDelay: '800ms' }}>
               Sacred
               <span className="text-gradient-luxury bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"> Emotional Journeys</span>
             </h2>
-            <p className={`text-xl text-white/80 max-w-4xl mx-auto font-luxury animate-on-scroll delay-200 ${destinationsObserver.isVisible ? 'is-visible' : ''}`}>
+            <p className={`text-xl text-white/80 max-w-4xl mx-auto font-luxury transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`} style={{ transitionDelay: '1000ms' }}>
               Each destination in Tamil Nadu offers a unique emotional experience, from peaceful hill retreats to spiritually enriching temple towns that awaken your inner self.
             </p>
           </div>
 
-          {/* Destinations Grid - Pure Cards, No Glass Wrapper */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Destinations Grid - Keep Original Cards */}
+          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`} style={{ transitionDelay: '1200ms' }}>
             {tamilNaduDestinations.map((destination, index) => (
-              <div
-                key={index}
-                className={`animate-on-scroll ${destinationsObserver.isVisible ? 'is-visible' : ''}`}
-                style={{ transitionDelay: `${400 + index * 100}ms` }}
-              >
-                {/* Standard Destination Card without extra wrappers */}
+              <div key={index}>
                 <DestinationCard {...destination} />
               </div>
             ))}
@@ -148,10 +144,10 @@ const TamilNadu = () => {
         </div>
       </section>
 
-      {/* Interactive Map Section - Glass Apple Applied */}
-      <section ref={mapObserver.ref} className="section-padding-sm relative">
+      {/* Interactive Map Section */}
+      <section className="section-padding-sm relative">
         <div className="max-w-7xl mx-auto">
-          <div className={`glass-apple rounded-3xl p-12 animate-on-scroll ${mapObserver.isVisible ? 'is-visible' : ''}`}>
+          <div className={`glass-premium rounded-3xl p-12 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`} style={{ transitionDelay: '1600ms' }}>
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-cinematic text-white mb-6">
                 Explore Tamil Nadu
@@ -173,10 +169,10 @@ const TamilNadu = () => {
         </div>
       </section>
 
-      {/* Travel Insights Section - Glass Apple Applied */}
-      <section ref={insightsObserver.ref} className="section-padding-xs relative">
+      {/* Travel Insights Section */}
+      <section className="section-padding-xs relative">
         <div className="max-w-6xl mx-auto">
-          <div className={`glass-apple rounded-3xl p-12 bg-gradient-to-br from-purple-600/30 to-blue-600/30 animate-on-scroll ${insightsObserver.isVisible ? 'is-visible' : ''}`}>
+          <div className={`glass-hero rounded-3xl p-12 bg-gradient-to-br from-purple-600/30 to-blue-600/30 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`} style={{ transitionDelay: '1800ms' }}>
             <h2 className="text-4xl font-cinematic text-white mb-12 text-center">Tamil Nadu Travel Mastery</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div className="space-y-6">

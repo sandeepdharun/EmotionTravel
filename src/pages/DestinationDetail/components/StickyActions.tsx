@@ -2,11 +2,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  Plus,
-  Check,
-  Navigation,
-  CheckCircle,
+import { 
+  Plus, 
+  Check, 
+  Navigation, 
+  CheckCircle, 
   TrendingUp,
   Heart,
   Clock,
@@ -45,7 +45,7 @@ export const StickyActions = ({
 }: StickyActionsProps) => {
   const getStatusInfo = () => {
     if (!currentPlan) return null;
-
+    
     switch (currentPlan.status) {
       case "selected":
         return {
@@ -73,20 +73,22 @@ export const StickyActions = ({
   const statusInfo = getStatusInfo();
 
   return (
-    <div className="space-y-6">
+    <div className="sticky top-20 space-y-6">
       {/* Main Action Card */}
-      <Card className="overflow-hidden border border-slate-200/60 shadow-sm bg-white rounded-[2rem]">
+      <Card className="overflow-hidden border-2 shadow-lg">
         <CardContent className="p-0">
           {/* Header with Status */}
-          <div className="bg-[#FAFAFA] p-6 border-b border-slate-100">
+          <div className="bg-gradient-to-br from-primary/10 to-primary/5 p-6 border-b">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-serif font-bold text-slate-800 flex items-center gap-2">
-                <Heart className="w-4 h-4 text-orange-400 fill-orange-400/20" />
+              <h3 className="text-xl font-bold flex items-center gap-2">
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  <Heart className="w-5 h-5 text-primary" />
+                </div>
                 Travel Plans
               </h3>
               {statusInfo && (
-                <Badge className={`px-2 py-0.5 text-xs font-medium border ${statusInfo.color} bg-transparent`}>
-                  <statusInfo.icon className="w-3 h-3 mr-1.5" />
+                <Badge className={`px-3 py-1 text-sm font-semibold ${statusInfo.color}`}>
+                  <statusInfo.icon className="w-4 h-4 mr-2" />
                   {statusInfo.label}
                 </Badge>
               )}
@@ -96,19 +98,19 @@ export const StickyActions = ({
             {currentPlan && (
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
+                  <span className="text-sm font-medium text-muted-foreground">
                     Progress
                   </span>
-                  <span className="text-xs font-bold text-slate-900">
+                  <span className="text-sm font-bold text-primary">
                     {progress}%
                   </span>
                 </div>
                 <Progress
                   value={progress}
-                  className="h-1.5 bg-slate-100"
+                  className="h-3 bg-muted"
                 />
-                <div className="flex items-center gap-2 text-[10px] text-slate-400 font-medium">
-                  <TrendingUp className="w-3 h-3" />
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <TrendingUp className="w-4 h-4" />
                   <span>
                     {currentPlan.status === "selected" && "Ready to start planning"}
                     {currentPlan.status === "ongoing" && "Journey in progress"}
@@ -120,14 +122,14 @@ export const StickyActions = ({
           </div>
 
           {/* Action Buttons */}
-          <div className="p-6 space-y-4 bg-white">
+          <div className="p-6 space-y-4">
             {!currentPlan ? (
               <Button
                 onClick={handlers.addToPlan}
-                className="w-full text-base py-6 bg-slate-900 hover:bg-black text-white shadow-md hover:shadow-lg transition-all duration-300 rounded-xl"
+                className="w-full text-lg py-6 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300"
                 data-testid="button-add-to-plan"
               >
-                <Plus className="w-4 h-4 mr-2" />
+                <Plus className="w-5 h-5 mr-2" />
                 Add to Travel Plans
               </Button>
             ) : (
@@ -135,37 +137,40 @@ export const StickyActions = ({
                 {currentPlan.status === "selected" && (
                   <Button
                     onClick={handlers.startJourney}
-                    className="w-full text-base py-6 bg-orange-500 hover:bg-orange-600 text-white shadow-md hover:shadow-lg transition-all duration-300 rounded-xl"
+                    className="w-full text-lg py-6 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 shadow-lg hover:shadow-xl transition-all duration-300"
                     data-testid="button-start-journey"
                   >
-                    <Navigation className="w-4 h-4 mr-2" />
+                    <Navigation className="w-5 h-5 mr-2" />
                     Start Journey
                   </Button>
                 )}
                 {currentPlan.status === "ongoing" && (
                   <Button
                     onClick={handlers.completeJourney}
-                    className="w-full text-base py-6 bg-green-600 hover:bg-green-700 text-white shadow-md hover:shadow-lg transition-all duration-300 rounded-xl"
+                    className="w-full text-lg py-6 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 shadow-lg hover:shadow-xl transition-all duration-300"
                     data-testid="button-complete-journey"
                   >
-                    <CheckCircle className="w-4 h-4 mr-2" />
+                    <CheckCircle className="w-5 h-5 mr-2" />
                     Complete Journey
                   </Button>
                 )}
                 {currentPlan.status === "completed" && (
-                  <div className="text-center py-4 bg-green-50/50 rounded-xl border border-green-100">
-                    <div className="inline-flex items-center gap-2 text-green-700 font-serif font-bold">
-                      <CheckCircle className="w-4 h-4" />
-                      Journey Completed
+                  <div className="text-center py-4">
+                    <div className="inline-flex items-center gap-2 text-green-600 font-semibold">
+                      <CheckCircle className="w-5 h-5" />
+                      Journey Completed!
                     </div>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Share your memories and plan your next adventure
+                    </p>
                   </div>
                 )}
               </>
             )}
 
             {isSelected && (
-              <div className="flex items-center justify-center gap-2 py-2 text-xs text-slate-400 font-medium">
-                <Check className="w-3 h-3 text-green-500" />
+              <div className="flex items-center justify-center gap-2 py-2 text-sm text-muted-foreground">
+                <Check className="w-4 h-4 text-green-500" />
                 Added to your travel plans
               </div>
             )}
