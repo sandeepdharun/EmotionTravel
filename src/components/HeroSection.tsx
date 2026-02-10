@@ -13,7 +13,7 @@ export const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black text-white">
+    <section className="relative hero-section flex items-center justify-center overflow-hidden bg-black text-white">
       {/* Background Space Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-black to-slate-950 -z-10" />
 
@@ -37,48 +37,45 @@ export const HeroSection = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
+      <div className="relative z-10 text-center px-6 max-w-6xl mx-auto pt-24 md:pt-32">
         {/* Tagline */}
-        <div 
-          className={`mb-12 inline-flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-xl rounded-full border border-blue-400/50 shadow-lg hover:scale-105 transition-all duration-500 cursor-pointer transform ${
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          } ${isHovering ? 'shadow-blue-400/25 border-blue-400/70' : ''}`}
+        <div
+          className={`mb-4 inline-flex items-center gap-2 px-4 py-1.5 bg-white/5 backdrop-blur-md rounded-full border border-white/10 transition-all duration-500 cursor-default transform ${isVisible ? 'translate-y-0 opacity-80' : 'translate-y-10 opacity-0'
+            }`}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
           style={{
             transitionDelay: '0.2s'
           }}
         >
-          <Heart className={`w-5 h-5 text-blue-400 transition-all duration-300 ${isHovering ? 'scale-110 text-blue-300' : ''}`} />
-          <span className="text-white text-sm font-medium tracking-wide">
+          <Heart className={`w-3.5 h-3.5 text-blue-400/70 transition-all duration-300 ${isHovering ? 'text-blue-400' : ''}`} />
+          <span className="text-gray-300 text-xs font-medium tracking-wider uppercase">
             Emotional Travel Intelligence • Feel-First Journey
           </span>
-          <Compass className={`w-4 h-4 text-teal-400 animate-pulse transition-all duration-300 ${isHovering ? 'rotate-12 scale-110' : ''}`} />
+          <Compass className={`w-3.5 h-3.5 text-teal-400/70 transition-all duration-300 ${isHovering ? 'rotate-12 text-teal-400' : ''}`} />
         </div>
 
         {/* Heading */}
-        <h1 className={`text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tight mb-8 transform transition-all duration-700 ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
-        }`}
-        style={{
-          transitionDelay: '0.4s'
-        }}>
-          <span className="inline-block animate-slideInUp" style={{animationDelay: '0.6s'}}>Journey</span>
+        <h1 className={`text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tight mb-8 transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+          }`}
+          style={{
+            transitionDelay: '0.4s'
+          }}>
+          <span className="inline-block animate-slideInUp" style={{ animationDelay: '0.6s' }}>Journey</span>
           <br />
-          <span className="inline-block animate-slideInUp" style={{animationDelay: '0.8s'}}>Beyond</span>
+          <span className="inline-block animate-slideInUp" style={{ animationDelay: '0.8s' }}>Beyond</span>
           <br />
-          <span className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 bg-clip-text text-transparent animate-pulse inline-block animate-slideInUp" style={{animationDelay: '1s'}}>
+          <span className="bg-gradient-to-r from-blue-500 via-teal-400 to-green-500 bg-clip-text text-transparent animate-pulse inline-block animate-slideInUp" style={{ animationDelay: '1s' }}>
             Emotions
           </span>
         </h1>
 
         {/* Description */}
-        <p className={`max-w-2xl mx-auto text-lg text-gray-300 leading-relaxed mb-12 transform transition-all duration-700 ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
-        }`}
-        style={{
-          transitionDelay: '1.2s'
-        }}>
+        <p className={`max-w-2xl mx-auto text-lg text-gray-300 leading-relaxed mb-12 transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+          }`}
+          style={{
+            transitionDelay: '1.2s'
+          }}>
           <span className="text-blue-400 font-semibold hover:text-blue-300 transition-colors duration-300">Discover your emotional compass</span> and let your feelings guide you to{" "}
           <span className="text-teal-400 font-semibold hover:text-teal-300 transition-colors duration-300">extraordinary destinations</span>.
           <br />
@@ -87,17 +84,16 @@ export const HeroSection = () => {
         </p>
 
         {/* Buttons */}
-        <div className={`flex flex-col sm:flex-row gap-6 justify-center mb-16 transform transition-all duration-700 ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
-        }`}
-        style={{
-          transitionDelay: '1.4s'
-        }}>
+        <div className={`flex flex-col sm:flex-row gap-6 justify-center mb-16 transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+          }`}
+          style={{
+            transitionDelay: '1.4s'
+          }}>
           <Button className="bg-gradient-to-r from-blue-600 to-teal-600 text-white px-10 py-6 rounded-full shadow-lg hover:scale-105 hover:shadow-blue-500/25 transition-all duration-300 animate-bounce-subtle">
             Start Your Journey
           </Button>
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={() => navigate("/signup")}
             className="border-2 border-blue-400/60 bg-white/10 text-white px-10 py-6 rounded-full hover:scale-105 hover:border-blue-400/80 hover:bg-white/20 transition-all duration-300 animate-bounce-subtle"
             style={{
