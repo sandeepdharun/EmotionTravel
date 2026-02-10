@@ -83,15 +83,12 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen w-full relative flex flex-col items-center justify-center p-4 pt-24">
-      {/* Fixed Background Layer */}
-      <div className="fixed inset-0 w-full h-full bg-[url('/travel-bg-2.png')] bg-cover bg-center -z-10">
-        <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]" />
-      </div>
+    <div className="h-screen relative flex flex-col items-center justify-center p-4 pt-24 overflow-hidden bg-[url('/travel-bg-2.png')] bg-cover bg-center">
 
-      <div className="fixed inset-0 pointer-events-none -z-10">
-        <ParticleBackground theme="minimal" />
-      </div>
+      {/* Dark Overlay for readability */}
+      <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]" />
+
+      <ParticleBackground theme="minimal" />
 
       <div className="w-full max-w-[500px] relative z-10 scale-95 origin-top">
 

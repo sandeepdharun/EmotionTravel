@@ -18,7 +18,7 @@ const getLocalSuggestions = () => {
 
 const Index = () => {
   return (
-    <div className="hero-section bg-background relative pt-16 content-container">
+    <div className="min-h-screen bg-background relative pt-16">
       <ParticleBackground theme="minimal" />
       <HeroSection />
       <EmotionForm />
