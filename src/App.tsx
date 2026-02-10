@@ -6,8 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navigation } from "./components/Navigation";
 import Index from "./pages/Index";
 import TamilNadu from "./pages/TamilNadu";
-import Kerala from "./pages/Kerala";
-import Bangalore from "./pages/Bangalore";
+
 import Discover from "./pages/Discover";
 import Dashboard from "./pages/Dashboard";
 import DestinationDetail from "./pages/DestinationDetail";
@@ -30,8 +29,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/tamil-nadu" element={<TamilNadu />} />
-            <Route path="/kerala" element={<Kerala />} />
-            <Route path="/bangalore" element={<Bangalore />} />
+
             <Route path="/discover" element={<Discover />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/destination/:country/:name" element={<DestinationDetail />} />

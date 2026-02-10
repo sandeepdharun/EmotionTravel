@@ -7,13 +7,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { usePlans } from "@/contexts/PlanContext";
-import { 
-  MapPin, 
-  Calendar, 
-  Star, 
-  Settings, 
-  User, 
-  Heart, 
+import {
+  MapPin,
+  Calendar,
+  Star,
+  Settings,
+  User,
+  Heart,
   TrendingUp,
   Clock,
   CheckCircle,
@@ -168,9 +168,9 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-background relative pt-16">
       <ParticleBackground theme="minimal" />
-      
+
       {/* Header */}
-      <section className="relative py-12 px-6">
+      <section className="relative py-6 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <div>
@@ -228,7 +228,7 @@ const Dashboard = () => {
               <TabsTrigger value="ongoing">Ongoing</TabsTrigger>
               <TabsTrigger value="completed">Completed</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="overview" className="mt-8">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Recent Activity */}
@@ -252,8 +252,8 @@ const Dashboard = () => {
                       <div className="space-y-4">
                         {selectedPlans.slice(0, 5).map((plan) => (
                           <div key={plan.id} className="flex items-center space-x-4 p-4 rounded-lg bg-muted/50">
-                            <img 
-                              src={plan.image} 
+                            <img
+                              src={plan.image}
                               alt={plan.name}
                               className="w-16 h-16 rounded-lg object-cover"
                             />
@@ -300,7 +300,7 @@ const Dashboard = () => {
                 </Card>
               </div>
             </TabsContent>
-            
+
             <TabsContent value="selected" className="mt-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {getPlansByStatus('selected').map((plan) => (
@@ -314,25 +314,25 @@ const Dashboard = () => {
                 )}
               </div>
             </TabsContent>
-            
+
             <TabsContent value="ongoing" className="mt-8">
               <div className="space-y-6">
 
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {getPlansByStatus('ongoing').map((plan) => (
-                  <PlanCard key={plan.id} plan={plan} />
-                ))}
-                {getPlansByStatus('ongoing').length === 0 && (
-                  <div className="col-span-full text-center py-12">
-                    <TrendingUp className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                    <p className="text-muted-foreground">No ongoing plans</p>
-                  </div>
-                )}
-              </div>
+                  {getPlansByStatus('ongoing').map((plan) => (
+                    <PlanCard key={plan.id} plan={plan} />
+                  ))}
+                  {getPlansByStatus('ongoing').length === 0 && (
+                    <div className="col-span-full text-center py-12">
+                      <TrendingUp className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                      <p className="text-muted-foreground">No ongoing plans</p>
+                    </div>
+                  )}
+                </div>
               </div>
             </TabsContent>
-            
+
             <TabsContent value="completed" className="mt-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {getPlansByStatus('completed').map((plan) => (

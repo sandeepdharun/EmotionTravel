@@ -47,12 +47,12 @@ export const GoogleMapEmbed = ({ region, embedUrl, searchBounds, showHeader = tr
   // Mock search function - in a real implementation, you'd use Google Places API
   const searchPlaces = async (query: string) => {
     if (!query.trim()) return;
-    
+
     setIsSearching(true);
-    
+
     // Simulate API call with mock data based on region
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     const mockResults: PlaceResult[] = generateMockResults(query, region);
     setSearchResults(mockResults);
     setIsSearching(false);
@@ -70,7 +70,7 @@ export const GoogleMapEmbed = ({ region, embedUrl, searchBounds, showHeader = tr
           geometry: { location: { lat: 9.9195, lng: 78.1193 } }
         },
         {
-          place_id: "tn_2", 
+          place_id: "tn_2",
           name: "Marina Beach",
           formatted_address: "Chennai, Tamil Nadu, India",
           rating: 4.2,
@@ -80,67 +80,15 @@ export const GoogleMapEmbed = ({ region, embedUrl, searchBounds, showHeader = tr
         {
           place_id: "tn_3",
           name: "Ooty Botanical Gardens",
-          formatted_address: "Ooty, Tamil Nadu, India", 
+          formatted_address: "Ooty, Tamil Nadu, India",
           rating: 4.4,
           types: ["park", "tourist_attraction"],
           geometry: { location: { lat: 11.4064, lng: 76.7009 } }
         }
-      ],
-      "Kerala": [
-        {
-          place_id: "kl_1",
-          name: "Alleppey Backwaters",
-          formatted_address: "Alappuzha, Kerala, India",
-          rating: 4.7,
-          types: ["tourist_attraction", "natural_feature"],
-          geometry: { location: { lat: 9.4981, lng: 76.3388 } }
-        },
-        {
-          place_id: "kl_2",
-          name: "Munnar Tea Gardens", 
-          formatted_address: "Munnar, Kerala, India",
-          rating: 4.5,
-          types: ["tourist_attraction", "establishment"],
-          geometry: { location: { lat: 10.0889, lng: 77.0595 } }
-        },
-        {
-          place_id: "kl_3",
-          name: "Fort Kochi Beach",
-          formatted_address: "Kochi, Kerala, India",
-          rating: 4.3,
-          types: ["beach", "tourist_attraction"], 
-          geometry: { location: { lat: 9.9648, lng: 76.2424 } }
-        }
-      ],
-      "Bangalore": [
-        {
-          place_id: "blr_1",
-          name: "Lalbagh Botanical Garden",
-          formatted_address: "Bangalore, Karnataka, India",
-          rating: 4.4,
-          types: ["park", "tourist_attraction"],
-          geometry: { location: { lat: 12.9507, lng: 77.5848 } }
-        },
-        {
-          place_id: "blr_2",
-          name: "Nandi Hills",
-          formatted_address: "Nandi Hills, Karnataka, India", 
-          rating: 4.3,
-          types: ["tourist_attraction", "natural_feature"],
-          geometry: { location: { lat: 13.3704, lng: 77.6838 } }
-        },
-        {
-          place_id: "blr_3",
-          name: "Bangalore Palace",
-          formatted_address: "Bangalore, Karnataka, India",
-          rating: 4.2,
-          types: ["tourist_attraction", "establishment"],
-          geometry: { location: { lat: 12.9982, lng: 77.5920 } }
-        }
       ]
     };
 
-    return baseResults[region] || [];
+    return baseResults["Tamil Nadu"] || [];
   };
 
   const handleSearch = (e: React.FormEvent) => {
@@ -149,9 +97,8 @@ export const GoogleMapEmbed = ({ region, embedUrl, searchBounds, showHeader = tr
   };
 
   const handleAddToPlans = (place: PlaceResult) => {
-    const normalizedRegion = region.includes("Tamil") ? "Tamil Nadu" : 
-                             region.includes("Kerala") ? "Kerala" : "Bangalore";
-    
+    const normalizedRegion = "Tamil Nadu";
+
     const newPlan = {
       name: place.name,
       country: region,
@@ -163,7 +110,7 @@ export const GoogleMapEmbed = ({ region, embedUrl, searchBounds, showHeader = tr
       safetyLevel: "high" as const,
       bestTime: "Year-round",
       priceRange: "$$" as const,
-      region: normalizedRegion as "Tamil Nadu" | "Kerala" | "Bangalore",
+      region: normalizedRegion as "Tamil Nadu",
     };
 
     addPlan(newPlan);
@@ -265,11 +212,11 @@ export const GoogleMapEmbed = ({ region, embedUrl, searchBounds, showHeader = tr
                       </div>
                     )}
                   </div>
-                  
+
                   <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
                     {place.formatted_address}
                   </p>
-                  
+
                   <div className="flex flex-wrap gap-1 mb-3">
                     {place.types.slice(0, 2).map((type, index) => (
                       <Badge key={index} variant="outline" className="text-xs">
@@ -277,7 +224,7 @@ export const GoogleMapEmbed = ({ region, embedUrl, searchBounds, showHeader = tr
                       </Badge>
                     ))}
                   </div>
-                  
+
                   <Button
                     size="sm"
                     onClick={(e) => {
@@ -311,14 +258,14 @@ export const GoogleMapEmbed = ({ region, embedUrl, searchBounds, showHeader = tr
                 <MapPin className="w-4 h-4 text-muted-foreground" />
                 <span className="text-sm text-muted-foreground">{selectedPlace.formatted_address}</span>
               </div>
-              
+
               {selectedPlace.rating && (
                 <div className="flex items-center gap-2">
                   <Star className="w-4 h-4 text-yellow-500 fill-current" />
                   <span className="text-sm font-medium">{selectedPlace.rating}/5 rating</span>
                 </div>
               )}
-              
+
               <div className="flex flex-wrap gap-2">
                 {selectedPlace.types.map((type, index) => (
                   <Badge key={index} variant="secondary" className="text-xs">
@@ -326,7 +273,7 @@ export const GoogleMapEmbed = ({ region, embedUrl, searchBounds, showHeader = tr
                   </Badge>
                 ))}
               </div>
-              
+
               <div className="flex gap-3">
                 <Button
                   onClick={() => handleAddToPlans(selectedPlace)}

@@ -6,8 +6,6 @@ import { Menu, X, Home, MapPin, Mountain, Waves, Building, LayoutDashboard, Comp
 const navItems = [
   { path: "/", label: "Home", icon: Home },
   { path: "/tamil-nadu", label: "Tamil Nadu", icon: Mountain },
-  { path: "/kerala", label: "Kerala", icon: Waves },
-  { path: "/bangalore", label: "Bangalore", icon: Building },
   { path: "/discover", label: "Discover", icon: Compass },
   { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard }
 ];
@@ -27,12 +25,6 @@ export const Navigation = () => {
     if (currentPath.startsWith("/destination/Tamil%20Nadu")) {
       return path === "/tamil-nadu";
     }
-    if (currentPath.startsWith("/destination/Kerala")) {
-      return path === "/kerala";
-    }
-    if (currentPath.startsWith("/destination/Bangalore")) {
-      return path === "/bangalore";
-    }
 
     // If current route isn't one of the main nav items (e.g. /signup),
     // keep Home highlighted as the default active item
@@ -50,7 +42,7 @@ export const Navigation = () => {
     const activeIndex = navItems.findIndex(item => isActive(item.path));
     if (activeIndex !== -1 && itemRefs.current[activeIndex]) {
       const activeElement = itemRefs.current[activeIndex];
-      
+
       // Add a small delay to ensure DOM is updated
       setTimeout(() => {
         setSelectorStyle({
@@ -232,7 +224,7 @@ export const Navigation = () => {
           transform: translateX(2px);
         }
       `}</style>
-      
+
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -241,13 +233,13 @@ export const Navigation = () => {
               <MapPin className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-500 bg-clip-text text-transparent">
-              Emotion Escapes 
+              Emotion Escapes
             </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center animated-nav" ref={navRef}>
-            <div 
+            <div
               className="nav-selector"
               style={{
                 width: `${selectorStyle.width}px`,
@@ -297,9 +289,8 @@ export const Navigation = () => {
                     key={item.path}
                     to={item.path}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-lg ${
-                      active ? "active" : ""
-                    }`}
+                    className={`mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-lg ${active ? "active" : ""
+                      }`}
                   >
                     <Icon className="w-5 h-5" />
                     <span className="font-medium">{item.label}</span>
