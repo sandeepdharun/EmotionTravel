@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
+import typography from "@tailwindcss/typography";
 
 export default {
 	darkMode: ["class"],
@@ -18,6 +20,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				display: ["'Cormorant Garamond'", "serif"],
+				sans: ["'Manrope'", "sans-serif"],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -52,49 +58,32 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// Travel-themed colors
-				ocean: {
-					DEFAULT: 'hsl(var(--ocean))',
-					light: 'hsl(var(--ocean-light))'
+				// "Royal Amethyst & Champagne" Palette
+				amethyst: {
+					DEFAULT: '#1A0B2E', // Deep Amethyst
+					light: '#2D1B4E',   // Lighter Violet
+					glass: 'rgba(26, 11, 46, 0.7)'
 				},
-				sunset: {
-					DEFAULT: 'hsl(var(--sunset))',
-					light: 'hsl(var(--sunset-light))'
+				champagne: {
+					DEFAULT: '#D4AF37', // Classic Gold
+					light: '#F5E6D3',   // Pale Champagne
+					dark: '#AA8C2C',    // Antique Gold
 				},
-				earth: {
-					DEFAULT: 'hsl(var(--earth))',
-					light: 'hsl(var(--earth-light))'
+				ivory: '#FAF9F6',       // Off-white text
+				sand: '#E6DDD0',        // Warm muted text
+				emerald: {
+					deep: '#0a1f1c',
+					muted: '#1a3c36'
 				},
-				forest: {
-					DEFAULT: 'hsl(var(--forest))',
-					light: 'hsl(var(--forest-light))'
-				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
+				bio: { // Kept for legacy compatibility
+					cyan: '#D4AF37',   // Gold
+					gold: '#F5E6D3',   // Champagne
+					purple: '#AA8C2C'  // Darker Gold
 				}
 			},
 			backgroundImage: {
-				'gradient-ocean': 'var(--gradient-ocean)',
-				'gradient-sunset': 'var(--gradient-sunset)',
-				'gradient-nature': 'var(--gradient-nature)',
-				'gradient-warm': 'var(--gradient-warm)',
-				'gradient-hero': 'var(--gradient-hero)'
-			},
-			boxShadow: {
-				'soft': 'var(--shadow-soft)',
-				'glow': 'var(--shadow-glow)',
-				'card': 'var(--shadow-card)'
-			},
-			transitionTimingFunction: {
-				'smooth': 'var(--transition-smooth)',
-				'bounce': 'var(--transition-bounce)'
+				'gradient-luminous': 'linear-gradient(135deg, #1A0B2E 0%, #0f172a 100%)',
+				'noise': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E\")",
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -103,27 +92,37 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'fade-in': {
+					from: { opacity: '0', transform: 'translateY(10px)' },
+					to: { opacity: '1', transform: 'translateY(0)' }
+				},
+				'scale-reveal': {
+					from: { transform: 'scale(0.95)', opacity: '0' },
+					to: { transform: 'scale(1)', opacity: '1' }
+				},
+				'shimmer': {
+					'0%': { backgroundPosition: '200% 0' },
+					'100%': { backgroundPosition: '-200% 0' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+				'scale-reveal': 'scale-reveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+				'shimmer': 'shimmer 8s linear infinite',
+			},
+			transitionTimingFunction: {
+				'lux': 'cubic-bezier(0.22, 1, 0.36, 1)', // Apple-like ease-out
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [tailwindcssAnimate, typography],
 } satisfies Config;

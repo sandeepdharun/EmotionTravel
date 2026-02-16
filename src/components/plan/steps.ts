@@ -1,4 +1,4 @@
-import { Bed, Bus, Plane, Train, Smile, Info, Landmark, FileText } from "lucide-react";
+import { Bed, Bus, Plane, Train, Smile, Info, Landmark, FileText, LucideIcon } from "lucide-react";
 
 export type StepId =
   | "transport"
@@ -12,7 +12,7 @@ export interface StepDefinition {
   id: StepId;
   title: string;
   subtitle: string;
-  icon: any;
+  icon: LucideIcon;
 }
 
 export const STEP_DEFINITIONS: StepDefinition[] = [

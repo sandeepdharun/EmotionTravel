@@ -3,7 +3,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { usePlans } from "@/contexts/PlanContext";
 import { useToast } from "@/hooks/use-toast";
 import {
-  tamilNaduDestinations,
+  getAllDestinations,
   type Destination,
 } from "@/data/destinations";
 import {
@@ -15,9 +15,7 @@ import {
   Map,
 } from "lucide-react";
 
-const allDestinations: Destination[] = [
-  ...tamilNaduDestinations,
-];
+const allDestinations: Destination[] = getAllDestinations();
 
 export const useDestinationDetail = () => {
   const { country = "", name = "" } = useParams();

@@ -1,6 +1,3 @@
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { MapPin } from "lucide-react";
 import type { Destination } from "@/data/destinations";
 
 interface HeroHeaderProps {
@@ -8,63 +5,81 @@ interface HeroHeaderProps {
 }
 
 export const HeroHeader = ({ destination }: HeroHeaderProps) => {
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    const target = e.currentTarget as HTMLImageElement;
-    if (target.src !== "/placeholder.svg") {
-      target.src = "/placeholder.svg";
-    }
+  const scrollToExperiences = () => {
+    const experiencesSection = document.getElementById('experiences');
+    experiencesSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Get first 2 categories from tourist places for tag chips
+  const getTagChips = () => {
+    const categories = new Set<string>();
+    destination.touristPlaces?.slice(0, 4).forEach(place => {
+      if (typeof place !== 'string' && place.emotion) {
+        categories.add(place.emotion);
+      }
+    });
+    return Array.from(categories).slice(0, 2);
+  };
+
+  const tagChips = getTagChips();
+
   return (
-    <section className="relative -mx-6 mb-8">
-      {/* Hero Image Container */}
-      <div className="relative h-[50vh] md:h-[65vh] overflow-hidden rounded-3xl">
+    <section className="relative w-full h-[80vh] min-h-[700px] overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
         <img
           src={destination.image}
-          alt={`${destination.name}, ${destination.country} travel destination`}
-          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-          loading="lazy"
-          decoding="async"
-          onError={handleImageError}
+          alt={`${destination.name} landscape`}
+          className="w-full h-full object-cover"
         />
-        
-        {/* Enhanced Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+        {/* Dark Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
+      </div>
 
-        {/* Floating Content */}
-        <div className="absolute inset-0 flex items-end">
-          <div className="w-full p-6 md:p-12">
-            {/* Main Title Section */}
-            <div className="mb-8">
-              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-                <div className="space-y-4 flex-1">
-                  {/* Country Badge */}
-                  <div className="flex items-start gap-4">
-                    <Badge 
-                      className="bg-white/15 backdrop-blur-lg text-white border-white/20 px-4 py-2 text-sm font-medium hover:bg-white/25 transition-all duration-300"
-                      data-testid="location-badge"
-                    >
-                      <MapPin className="w-4 h-4 mr-2" />
-                      {destination.country}
-                    </Badge>
-                  </div>
+      {/* Hero Content - Left Aligned */}
+      <div className="relative h-full flex items-end pb-16 md:pb-20 lg:pb-24">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 max-w-7xl">
+          <div className="max-w-2xl space-y-6">
+            {/* Region Label */}
+            <p className="text-white/80 text-xs uppercase tracking-[0.2em] font-medium">
+              {destination.country}
+            </p>
 
-                  {/* Destination Name */}
-                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                    {destination.name}
-                  </h1>
+            {/* Destination Title - Very Large Serif */}
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif text-white leading-[1.05] font-normal">
+              {destination.name}
+            </h1>
 
-                </div>
+            {/* Poetic Tagline */}
+            <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-xl font-light">
+              {destination.description}
+            </p>
 
+            {/* Tag Chips */}
+            {tagChips.length > 0 && (
+              <div className="flex flex-wrap gap-2 pt-2">
+                {tagChips.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="px-4 py-1.5 bg-white/10 backdrop-blur-sm text-white/90 text-xs font-medium rounded-full border border-white/20"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
-            </div>
+            )}
 
+            {/* Primary CTA Button */}
+            <div className="pt-4">
+              <button
+                onClick={scrollToExperiences}
+                className="bg-white/95 hover:bg-white text-[#121417] px-8 py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                Explore What to See
+              </button>
+            </div>
           </div>
         </div>
-
-        {/* Decorative Elements */}
-        <div className="absolute top-6 right-6 w-32 h-32 bg-gradient-to-br from-white/10 to-transparent rounded-full blur-xl" />
-        <div className="absolute bottom-6 left-6 w-20 h-20 bg-gradient-to-tr from-pink-500/20 to-transparent rounded-full blur-lg" />
       </div>
     </section>
   );

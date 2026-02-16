@@ -13,7 +13,7 @@ export interface PlanStepsData {
 type CulturalHighlight = string | {
   name: string;
   description: string;
-  category: "people" | "livelihood" | "culture" | "tradition" | "lifestyle" | "art" | "festival";
+  category: "people" | "livelihood" | "culture" | "tradition" | "lifestyle" | "art" | "festival" | "history" | "nature" | "temple";
 };
 
 export interface SelectedPlan {
@@ -43,7 +43,7 @@ interface PlanContextType {
   getPlansByStatus: (status: SelectedPlan['status']) => SelectedPlan[];
   getPlansByRegion: (region: string) => SelectedPlan[];
   getPlanById: (id: string) => SelectedPlan | undefined;
-  updatePlanStepData: (id: string, step: StepId, data: any) => void;
+  updatePlanStepData: (id: string, step: StepId, data: PlanStepsData[StepId]) => void;
   setPlanCurrentStep: (id: string, step: StepId) => void;
   computePlanProgress: (id: string) => number;
 }
@@ -110,7 +110,7 @@ export const PlanProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const getPlanById = (id: string) => selectedPlans.find(p => p.id === id);
 
-  const updatePlanStepData = (id: string, step: StepId, data: any) => {
+  const updatePlanStepData = (id: string, step: StepId, data: PlanStepsData[StepId]) => {
     setSelectedPlans(prev => prev.map(plan => plan.id === id ? {
       ...plan,
       stepsData: { ...(plan.stepsData || {}), [step]: data }
@@ -124,8 +124,8 @@ export const PlanProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const computePlanProgress = (id: string) => {
     const plan = getPlanById(id);
     if (!plan) return 0;
-    const keys: StepId[] = ['transport','room','emotion','awareness','culture','report'];
-    const done = keys.reduce((acc, k) => acc + (plan.stepsData && (plan.stepsData as any)[k] ? 1 : 0), 0);
+    const keys: StepId[] = ['transport', 'room', 'emotion', 'awareness', 'culture', 'report'];
+    const done = keys.reduce((acc, k) => acc + (plan.stepsData && plan.stepsData[k] ? 1 : 0), 0);
     return (done / keys.length) * 100;
   };
 

@@ -1,309 +1,201 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Menu, X, Home, MapPin, Mountain, Waves, Building, LayoutDashboard, Compass } from "lucide-react";
+import { Home, MapPin, Compass, LayoutDashboard, Sparkles, Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
   { path: "/", label: "Home", icon: Home },
-  { path: "/tamil-nadu", label: "Tamil Nadu", icon: Mountain },
+  { path: "/tamil-nadu", label: "Tamil Nadu", icon: MapPin },
+  { path: "/kerala", label: "Kerala", icon: Sparkles },
   { path: "/discover", label: "Discover", icon: Compass },
   { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard }
 ];
 
-// Named export - make sure you're importing it as { Navigation }
-export const Navigation = () => {
+export const Navigation: React.FC = () => {
+  const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [selectorStyle, setSelectorStyle] = useState({ width: 0, left: 0 });
   const location = useLocation();
-  const navRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<{ [key: number]: HTMLElement }>({});
+  const [bubbleStyle, setBubbleStyle] = useState({ left: 0, width: 0 });
+  const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
-  const isActive = (path: string) => {
-    const currentPath = location.pathname;
-
-    // Handle destination detail routes so the parent region stays highlighted
-    if (currentPath.startsWith("/destination/Tamil%20Nadu")) {
-      return path === "/tamil-nadu";
-    }
-
-    // If current route isn't one of the main nav items (e.g. /signup),
-    // keep Home highlighted as the default active item
-    const isKnownNavRoute = navItems.some((item) => item.path === currentPath);
-
-    if (!isKnownNavRoute) {
-      return path === "/";
-    }
-
-    return currentPath === path;
-  };
-
-  // Update selector position when route changes
   useEffect(() => {
-    const activeIndex = navItems.findIndex(item => isActive(item.path));
-    if (activeIndex !== -1 && itemRefs.current[activeIndex]) {
-      const activeElement = itemRefs.current[activeIndex];
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-      // Add a small delay to ensure DOM is updated
-      setTimeout(() => {
-        setSelectorStyle({
-          width: activeElement.offsetWidth,
-          left: activeElement.offsetLeft
+  useEffect(() => {
+    const activeIndex = navItems.findIndex(item => item.path === location.pathname);
+    const activeElement = navRefs.current[activeIndex];
+
+    if (activeElement) {
+      const parent = activeElement.parentElement;
+      if (parent) {
+        setBubbleStyle({
+          left: activeElement.offsetLeft,
+          width: activeElement.offsetWidth
         });
-      }, 50);
+      }
     }
   }, [location.pathname]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border/50 shadow-md">
-      <style>{`
-        .animated-nav {
-          position: relative;
-          display: flex;
-          align-items: center;
-        }
-        
-        .nav-item {
-          position: relative;
-          z-index: 2;
-        }
-        
-        .nav-selector {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          height: 40px;
-          background: linear-gradient(135deg, #3b82f6, #1d4ed8, #7c3aed);
-          border-radius: 20px;
-          transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-          z-index: 1;
-          box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
-          animation: selectorPulse 0.6s ease-out;
-        }
+    <>
+      <nav className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
+        <div
+          className={cn(
+            "relative flex items-center justify-between px-3 py-2 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+            "rounded-full border backdrop-blur-3xl backdrop-saturate-[180%]",
+            scrolled
+              ? "bg-slate-900/30 border-white/20 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] py-2"
+              : "bg-white/[0.02] border-white/10 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)] py-3"
+          )}
+        >
+          {/* Shine Effect on Top Edge */}
+          <div className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-50" />
 
-        @keyframes selectorPulse {
-          0% {
-            transform: translateY(-50%) scale(0.95);
-            opacity: 0.8;
-          }
-          50% {
-            transform: translateY(-50%) scale(1.02);
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(-50%) scale(1);
-            opacity: 1;
-          }
-        }
-        
-        .nav-item-link {
-          position: relative;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          padding: 10px 16px;
-          border-radius: 20px;
-          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-          color: #6b7280;
-          text-decoration: none;
-          font-weight: 500;
-          z-index: 2;
-          white-space: nowrap;
-        }
-        
-        .nav-item-link.active {
-          color: white;
-          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-          animation: textGlow 0.6s ease-out;
-        }
+          {/* Glass Specular Reflection (Gradient) */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/10 via-transparent to-transparent pointer-events-none" />
 
-        @keyframes textGlow {
-          0% {
-            color: #6b7280;
-            text-shadow: none;
-          }
-          50% {
-            color: #e0e7ff;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-          }
-          100% {
-            color: white;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-          }
-        }
-        
-        .nav-item-link:not(.active):hover {
-          color: #3b82f6;
-          background: rgba(59, 130, 246, 0.08);
-          transform: translateY(-1px);
-        }
-
-        .nav-item-link:not(.active) {
-          transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
-        }
-        
-        .nav-icon {
-          width: 16px;
-          height: 16px;
-          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .nav-item-link.active .nav-icon {
-          color: white;
-          filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
-          animation: iconGlow 0.6s ease-out;
-        }
-
-        @keyframes iconGlow {
-          0% {
-            color: #6b7280;
-            filter: none;
-            transform: scale(1);
-          }
-          50% {
-            color: #e0e7ff;
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
-            transform: scale(1.1);
-          }
-          100% {
-            color: white;
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
-            transform: scale(1);
-          }
-        }
-
-        .nav-item-link:not(.active):hover .nav-icon {
-          transform: scale(1.1);
-          color: #3b82f6;
-        }
-
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in {
-          animation: fade-in 0.3s ease-out;
-        }
-
-        .mobile-nav-item {
-          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .mobile-nav-item.active {
-          background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(29, 78, 216, 0.15));
-          color: #3b82f6;
-          border-left: 3px solid #3b82f6;
-          transform: translateX(4px);
-          animation: mobileActiveSlide 0.5s ease-out;
-        }
-
-        @keyframes mobileActiveSlide {
-          0% {
-            background: transparent;
-            color: #6b7280;
-            border-left: 3px solid transparent;
-            transform: translateX(0);
-          }
-          100% {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(29, 78, 216, 0.15));
-            color: #3b82f6;
-            border-left: 3px solid #3b82f6;
-            transform: translateX(4px);
-          }
-        }
-
-        .mobile-nav-item:not(.active):hover {
-          background: rgba(59, 130, 246, 0.05);
-          color: #3b82f6;
-          transform: translateX(2px);
-        }
-      `}</style>
-
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg flex items-center justify-center shadow-lg">
-              <MapPin className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-emerald-400 to-teal-500 bg-clip-text text-transparent">
+          {/* Logo Section */}
+          <div className="pl-4 pr-6 relative z-10 flex items-center gap-2">
+            <span className="text-xl font-display font-medium text-white tracking-wide italic drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
               Emotion Escapes
             </span>
-          </Link>
+          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center animated-nav" ref={navRef}>
-            <div
-              className="nav-selector"
-              style={{
-                width: `${selectorStyle.width}px`,
-                left: `${selectorStyle.left}px`,
-                opacity: selectorStyle.width > 0 ? 1 : 0
+          {/* Desktop Links with Ultra-Premium Liquid Bubble */}
+          <div className="hidden md:flex items-center gap-1 relative">
+            {/* Animated Bubble Background */}
+            <motion.div
+              className="absolute rounded-full"
+              animate={{
+                left: bubbleStyle.left,
+                width: bubbleStyle.width
               }}
-            />
+              transition={{
+                type: "spring",
+                bounce: 0.2,
+                duration: 0.6
+              }}
+              style={{
+                background: "rgba(255, 255, 255, 0.15)",
+                boxShadow: `
+                  0 4px 15px rgba(0, 0, 0, 0.1), 
+                  inset 0 0 20px rgba(255, 255, 255, 0.2), 
+                  inset 0 1px 2px rgba(255, 255, 255, 0.6)
+                `,
+                backdropFilter: "blur(8px)",
+                top: 0,
+                bottom: 0,
+                height: "100%"
+              }}
+            >
+              {/* Inner Shine for Liquid Effect */}
+              <div className="absolute top-1 left-4 right-4 h-1 bg-white/40 rounded-full blur-[2px] opacity-60" />
+              {/* Bottom Glow */}
+              <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-white/10 to-transparent rounded-b-full opacity-40" />
+            </motion.div>
+
             {navItems.map((item, index) => {
-              const Icon = item.icon;
-              const active = isActive(item.path);
+              const isActive = location.pathname === item.path;
               return (
                 <Link
                   key={item.path}
                   to={item.path}
-                  ref={(el: HTMLAnchorElement | null) => {
-                    if (el) itemRefs.current[index] = el;
-                  }}
-                  className={`nav-item-link nav-item ${active ? 'active' : ''}`}
+                  ref={el => navRefs.current[index] = el}
+                  className={cn(
+                    "relative z-10 flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-300 group",
+                    isActive ? "text-white" : "text-white/60 hover:text-white"
+                  )}
                 >
-                  <Icon className="nav-icon" />
-                  <span>{item.label}</span>
+                  <div className="relative z-10 flex items-center gap-2">
+                    <item.icon
+                      size={16}
+                      className={cn(
+                        "transition-all duration-300",
+                        isActive ? "scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" : "group-hover:scale-110"
+                      )}
+                    />
+                    <span className={cn(
+                      "text-sm font-medium tracking-wide transition-all duration-300",
+                      isActive && "drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
+                    )}>
+                      {item.label}
+                    </span>
+                  </div>
                 </Link>
               );
             })}
           </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="outline"
-            size="sm"
-            className="md:hidden border-gray-200 hover:bg-blue-50 hover:border-blue-300 transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-          </Button>
+          {/* Mobile Menu Toggle */}
+          <div className="relative z-10 md:hidden px-2">
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="p-2 rounded-full text-white/80 hover:bg-white/10 transition-colors"
+            >
+              <Menu size={20} />
+            </button>
+          </div>
         </div>
+      </nav>
 
-        {/* Mobile Navigation */}
+      {/* Mobile Full Screen Menu */}
+      <AnimatePresence>
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 animate-fade-in">
-            <div className="flex flex-col space-y-2">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const active = isActive(item.path);
-                return (
+          <motion.div
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(24px)" }}
+            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            className="fixed inset-0 z-[60] bg-slate-900/60 flex flex-col items-center justify-center text-center"
+          >
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="absolute top-8 right-8 p-4 rounded-full bg-white/5 text-white/70 hover:bg-white/10 hover:text-white transition-colors border border-white/5"
+            >
+              <X size={24} />
+            </button>
+
+            <motion.div
+              className="flex flex-col gap-8"
+              initial="closed"
+              animate="open"
+              variants={{
+                open: { transition: { staggerChildren: 0.1 } },
+                closed: { transition: { staggerChildren: 0.05, staggerDirection: -1 } }
+              }}
+            >
+              {navItems.map((item) => (
+                <motion.div
+                  key={item.path}
+                  variants={{
+                    open: { y: 0, opacity: 1 },
+                    closed: { y: 20, opacity: 0 }
+                  }}
+                >
                   <Link
-                    key={item.path}
                     to={item.path}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`mobile-nav-item flex items-center space-x-3 px-4 py-3 rounded-lg ${active ? "active" : ""
-                      }`}
+                    className={cn(
+                      "relative flex items-center justify-center gap-3 text-3xl font-display italic transition-all duration-300",
+                      location.pathname === item.path
+                        ? "text-white scale-110 drop-shadow-[0_0_20px_rgba(255,255,255,0.6)]"
+                        : "text-white/40 hover:text-white hover:scale-105"
+                    )}
                   >
-                    <Icon className="w-5 h-5" />
-                    <span className="font-medium">{item.label}</span>
+                    <item.icon size={28} className={location.pathname === item.path ? "opacity-100" : "opacity-0"} />
+                    {item.label}
                   </Link>
-                );
-              })}
-            </div>
-          </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
         )}
-      </div>
-    </nav>
+      </AnimatePresence>
+    </>
   );
 };
-
-// If you want to use default export instead, uncomment this line and comment out the named export above:
-// export default Navigation;

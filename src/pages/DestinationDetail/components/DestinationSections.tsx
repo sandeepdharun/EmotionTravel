@@ -1,228 +1,100 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { GoogleMapEmbed } from "@/components/GoogleMapEmbed";
-import { 
-  Info, 
-  Heart, 
-  Shield, 
-  Clock, 
-  DollarSign, 
-  Map,
-  Star,
-  AlertTriangle,
-  CheckCircle,
-  Thermometer,
-  Camera,
-  Utensils
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { Destination } from "@/data/destinations";
+import { Button } from "@/components/ui/button";
 
-interface DestinationSectionsProps {
-  destination: Destination;
-  rentText: string;
-}
+export const QuickStatsBar = ({ destination }: { destination: Destination }) => {
+  const language = destination.country === "Tamil Nadu" ? "Tamil" :
+    destination.country === "Kerala" ? "Malayalam" : "Kannada";
 
-export const AboutSection = ({ destination }: { destination: Destination }) => (
-  <Card className="border bg-background/80 backdrop-blur-sm text-foreground shadow-sm">
-    <CardContent className="p-5 md:p-8 space-y-6">
-      {/* Minimal, calm destination intro */}
-      <div className="text-center space-y-3 max-w-2xl mx-auto">
-        <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-          <Info className="w-3.5 h-3.5 text-primary" />
-          <span>{destination.country} • {destination.emotionalMatch}</span>
-        </p>
-        <h2 className="text-xl md:text-2xl font-semibold leading-snug">
-          {destination.name} is where the noise in your head finally goes quiet.
-        </h2>
-        <p className="text-sm md:text-base text-foreground/90 max-w-xl mx-auto leading-relaxed">
-          {destination.description}
-        </p>
-        <p className="text-xs md:text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed">
-          A calm corner of {destination.country} for people who want to slow down, not do more.
-        </p>
-      </div>
-    </CardContent>
-  </Card>
-);
-
-export const SafetyAndTimeSection = ({ destination, rentText }: DestinationSectionsProps) => {
-  const safetyConfig = {
-    high: { color: "text-green-600", bg: "bg-green-50 dark:bg-green-950/30", icon: CheckCircle },
-    medium: { color: "text-yellow-600", bg: "bg-yellow-50 dark:bg-yellow-950/30", icon: AlertTriangle },
-    low: { color: "text-red-600", bg: "bg-red-50 dark:bg-red-950/30", icon: Shield },
-  };
-
-  const safety = safetyConfig[destination.safetyLevel];
-  const SafetyIcon = safety.icon;
+  const duration = destination.duration || "2–3 Days";
+  const safety = destination.safetyLevel.charAt(0).toUpperCase() + destination.safetyLevel.slice(1) + " Safety";
 
   return (
-    <div className="grid md:grid-cols-2 gap-4">
-      {/* Safety Information */}
-      <Card className="border shadow-sm">
-        <CardContent className="p-4 md:p-6">
-          <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            <div className={`p-2 rounded-lg ${safety.bg}`}>
-              <Shield className={`w-5 h-5 ${safety.color}`} />
-            </div>
-            Safety Information
-          </h3>
-          
-          <div className="space-y-4">
-            <div className={`${safety.bg} rounded-xl p-4 border border-current/20`}>
-              <div className="flex items-center gap-3 mb-2">
-                <SafetyIcon className={`w-5 h-5 ${safety.color}`} />
-                <div>
-                  <h4 className={`text-lg font-semibold ${safety.color} capitalize`}>
-                    {destination.safetyLevel} Safety Level
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    {destination.safetyLevel === 'high' && "Very safe for travelers with minimal precautions needed"}
-                    {destination.safetyLevel === 'medium' && "Generally safe with standard travel precautions recommended"}
-                    {destination.safetyLevel === 'low' && "Exercise additional caution and stay informed about local conditions"}
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            {/* Safety Tips */}
-            <div className="space-y-2">
-              <h5 className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                Safety Tips
-              </h5>
-              <div className="space-y-1.5 text-xs">
-                <div className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span>Keep copies of important documents</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span>Stay aware of your surroundings</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span>Follow local customs and guidelines</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Best Time & Cost */}
-      <Card className="border shadow-sm">
-        <CardContent className="p-4 md:p-6">
-          <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            <div className="p-2 bg-amber-100 dark:bg-amber-900 rounded-lg">
-              <Clock className="w-5 h-5 text-amber-600 dark:text-amber-400" />
-            </div>
-            Travel Planning
-          </h3>
-
-          <div className="space-y-4">
-            {/* Best Time */}
-            <div className="bg-amber-50 dark:bg-amber-950/30 rounded-xl p-4 border border-amber-200 dark:border-amber-800">
-              <div className="flex items-center gap-3 mb-2">
-                <Thermometer className="w-5 h-5 text-amber-600 dark:text-amber-400" />
-                <h4 className="text-base font-semibold text-amber-700 dark:text-amber-300">
-                  Best Time to Visit
-                </h4>
-              </div>
-              <p className="text-amber-700 dark:text-amber-300 font-medium">
-                {destination.bestTime}
-              </p>
-            </div>
-
-            {/* Cost Information */}
-            <div className="bg-green-50 dark:bg-green-950/30 rounded-xl p-4 border border-green-200 dark:border-green-800">
-              <div className="flex items-center gap-3 mb-2">
-                <DollarSign className="w-5 h-5 text-green-600 dark:text-green-400" />
-                <h4 className="text-base font-semibold text-green-700 dark:text-green-300">
-                  Accommodation Cost
-                </h4>
-              </div>
-              <p className="text-green-700 dark:text-green-300 font-medium">
-                {rentText}
-              </p>
-              <p className="text-[11px] text-green-600 dark:text-green-400 mt-1 opacity-75">
-                Price Range: {destination.priceRange}
-              </p>
-            </div>
-
-            {/* Additional Tips */}
-            <div className="space-y-2">
-              <h5 className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                Travel Tips
-              </h5>
-              <div className="space-y-1.5 text-xs">
-                <div className="flex items-start gap-2">
-                  <Camera className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
-                  <span>Book accommodations in advance during peak season</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Utensils className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
-                  <span>Try local cuisine for an authentic experience</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Star className="w-4 h-4 text-purple-500 mt-0.5 flex-shrink-0" />
-                  <span>Research local festivals and events</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+    <div className="w-full">
+      <div className="container mx-auto px-4">
+        <p className="text-center text-[#666666] text-sm md:text-base font-normal tracking-wide">
+          {destination.bestTime} · {language} · {duration} · {safety}
+        </p>
+      </div>
     </div>
   );
 };
 
-export const MapSection = ({ destination }: { destination: Destination }) => {
-  // Generate search bounds based on destination
-  const getSearchBounds = () => {
-    // Default coordinates for different regions
-    const regionCoords = {
-      "Tamil Nadu": { lat: 11.1271, lng: 78.6569, radius: 50000 },
-      "Kerala": { lat: 10.8505, lng: 76.2711, radius: 40000 },
-      "Bangalore": { lat: 12.9716, lng: 77.5946, radius: 30000 },
-    };
-    
-    return regionCoords[destination.country as keyof typeof regionCoords] || 
-           { lat: 11.0, lng: 77.0, radius: 50000 };
-  };
+export const QuoteSection = () => (
+  <div className="w-full">
+    <div className="container mx-auto px-4">
+      <p className="text-center text-[#6A6F75] text-base md:text-lg italic font-light max-w-2xl mx-auto leading-relaxed">
+        "Every journey begins with a single step of curiosity."
+      </p>
+    </div>
+  </div>
+);
 
+export const AboutSection = ({ destination }: { destination: Destination }) => (
+  <div className="max-w-6xl mx-auto px-6 md:px-8">
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16">
+      {/* Left Column - Label + Heading */}
+      <div className="md:col-span-4 space-y-3">
+        <p className="text-xs uppercase tracking-[0.2em] font-semibold text-[#9A9A9A]">
+          ABOUT
+        </p>
+        <h2 className="text-2xl md:text-3xl font-serif text-[#121417] leading-tight">
+          About {destination.name}
+        </h2>
+      </div>
+
+      {/* Right Column - Paragraph */}
+      <div className="md:col-span-8">
+        <p className="text-base md:text-lg leading-relaxed text-[#333333]">
+          {destination.description}
+        </p>
+      </div>
+    </div>
+  </div>
+);
+
+export const MapSection = ({ destination }: { destination: Destination }) => {
   const mapEmbedUrl = destination.name === "Pondicherry"
     ? "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d72624.2633302847!2d79.82120989246204!3d11.936286365839566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1756863984310!5m2!1sen!2sin"
     : `https://www.google.com/maps?q=${encodeURIComponent(
-        destination.name + ", " + destination.country
-      )}&output=embed`;
+      destination.name + ", " + destination.country
+    )}&output=embed`;
+
+  const mapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(destination.name + " " + destination.country)}`;
 
   return (
-    <Card className="border shadow-sm">
-      <CardContent className="p-4 md:p-6">
-        <div className="text-center mb-4">
-          <h3 className="text-xl font-semibold mb-2 flex items-center justify-center gap-2">
-            <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
-              <Map className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            </div>
-            Explore {destination.name}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              on Map
-            </span>
-          </h3>
-          <p className="text-sm text-muted-foreground">
-            Discover attractions, accommodations, and local points of interest
-          </p>
-        </div>
+    <div className="relative w-full h-[500px] rounded-2xl overflow-hidden">
+      {/* Full-width Map */}
+      <iframe
+        src={mapEmbedUrl}
+        width="100%"
+        height="100%"
+        style={{ border: 0 }}
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        title={`${destination.name} location map`}
+        className="w-full h-full"
+      />
 
-        <div className="rounded-xl overflow-hidden border border-border">
-          <GoogleMapEmbed
-            region={destination.name}
-            embedUrl={mapEmbedUrl}
-            searchBounds={getSearchBounds()}
-            showHeader={false}
-          />
-        </div>
-      </CardContent>
-    </Card>
+      {/* Floating Info Panel - Bottom Left */}
+      <div className="absolute bottom-8 left-8 bg-white/95 backdrop-blur-md rounded-xl p-8 max-w-sm shadow-lg">
+        <h3 className="text-xs uppercase tracking-[0.15em] font-semibold text-[#9A9A9A] mb-3">
+          LOCATION
+        </h3>
+        <p className="text-sm text-[#333333] leading-relaxed mb-5">
+          Located in the heart of {destination.country}, {destination.name} offers a unique blend of culture and natural beauty through history.
+        </p>
+        <a
+          href={mapsSearchUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center text-sm font-medium text-[#0F4C5C] hover:text-[#0A3A47] transition-colors underline"
+        >
+          Open in Maps →
+        </a>
+      </div>
+    </div>
   );
 };

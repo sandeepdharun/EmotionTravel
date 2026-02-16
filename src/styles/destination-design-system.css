@@ -1,0 +1,626 @@
+/**
+ * UNIVERSAL DESTINATION PAGE DESIGN SYSTEM
+ * Spiritual Coastal Travel Journal Aesthetic
+ * 
+ * This file defines the COMPLETE visual system for ALL destination detail pages.
+ * Every destination (Rameswaram, Ooty, Kodaikanal, Mahabalipuram, etc.) automatically 
+ * inherits these styles.
+ * 
+ * DO NOT create city-specific CSS overrides.
+ * DO NOT hardcode content-specific styles.
+ * This is a UNIVERSAL TEMPLATE system.
+ */
+
+/* ========================================
+   DESIGN PHILOSOPHY
+   ======================================== */
+/*
+   Spiritual Coastal Travel Journal
+   - Calm, breathable, emotionally reassuring
+   - Feels like flowing chapters, not stacked boxes
+   - Clear visual hierarchy and reading flow
+   - Reduces cognitive load
+   - Premium but approachable
+*/
+
+/* ========================================
+   COLOR PALETTE (Universal)
+   ======================================== */
+:root {
+    /* Background Tones - Warm, Calm, Spiritual */
+    --dest-bg-primary: #FAFAF8;
+    /* Warm off-white / light sand */
+    --dest-bg-secondary: hsl(35, 25%, 94%);
+    /* Slightly darker sand */
+    --dest-bg-tertiary: hsl(35, 15%, 97%);
+    /* Almost white with warmth */
+    --dest-bg-panel: hsla(35, 40%, 95%, 0.6);
+    /* Soft panel background */
+
+    /* Accent Colors - Ocean & Temple Stone */
+    --dest-accent-blue: hsl(210, 95%, 28%);
+    /* Deep ocean blue */
+    --dest-accent-blue-light: hsl(210, 85%, 55%);
+    /* Light ocean blue */
+    --dest-accent-gold: hsl(38, 45%, 58%);
+    /* Muted gold / temple stone */
+    --dest-accent-gold-light: hsl(38, 50%, 72%);
+    /* Light temple gold */
+
+    /* Text Colors - Near-black and soft grays */
+    --dest-text-primary: hsl(220, 25%, 18%);
+    /* Near-black for headings */
+    --dest-text-secondary: hsl(220, 12%, 48%);
+    /* Soft gray for body */
+    --dest-text-tertiary: hsl(220, 8%, 62%);
+    /* Light gray for captions */
+
+    /* Mood Tag Colors - Emotion-specific, muted tones */
+    --mood-calm: hsl(150, 35%, 48%);
+    /* Soft healing green */
+    --mood-spiritual: hsl(32, 55%, 52%);
+    /* Warm temple amber */
+    --mood-adventure: hsl(18, 65%, 52%);
+    /* Calm energetic orange */
+    --mood-mystery: hsl(265, 40%, 45%);
+    /* Soft deep purple */
+    --mood-romantic: hsl(345, 60%, 58%);
+    /* Gentle pink */
+    --mood-awe: hsl(205, 75%, 42%);
+    /* Coastal blue */
+
+    /* Shadows - Extremely soft, barely there */
+    --dest-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+    --dest-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --dest-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.06);
+    --dest-shadow-xl: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+    /* Border Colors - Extremely subtle */
+    --dest-border-subtle: hsla(220, 10%, 85%, 0.4);
+    --dest-border-soft: hsla(220, 10%, 80%, 0.3);
+
+    /* Border Radius - Soft, organic */
+    --dest-radius-sm: 6px;
+    --dest-radius-md: 10px;
+    --dest-radius-lg: 14px;
+    --dest-radius-xl: 20px;
+}
+
+.dark {
+    --dest-bg-primary: hsl(220, 15%, 12%);
+    --dest-bg-secondary: hsl(220, 15%, 15%);
+    --dest-bg-tertiary: hsl(220, 15%, 10%);
+    --dest-bg-panel: hsla(220, 20%, 14%, 0.6);
+    --dest-text-primary: hsl(220, 15%, 95%);
+    --dest-text-secondary: hsl(220, 10%, 70%);
+    --dest-text-tertiary: hsl(220, 8%, 50%);
+    --dest-border-subtle: hsla(220, 10%, 30%, 0.4);
+    --dest-border-soft: hsla(220, 10%, 25%, 0.3);
+}
+
+/* ========================================
+   TYPOGRAPHY SYSTEM
+   ======================================== */
+
+/* Heading Hierarchy - Human-scaled for comfort */
+.dest-h1 {
+    font-family: 'Crimson Text', 'Libre Baskerville', 'Georgia', serif;
+    font-size: clamp(1.875rem, 3.75vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--dest-text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.dest-h2 {
+    font-family: 'Crimson Text', 'Libre Baskerville', 'Georgia', serif;
+    font-size: clamp(1.375rem, 2.75vw, 2.125rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--dest-text-primary);
+    margin-bottom: 0.875rem;
+}
+
+.dest-h3 {
+    font-family: 'Inter', -apple-system, 'SF Pro Text', sans-serif;
+    font-size: clamp(1rem, 1.875vw, 1.25rem);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--dest-text-primary);
+    margin-bottom: 0.75rem;
+}
+
+/* Body Text - Comfortable reading scale */
+.dest-body {
+    font-family: 'Inter', -apple-system, 'SF Pro Text', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--dest-text-secondary);
+    letter-spacing: 0.002em;
+}
+
+.dest-body-large {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--dest-text-secondary);
+}
+
+.dest-caption {
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--dest-text-tertiary);
+    letter-spacing: 0.005em;
+}
+
+/* ========================================
+   SPACING SYSTEM (Human-Scaled)
+   ======================================== */
+
+.dest-section-gap {
+    margin-bottom: clamp(2.75rem, 5.5vw, 4.5rem);
+}
+
+.dest-component-gap {
+    margin-bottom: clamp(1.5rem, 2.75vw, 2.25rem);
+}
+
+.dest-element-gap {
+    margin-bottom: 1rem;
+}
+
+.dest-section-padding {
+    padding: clamp(1.75rem, 3.5vw, 2.75rem) clamp(1.125rem, 2.25vw, 1.875rem);
+}
+
+/* ========================================
+   HERO SECTION (Human-Scaled)
+   ======================================== */
+
+.dest-hero {
+    position: relative;
+    width: 100%;
+    height: clamp(350px, 52vh, 520px);
+    border-radius: var(--dest-radius-lg);
+    overflow: hidden;
+    margin-bottom: var(--dest-section-gap);
+    box-shadow: var(--dest-shadow-lg);
+}
+
+.dest-hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dest-hero:hover .dest-hero-image {
+    transform: scale(1.05);
+}
+
+.dest-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.65) 0%,
+            rgba(0, 0, 0, 0.25) 45%,
+            transparent 100%);
+}
+
+.dest-hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: clamp(1.5rem, 3.25vw, 2.25rem);
+    color: white;
+}
+
+.dest-hero-title {
+    font-family: 'Crimson Text', 'Libre Baskerville', 'Georgia', serif;
+    font-size: clamp(2.125rem, 5.25vw, 4.25rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.dest-hero-description {
+    font-size: clamp(0.875rem, 1.7vw, 1.0625rem);
+    line-height: 1.5;
+    max-width: 520px;
+    margin-bottom: 1.375rem;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+/* ========================================
+   MOOD TAGS (Universal)
+   ======================================== */
+
+.dest-mood-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5625rem;
+    margin-bottom: 1.125rem;
+}
+
+.dest-mood-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.8125rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--dest-shadow-sm);
+    transition: all 0.2s ease;
+}
+
+.dest-mood-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--dest-shadow-md);
+}
+
+.dest-mood-tag-calm {
+    color: var(--mood-calm);
+}
+
+.dest-mood-tag-spiritual {
+    color: var(--mood-spiritual);
+}
+
+.dest-mood-tag-adventure {
+    color: var(--mood-adventure);
+}
+
+.dest-mood-tag-mystery {
+    color: var(--mood-mystery);
+}
+
+.dest-mood-tag-romantic {
+    color: var(--mood-romantic);
+}
+
+.dest-mood-tag-awe {
+    color: var(--mood-awe);
+}
+
+/* ========================================
+   EMOTION-DRIVEN SECTIONS
+   ======================================== */
+
+.dest-emotion-section {
+    background: var(--dest-bg-panel);
+    backdrop-filter: blur(8px);
+    border-radius: var(--dest-radius-lg);
+    padding: var(--dest-section-padding);
+    box-shadow: var(--dest-shadow-sm);
+    border: none;
+    margin-bottom: var(--dest-section-gap);
+}
+
+.dest-emotion-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.dest-emotion-title {
+    font-family: 'Crimson Text', 'Georgia', serif;
+    font-size: clamp(1.375rem, 2.75vw, 1.875rem);
+    font-weight: 600;
+    color: var(--dest-text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.dest-emotion-subtitle {
+    font-size: 0.875rem;
+    color: var(--dest-text-tertiary);
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ========================================
+   PLACE CARDS (Minimal Design)
+   ======================================== */
+
+.dest-place-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.125rem;
+}
+
+.dest-place-card {
+    background: white;
+    border-radius: var(--dest-radius-md);
+    padding: 0.875rem;
+    border: 1px solid var(--dest-border-subtle);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dest-place-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--dest-shadow-lg);
+    border-color: var(--dest-accent-blue-light);
+}
+
+.dest-place-card-image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--dest-radius-sm);
+    object-fit: cover;
+    margin-bottom: 0.75rem;
+}
+
+.dest-place-card-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--dest-text-primary);
+    margin-bottom: 0.375rem;
+}
+
+.dest-place-card-description {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--dest-text-secondary);
+}
+
+/* ========================================
+   SIDEBAR (Planning Component)
+   ======================================== */
+
+.dest-sidebar {
+    position: sticky;
+    top: 1.375rem;
+    background: var(--dest-bg-panel);
+    backdrop-filter: blur(8px);
+    border-radius: var(--dest-radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--dest-shadow-md);
+    border: 1px solid var(--dest-border-soft);
+}
+
+.dest-sidebar-title {
+    font-family: 'Crimson Text', 'Georgia', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--dest-text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.dest-sidebar-section {
+    margin-bottom: 1.125rem;
+    padding-bottom: 1.125rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dest-sidebar-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* ========================================
+   MAP SECTION
+   ======================================== */
+
+.dest-map-container {
+    background: transparent;
+    border-radius: var(--dest-radius-lg);
+    padding: 0;
+    box-shadow: none;
+    margin-bottom: var(--dest-section-gap);
+}
+
+.dest-map-wrapper {
+    border-radius: var(--dest-radius-md);
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    box-shadow: var(--dest-shadow-md);
+}
+
+/* ========================================
+   BUTTONS (Universal)
+   ======================================== */
+
+.dest-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--dest-radius-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.dest-btn-primary {
+    background: var(--dest-accent-blue);
+    color: white;
+    box-shadow: var(--dest-shadow-sm);
+}
+
+.dest-btn-primary:hover {
+    background: var(--dest-accent-blue-light);
+    transform: translateY(-2px);
+    box-shadow: var(--dest-shadow-md);
+}
+
+.dest-btn-secondary {
+    background: white;
+    color: var(--dest-accent-blue);
+    border: 2px solid var(--dest-accent-blue);
+}
+
+.dest-btn-secondary:hover {
+    background: var(--dest-accent-blue);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.dest-btn-ghost {
+    background: transparent;
+    color: var(--dest-text-secondary);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dest-btn-ghost:hover {
+    background: var(--dest-bg-secondary);
+    border-color: var(--dest-accent-blue);
+    color: var(--dest-text-primary);
+}
+
+/* ========================================
+   SHOW MORE / EXPAND PATTERNS
+   ======================================== */
+
+.dest-show-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    margin-top: 1rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--dest-accent-blue);
+    background: var(--dest-bg-secondary);
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.dest-show-more:hover {
+    background: var(--dest-accent-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--dest-shadow-sm);
+}
+
+/* ========================================
+   LAYOUT GRID (Universal)
+   ======================================== */
+
+.dest-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 2vw, 1.25rem);
+}
+
+.dest-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.125rem, 2.25vw, 1.875rem);
+}
+
+@media (min-width: 1024px) {
+    .dest-layout {
+        grid-template-columns: 1fr 300px;
+    }
+}
+
+.dest-main-content {
+    min-width: 0;
+    /* Prevents overflow */
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+    .dest-hero {
+        height: 320px;
+        border-radius: var(--dest-radius-md);
+    }
+
+    .dest-place-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dest-sidebar {
+        position: relative;
+        top: 0;
+    }
+}
+
+/* ========================================
+   MICRO-ANIMATIONS (Universal)
+   ======================================== */
+
+@keyframes dest-fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dest-animate-in {
+    animation: dest-fade-in-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.dest-animate-in-delay-1 {
+    animation: dest-fade-in-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+    opacity: 0;
+}
+
+.dest-animate-in-delay-2 {
+    animation: dest-fade-in-up 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+    opacity: 0;
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+.dest-skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--dest-accent-blue);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+}
+
+.dest-skip-link:focus {
+    top: 0;
+}
+
+/* Focus styles */
+*:focus-visible {
+    outline: 2px solid var(--dest-accent-blue);
+    outline-offset: 2px;
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+
+    .dest-sidebar,
+    .dest-btn,
+    .dest-show-more {
+        display: none;
+    }
+
+    .dest-hero {
+        height: 300px;
+    }
+}

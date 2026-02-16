@@ -71,10 +71,11 @@ const Signup = () => {
 
       toast({ title: "Welcome aboard! ✨", description: "Check your email to confirm your journey." });
       setTimeout(() => navigate("/"), 2000);
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Something went wrong.";
       toast({
         title: "Error",
-        description: error.message || "Something went wrong.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -83,17 +84,32 @@ const Signup = () => {
   };
 
   return (
-    <div className="h-screen relative flex flex-col items-center justify-center p-4 pt-24 overflow-hidden bg-[url('/travel-bg-2.png')] bg-cover bg-center">
+    <div className="h-screen relative flex flex-col items-center justify-center p-4 pt-24 overflow-hidden">
 
-      {/* Dark Overlay for readability */}
-      <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]" />
+      {/* Cinematic Travel Background with Subtle Animation */}
+      <div
+        className="absolute inset-0 bg-cover bg-center animate-slow-zoom"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop')`,
+          backgroundPosition: 'center 40%'
+        }}
+      />
 
+      {/* Multi-layer Gradient Overlays for Cinematic Depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/50 to-slate-900/80" />
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-transparent to-purple-900/20" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
+
+      {/* Soft Atmospheric Particles */}
       <ParticleBackground theme="minimal" />
 
+      {/* Premium Glassmorphism Card */}
       <div className="w-full max-w-[500px] relative z-10 scale-95 origin-top">
 
-        <div className="bg-slate-900/80 backdrop-blur-3xl border border-white/20 rounded-2xl p-6 shadow-2xl shadow-primary/10 ring-1 ring-white/10">
-          <div className="text-center mb-4">
+        <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 shadow-2xl shadow-black/50 ring-1 ring-white/5 
+                        hover:border-white/20 transition-all duration-700 
+                        before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-br before:from-white/5 before:to-transparent before:pointer-events-none">
+          <div className="text-center mb-4 relative z-10">
             <h1 className="text-2xl font-bold tracking-tight mb-1 bg-gradient-to-br from-white via-white to-slate-400 bg-clip-text text-transparent flex items-center justify-center gap-2 drop-shadow-sm">
               <Sparkles className="w-5 h-5 text-sky-400" /> Start Your Journey
             </h1>

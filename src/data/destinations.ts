@@ -4,6 +4,7 @@
 export type Destination = {
   name: string;
   country: string; // Region label (e.g., "Tamil Nadu", "Kerala", "Bangalore", "Near Bangalore")
+  district?: string; // Sub-region (e.g., "Thiruvananthapuram", "Idukki")
   image: string;
   emotionalMatch: string;
   matchPercentage: number;
@@ -20,7 +21,10 @@ export type Destination = {
       | "tradition"
       | "lifestyle"
       | "art"
-      | "festival";
+      | "festival"
+      | "history"
+      | "nature"
+      | "temple";
     }
   )[];
   safetyLevel: "high" | "medium" | "low";
@@ -1415,8 +1419,970 @@ export const tamilNaduDestinations: Destination[] = [
   },
 ];
 
+export const keralaDestinations: Destination[] = [
+  {
+    name: "Thiruvananthapuram",
+    country: "Kerala",
+    image: "https://i.ibb.co/RGstVDP3/image-af6c7bf2.png",
+    emotionalMatch: "Heritage & Statehood",
+
+    matchPercentage: 98,
+    description: "The evergreen city of India with sacred temples and golden beaches.",
+    culturalHighlights: ["Padmanabhaswamy Temple", "Kovalam Beach", "Ponmudi"],
+    safetyLevel: "high",
+    bestTime: "Oct-Mar",
+    priceRange: "$$",
+    touristPlaces: [
+      {
+        name: "Padmanabhaswamy Temple",
+        description: "The wealthiest temple in the world, a masterpiece of Dravidian architecture.",
+        category: "temple",
+        emotion: "Spiritual / Divine",
+      },
+      {
+        name: "Kovalam Beach",
+        description: "Internationally renowned beach with a distinctive lighthouse and crescent coastline.",
+        category: "beach",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Napier Museum",
+        description: "An architectural gem housing rare archaeological and historic artifacts.",
+        category: "historical",
+        emotion: "Pride / History",
+      },
+      {
+        name: "Ponmudi",
+        description: "A scenic hill station with winding roads, tea estates, and misty peaks.",
+        category: "nature",
+        emotion: "Romantic / Dreamy",
+      },
+      {
+        name: "Varkala Cliff",
+        description: "A unique geological formation with a stunning beach and vibrant cliffside cafes.",
+        category: "beach",
+        emotion: "Awe / Wow",
+      },
+      {
+        name: "Poovar Island",
+        description: "Where the lake, river, and sea meet, offering serene golden sand beaches.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Agasthyarkoodam",
+        description: "The second highest peak in Kerala, known for its rare medicinal herbs.",
+        category: "adventure",
+        emotion: "Mystery / Hidden",
+      },
+      {
+        name: "Shangumugham Beach",
+        description: "Famous for its giant mermaid sculpture and perfect sunset views.",
+        category: "beach",
+        emotion: "Calm / Healing",
+      },
+    ]
+  },
+  {
+    name: "Kollam",
+    country: "Kerala",
+    image: "https://i.ibb.co/1t0yRpF9/Firefly-20260215215840.png",
+    emotionalMatch: "Cashew & Canals",
+
+    matchPercentage: 92,
+    description: "The gateway to the backwaters, rich in trade history and natural beauty.",
+    culturalHighlights: [
+      {
+        name: "Ashtamudi Lake",
+        description: "A vast palm-shaped water body known for its unique ecosystem and houseboats.",
+        category: "nature",
+      },
+      {
+        name: "Munroe Island",
+        description: "A hidden cluster of eight islands offering canoe tours through narrow canals.",
+        category: "nature",
+      },
+      {
+        name: "Jatayu Earth Center",
+        description: "Home to the world's largest bird sculpture, symbolizing safety and honor.",
+        category: "art",
+      },
+    ],
+    safetyLevel: "high",
+    bestTime: "Nov-Mar",
+    priceRange: "$$",
+    touristPlaces: [
+      {
+        name: "Thangassery Light House",
+        description: "A historic lighthouse offering panoramic views of the Arabian Sea.",
+        category: "historical",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Palaruvi Waterfalls",
+        description: "Meaning 'Stream of Milk', one of the highest waterfalls in Kerala.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Thenmala Ecotourism",
+        description: "India's first planned ecotourism destination with trekking and boating.",
+        category: "adventure",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Sasthamkotta Lake",
+        description: "The largest freshwater lake in Kerala, known as the Queen of Lakes.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Kollam Beach",
+        description: "A vibrant beach park perfect for evening strolls and watching sunsets.",
+        category: "beach",
+        emotion: "Romantic / Social",
+      },
+      {
+        name: "Shenduruny Wildlife Sanctuary",
+        description: "A sanctuary rich in biodiversity, part of the Agasthyamalai Biosphere Reserve.",
+        category: "nature",
+        emotion: "Mystery / Hidden",
+      },
+    ]
+  },
+  {
+    name: "Pathanamthitta",
+    country: "Kerala",
+    image: "https://i.ibb.co/nMzdk3YT/image-a92af501.png",
+    emotionalMatch: "Pilgrim's Paradise",
+
+    matchPercentage: 90,
+    description: "The headquarters of pilgrimage tourism with pristine forests and rivers.",
+    culturalHighlights: [
+      {
+        name: "Gavi Eco Tourism",
+        description: "A pristine forest area perfect for trekking, camping, and wildlife spotting.",
+        category: "nature",
+      },
+      {
+        name: "Aranmula Boat Race",
+        description: "The oldest river boat fiesta in Kerala, held during Onam.",
+        category: "festival",
+      },
+      {
+        name: "Konni Elephant Cage",
+        description: "A historic elephant training center and museum.",
+        category: "culture",
+      },
+    ],
+    safetyLevel: "medium",
+    bestTime: "Sep-Feb",
+    priceRange: "$$",
+    touristPlaces: [
+      {
+        name: "Sabarimala Temple",
+        description: "One of the most famous pilgrim centers, situated amidst dense forests.",
+        category: "temple",
+        emotion: "Spiritual / Divine",
+      },
+      {
+        name: "Perunthenaruvi Waterfalls",
+        description: "A natural wonder where water flows over a rocky bed into a ravine.",
+        category: "nature",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Aranmula Parthasarathy Temple",
+        description: "An ancient temple on the banks of the Pamba river, key to the boat race.",
+        category: "temple",
+        emotion: "Spiritual / Divine",
+      },
+      {
+        name: "Adavi Eco Tourism",
+        description: "Famous for coracle rafting (bowl boat riding) through the forest river.",
+        category: "adventure",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Kaviyoor Rock Cut Temple",
+        description: "An 8th-century rock-cut cave temple dedicated to Lord Shiva.",
+        category: "historical",
+        emotion: "Pride / History",
+      },
+      {
+        name: "Mannadi",
+        description: "The place where the freedom fighter Velu Thampi Dalawa took his last breath.",
+        category: "historical",
+        emotion: "Pride / History",
+      },
+    ]
+  },
+  {
+    name: "Alappuzha",
+    country: "Kerala",
+    image: "https://i.ibb.co/998Psxn0/image-5ff17120.png",
+    emotionalMatch: "Venice of the East",
+
+    matchPercentage: 96,
+    description: "World-famous backwaters and houseboats gliding through emerald canals.",
+    culturalHighlights: ["Houseboats", "Kuttanad", "Marari Beach"],
+    safetyLevel: "high",
+    bestTime: "Oct-Feb",
+    priceRange: "$$$",
+    touristPlaces: [
+      {
+        name: "Kuttanad Backwaters",
+        description: "Cruise through the 'Rice Bowl of Kerala', seeing farming below sea level.",
+        category: "nature",
+        emotion: "Awe / Wow",
+      },
+      {
+        name: "Alappuzha Beach",
+        description: "A historic beach with an old pier extending into the sea, holding colonial tales.",
+        category: "beach",
+        emotion: "Pride / History",
+      },
+      {
+        name: "Marari Beach",
+        description: "A pristine, sleepy fishing village beach perfect for doing absolutely nothing.",
+        category: "beach",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Ambalappuzha Temple",
+        description: "Famous for its unique architecture and the legendary sweet milk porridge (Palpayasam).",
+        category: "temple",
+        emotion: "Spiritual / Divine",
+      },
+      {
+        name: "Pathiramanal Island",
+        description: "A birdwatcher's paradise island in the middle of Vembanad Lake.",
+        category: "nature",
+        emotion: "Mystery / Hidden",
+      },
+      {
+        name: "Krishnapuram Palace",
+        description: "A museum palace famous for the massive Gajendra Moksha mural painting.",
+        category: "historical",
+        emotion: "Pride / History",
+      },
+      {
+        name: "Alleppey Lighthouse",
+        description: "Offers a panoramic view of the Arabian Sea and the sprawling town.",
+        category: "historical",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Revi Karunakaran Museum",
+        description: "A private museum showcasing crystals, ivory, and Tanjore paintings.",
+        category: "cultural",
+        emotion: "Intellectual",
+      },
+    ]
+  },
+  {
+    name: "Kottayam",
+    country: "Kerala",
+    image: "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?q=80&w=1000",
+    emotionalMatch: "Letters & Lakes",
+
+    matchPercentage: 93,
+    description: "A land of letters, latex, and lakes, bordered by the Western Ghats and Vembanad.",
+    culturalHighlights: [
+      {
+        name: "Kumarakom",
+        description: "A village cluster of little islands on Vembanad Lake, famous for bird watching.",
+        category: "nature",
+      },
+      {
+        name: "Ilaveezhapoonchira",
+        description: "A valley where no leaves fall, offering stunning sunrise and sunset views.",
+        category: "nature",
+      },
+      {
+        name: "Vaikom Temple",
+        description: "One of the oldest temples in Kerala, known for the Vaikom Ashtami festival.",
+        category: "culture",
+      },
+    ],
+    safetyLevel: "high",
+    bestTime: "Nov-Feb",
+    priceRange: "$$",
+    touristPlaces: [
+      {
+        name: "Vembanad Lake",
+        description: "The longest lake in India, the heart of Kerala’s backwater tourism.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Kumarakom Bird Sanctuary",
+        description: "A haven for migratory birds like the Siberian Stork.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Thirunakkara Mahadeva Temple",
+        description: "A 500-year-old temple known for its traditional Kerala architecture and murals.",
+        category: "temple",
+        emotion: "Spiritual / Divine",
+      },
+      {
+        name: "Marmala Waterfalls",
+        description: "A scenic waterfall located inside a private rubber estate.",
+        category: "nature",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Bay Island Driftwood Museum",
+        description: "A unique museum displaying artistic driftwood sculptures.",
+        category: "cultural",
+        emotion: "Intellectual",
+      },
+      {
+        name: "Mango Meadows Agricultural Theme Park",
+        description: "The world's first agricultural theme park with over 4800 species of plants.",
+        category: "nature",
+        emotion: "Intellectual",
+      },
+    ]
+  },
+  {
+    name: "Idukki",
+    country: "Kerala",
+    image: "https://i.ibb.co/S7fNP81M/image-18597594.png",
+    emotionalMatch: "Spice Garden",
+
+    matchPercentage: 99,
+    description: "A high-range paradise of tea plantations, wildlife sanctuaries, and misty peaks.",
+    culturalHighlights: ["Munnar Tea Gardens", "Thekkady", "Idukki Dam"],
+    safetyLevel: "high",
+    bestTime: "Sep-Mar",
+    priceRange: "$$",
+    touristPlaces: [
+      {
+        name: "Munnar Tea Gardens",
+        description: "Endless rolling hills covered in emerald green tea plantations.",
+        category: "nature",
+        emotion: "Awe / Wow",
+      },
+      {
+        name: "Eravikulam National Park",
+        description: "Home to the endangered Nilgiri Tahr and the blooming Neelakurinji flowers.",
+        category: "nature",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Idukki Dam",
+        description: "One of the highest arch dams in Asia, a marvel of engineering between two mountains.",
+        category: "historical",
+        emotion: "Awe / Wow",
+      },
+      {
+        name: "Ramakkalmedu",
+        description: "A windy hill station with massive statues and views of Tamil Nadu farmlands.",
+        category: "nature",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Thekkady (Periyar)",
+        description: "Famous for its elephant sightings and boat rides in the sanctuary.",
+        category: "nature",
+        emotion: "Mystery / Hidden",
+      },
+      {
+        name: "Vagamon",
+        description: "Pine forests, meadows, and mist make this a dreamy, quiet hill retreat.",
+        category: "nature",
+        emotion: "Romantic / Dreamy",
+      },
+      {
+        name: "Meesapulimala",
+        description: "The second highest peak in the majestic Western Ghats, a trekker’s dream.",
+        category: "adventure",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Hill View Park",
+        description: "Offers spectacular views of the Idukki Arch Dam and Cheruthoni Dam.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+    ]
+  },
+  {
+    name: "Ernakulam",
+    country: "Kerala",
+    image: "https://i.ibb.co/nsF5t6v7/image-fdbb96e7.png",
+    emotionalMatch: "Queen of Arabian Sea",
+
+    matchPercentage: 94,
+    description: "The commercial capital blending colonial heritage with cosmetic urbanity.",
+    culturalHighlights: ["Fort Kochi", "Marine Drive", "Cherai Beach"],
+    safetyLevel: "high",
+    bestTime: "Oct-Mar",
+    priceRange: "$$",
+    touristPlaces: [
+      {
+        name: "Fort Kochi",
+        description: "A potpourri of Portuguese, Dutch, and British colonial architecture with Chinese fishing nets.",
+        category: "historical",
+        emotion: "Pride / History",
+      },
+      {
+        name: "Mattancherry Palace",
+        description: "Known as the Dutch Palace, featuring Kerala murals depicting Hindu temple art.",
+        category: "historical",
+        emotion: "Pride / History",
+      },
+      {
+        name: "Marine Drive",
+        description: "A scenic promenade facing the backwaters, perfect for evening walks and sunsets.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Jew Town & Synagogue",
+        description: "A historic area with antique shops and the oldest active synagogue in the Commonwealth.",
+        category: "cultural",
+        emotion: "Mystery / Hidden",
+      },
+      {
+        name: "Cherai Beach",
+        description: "A lovely beach on Vypin Island, ideal for swimming and dolphin spotting.",
+        category: "beach",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Hill Palace Museum",
+        description: "The largest archaeological museum in Kerala, the former imperial administrative office.",
+        category: "historical",
+        emotion: "Pride / History",
+      },
+      {
+        name: "Bolgatty Palace",
+        description: "A Dutch palace on an island, now a heritage hotel with lush gardens.",
+        category: "historical",
+        emotion: "Romantic / Social",
+      },
+      {
+        name: "Mangalavanam Bird Sanctuary",
+        description: "An ecologically sensitive area in the heart of the city, hosting migratory birds.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+    ]
+  },
+  {
+    name: "Thrissur",
+    country: "Kerala",
+    image: "https://i.ibb.co/BKVL2Swf/image-f1937955.png",
+    emotionalMatch: "Cultural Capital",
+
+    matchPercentage: 95,
+    description: "The land of festivals, elephants, and sacred temple arts.",
+    culturalHighlights: [
+      {
+        name: "Athirappilly Falls",
+        description: "Experience the thunderous roar of Kerala's largest waterfall amidst dense Shola forests.",
+        category: "nature",
+      },
+      {
+        name: "Vadakkunnathan Temple",
+        description: "A 9-acre architectural masterpiece dedicated to Lord Shiva, centered in the city's heart.",
+        category: "culture",
+      },
+      {
+        name: "Thrissur Pooram",
+        description: "Witness the 'Mother of all Festivals' with caparisoned elephants, percussion, and fireworks.",
+        category: "festival",
+      },
+    ],
+    safetyLevel: "high",
+    bestTime: "All year",
+    priceRange: "$",
+    touristPlaces: [
+      {
+        name: "Vadakkunnathan Temple",
+        description: "An ancient Shiva temple sprawl with classic Kerala architecture and sacred groves.",
+        category: "temple",
+        emotion: "Spiritual / Divine",
+      },
+      {
+        name: "Athirappilly Waterfalls",
+        description: "The 'Niagara of India', mesmerizing and powerful, featured in epic films.",
+        category: "nature",
+        emotion: "Awe / Wow",
+      },
+      {
+        name: "Punnathur Kotta",
+        description: "An elephant sanctuary home to over 60 gentle giants, offering close encounters.",
+        category: "nature",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Shakthan Thampuran Palace",
+        description: "A blend of Dutch and Kerala architecture, telling stories of the Cochin dynasty.",
+        category: "historical",
+        emotion: "Pride / History",
+      },
+      {
+        name: "Vilangan Kunnu",
+        description: "Known as the 'Oxygen Jar' of Thrissur, offering panoramic views of the city.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Paramekkavu Bagavathi Temple",
+        description: "A key temple in the famous Thrissur Pooram, vibrant and culturally rich.",
+        category: "temple",
+        emotion: "Spiritual / Divine",
+      },
+      {
+        name: "Chavakkad Beach",
+        description: "Where the river meets the sea, famous for its serene Azhimukam and lighthouse.",
+        category: "beach",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Basilica of Our Lady of Dolours",
+        description: "The tallest church tower in Asia, a gothic marvel dominating the skyline.",
+        category: "temple",
+        emotion: "Awe / Wow",
+      },
+      {
+        name: "Peechi Dam & Wildlife Sanctuary",
+        description: "A perfect picnic spot with boating, botanical gardens, and potential wildlife sightings.",
+        category: "nature",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Snehatheeram Beach",
+        description: "Ideally named 'Love Shore', a well-maintained beach park perfect for families.",
+        category: "beach",
+        emotion: "Romantic / Social",
+      },
+      {
+        name: "Cheppara",
+        description: "A lesser-known rock hill offering stunning sunset views without the crowds.",
+        category: "nature",
+        emotion: "Mystery / Hidden",
+      },
+      {
+        name: "Vazhachal Waterfalls",
+        description: "Just upstream from Athirappilly, calmer but equally scenic with forest surroundings.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+    ]
+  },
+  {
+    name: "Palakkad",
+    country: "Kerala",
+    image: "https://i.ibb.co/TM7ywFH7/image-27767b2b.png",
+    emotionalMatch: "Granary of Kerala",
+
+    matchPercentage: 89,
+    description: "A gap in the ghats opening to endless paddy fields and palmyrah trees.",
+    culturalHighlights: [
+      {
+        name: "Silent Valley",
+        description: "One of the last remaining rainforests in India, home to the Lion-tailed Macaque.",
+        category: "nature",
+      },
+      {
+        name: "Malampuzha Dam",
+        description: "A large masonry dam with lush gardens, ropeway, and the famous Yakshi sculpture.",
+        category: "culture",
+      },
+      {
+        name: "Kalpathy Heritage Village",
+        description: "An ancient Brahmin settlement famous for its Ratholsavam (Chariot Festival).",
+        category: "festival",
+      },
+    ],
+    safetyLevel: "medium",
+    bestTime: "Sep-Feb",
+    priceRange: "$",
+    touristPlaces: [
+      {
+        name: "Palakkad Fort",
+        description: "One of the best-preserved forts in Kerala, built by Hyder Ali in 1766.",
+        category: "historical",
+        emotion: "Pride / History",
+      },
+      {
+        name: "Nelliyampathy Hills",
+        description: "Known as the 'Ooty of Kerala', offering cloud-kissed peaks and orange farms.",
+        category: "nature",
+        emotion: "Romantic / Dreamy",
+      },
+      {
+        name: "Parambikulam Tiger Reserve",
+        description: "A biodiversity hotspot with teak plantations and wildlife safaris.",
+        category: "nature",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Dhoni Waterfalls",
+        description: "Accessible via a trek through reserve forests, perfect for nature lovers.",
+        category: "adventure",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Kava Island",
+        description: "A scenic spot behind Malampuzha Dam, often appearing in movies.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Mangalam Dam",
+        description: "A quiet reservoir surrounded by dense forest, ideal for picnics.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+    ]
+  },
+  {
+    name: "Malappuram",
+    country: "Kerala",
+    image: "https://i.ibb.co/gLhmm0Mj/image-bed25b34.png",
+    emotionalMatch: "Soccer & Soul",
+
+    matchPercentage: 88,
+    description: "A historic land of teak forests, football fervor, and colonial legacy.",
+    culturalHighlights: [
+      {
+        name: "Teak Museum",
+        description: "World's first teak museum, showcasing the history and significance of Nilambur teak.",
+        category: "nature",
+      },
+      {
+        name: "Kottakkunnu",
+        description: "A hilltop garden offering panoramic views, ruins of an old fort, and open-air theater.",
+        category: "lifestyle",
+      },
+      {
+        name: "Thirunavaya",
+        description: "Historic site of the Mamankam festival on the banks of Bharathapuzha.",
+        category: "history",
+      },
+    ],
+    safetyLevel: "high",
+    bestTime: "Sep-Mar",
+    priceRange: "$",
+    touristPlaces: [
+      {
+        name: "Adyanpara Waterfalls",
+        description: "A cascading waterfall in Nilambur, surrounded by evergreen forests.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Kadalundi Bird Sanctuary",
+        description: "Where the river meets the sea, hosting over 60 species of migratory birds.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Padinharekara Beach",
+        description: "A stunning confluence of the Bharathapuzha, Tirur Puzha, and the Arabian Sea.",
+        category: "beach",
+        emotion: "Romantic / Social",
+      },
+      {
+        name: "Kodikuthimala",
+        description: "Known as the Ooty of Malappuram, offering trekking trails and watchtowers.",
+        category: "adventure",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Nilambur Kovilakam",
+        description: "The residence of the local rajas, featuring beautiful woodwork and architecture.",
+        category: "historical",
+        emotion: "Pride / History",
+      },
+      {
+        name: "Nedumkayam Rainforest",
+        description: "Dense teak forests with an old wooden bridge and elephants nearby.",
+        category: "nature",
+        emotion: "Mystery / Hidden",
+      },
+    ]
+  },
+  {
+    name: "Kozhikode",
+    country: "Kerala",
+    image: "https://i.ibb.co/RprKP0wm/image-7a2f9883.png",
+    emotionalMatch: "City of Spices",
+
+    matchPercentage: 91,
+    description: "Where history was made on the shores, famous for food and hospitality.",
+    culturalHighlights: [
+      {
+        name: "Kappad Beach",
+        description: "The historic beach where Vasco da Gama landed in 1498, changing history forever.",
+        category: "history",
+      },
+      {
+        name: "Beypore Port",
+        description: "Famous for Uru (wooden ship) building yards that have supplied vessels to Arabs for centuries.",
+        category: "livelihood",
+      },
+      {
+        name: "Mananchira Square",
+        description: "A man-made freshwater pond surrounded by temples, churches, and old homes.",
+        category: "culture",
+      },
+    ],
+    safetyLevel: "high",
+    bestTime: "Sep-May",
+    priceRange: "$",
+    touristPlaces: [
+      {
+        name: "Kozhikode Beach",
+        description: "A lively beach with an old crumbling pier and famous food stalls nearby.",
+        category: "beach",
+        emotion: "Romantic / Social",
+      },
+      {
+        name: "Mishkal Mosque",
+        description: "A 14th-century mosque with timber architecture, devoid of minarets.",
+        category: "temple",
+        emotion: "Spiritual / Divine",
+      },
+      {
+        name: "Thusharagiri Waterfalls",
+        description: "‘Snow-capped mountains’—a trekking destination with three waterfalls.",
+        category: "adventure",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Sargaalaya Arts & Crafts Village",
+        description: "A dedicated village showcasing Kerala's traditional artisans and crafts.",
+        category: "cultural",
+        emotion: "Intellectual",
+      },
+      {
+        name: "Kadalundi River View",
+        description: "Scenic boat rides through mangroves offering peace and bird watching.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Kakkayam Dam",
+        description: "A perfect trekking and boating location with high scenic value.",
+        category: "adventure",
+        emotion: "Adventure / Active",
+      },
+    ]
+  },
+  {
+    name: "Wayanad",
+    country: "Kerala",
+    image: "https://i.ibb.co/JWMhGhNp/image-e015f7e3.png",
+    emotionalMatch: "Green Paradise",
+
+    matchPercentage: 97,
+    description: "A pristine plateau of tribal heritage, caves, and spice plantations.",
+    culturalHighlights: [
+      {
+        name: "Edakkal Caves",
+        description: "Prehistoric caves featuring Stone Age carvings from 6000 BC.",
+        category: "history",
+      },
+      {
+        name: "Banasura Sagar Dam",
+        description: "The largest earth dam in India, set against the backdrop of misty hills.",
+        category: "nature",
+      },
+      {
+        name: "Tribal Heritage",
+        description: "The district has the largest population of tribals in Kerala, with unique customs.",
+        category: "people",
+      },
+    ],
+    safetyLevel: "high",
+    bestTime: "Oct-May",
+    priceRange: "$$",
+    touristPlaces: [
+      {
+        name: "Chembra Peak",
+        description: "A trekking paradise famous for its heart-shaped lake halfway to the top.",
+        category: "adventure",
+        emotion: "Romantic / Dreamy",
+      },
+      {
+        name: "Pookode Lake",
+        description: "A natural freshwater lake nestled among evergreen forests and hills.",
+        category: "nature",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Soochipara Waterfalls",
+        description: "A three-tiered waterfall surrounded by deciduous, evergreen, and montane forests.",
+        category: "nature",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Thirunelli Temple",
+        description: "An ancient temple dedicated to Lord Vishnu, known as the 'Kashi of the South'.",
+        category: "temple",
+        emotion: "Spiritual / Divine",
+      },
+      {
+        name: "Kuruvadweep",
+        description: "A protected river delta on the Kabini River, rich in flora and fauna.",
+        category: "nature",
+        emotion: "Mystery / Hidden",
+      },
+      {
+        name: "Wayanad Wildlife Sanctuary",
+        description: "An integral part of the Nilgiri Biosphere Reserve, home to tigers and elephants.",
+        category: "nature",
+        emotion: "Adventure / Active",
+      },
+    ]
+  },
+  {
+    name: "Kannur",
+    country: "Kerala",
+    image: "https://i.ibb.co/3GcBcRD/image-2e893e86.png",
+    emotionalMatch: "Looms & Lores",
+
+    matchPercentage: 90,
+    description: "The land of Theyyam, handlooms, and unspoiled beaches.",
+    culturalHighlights: [
+      {
+        name: "Theyyam",
+        description: "A spectacular ritual art form that blends dance, mime, and music.",
+        category: "festival",
+      },
+      {
+        name: "Handloom Heritage",
+        description: "Kannur is famous for its high-quality handloom exports and weaving cooperative societies.",
+        category: "livelihood",
+      },
+      {
+        name: "St. Angelo Fort",
+        description: "A massive triangular laterite fort standing guard over the Arabian Sea.",
+        category: "history",
+      },
+    ],
+    safetyLevel: "high",
+    bestTime: "Oct-May",
+    priceRange: "$",
+    touristPlaces: [
+      {
+        name: "Muzhappilangad Drive-in Beach",
+        description: "Asia’s longest drive-in beach, offering a unique coastal driving experience.",
+        category: "beach",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Payyambalam Beach",
+        description: "Known for its long stretch of golden sand and the sculpture of a mother and child.",
+        category: "beach",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Arakkal Museum",
+        description: "Dedicated to the Arakkal family, the only Muslim royal family in Kerala.",
+        category: "historical",
+        emotion: "Pride / History",
+      },
+      {
+        name: "Paithalmala",
+        description: "A hill station offering trekking trails and panoramic views of the Kodagu forests.",
+        category: "nature",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Parassinikadavu Snake Park",
+        description: "Home to a variety of snakes and other reptiles, dedicated to preservation.",
+        category: "nature",
+        emotion: "Intellectual",
+      },
+      {
+        name: "Dharmadam Island",
+        description: "A small private island visible from the beach, accessible during low tide.",
+        category: "nature",
+        emotion: "Mystery / Hidden",
+      },
+    ]
+  },
+  {
+    name: "Kasaragod",
+    country: "Kerala",
+    image: "https://i.ibb.co/21rFHFRL/image-d96e691f.png",
+    emotionalMatch: "Land of Gods",
+
+    matchPercentage: 92,
+    description: "The northernmost tip featuring majestic forts and distinct linguistic culture.",
+    culturalHighlights: [
+      {
+        name: "Bekal Fort",
+        description: "The largest fort in Kerala, offering commanding views of the coastline.",
+        category: "history",
+      },
+      {
+        name: "Linguistic Diversity",
+        description: "A melting pot of seven languages including Tulu, Kannada, and Malayalam.",
+        category: "culture",
+      },
+      {
+        name: "Yakshagana",
+        description: "A traditional theater form that combines dance, music, dialogue, and costume.",
+        category: "art",
+      },
+    ],
+    safetyLevel: "high",
+    bestTime: "Oct-Mar",
+    priceRange: "$",
+    touristPlaces: [
+      {
+        name: "Ranipuram",
+        description: "Often called the 'Ooty of Kasaragod', known for its trekking trails and shola forests.",
+        category: "nature",
+        emotion: "Adventure / Active",
+      },
+      {
+        name: "Ananthapura Lake Temple",
+        description: "The only lake temple in Kerala, legendary home of a vegetarian crocodile.",
+        category: "temple",
+        emotion: "Spiritual / Divine",
+      },
+      {
+        name: "Kappil Beach",
+        description: "A secluded and clean beach, perfect for those looking for solitude.",
+        category: "beach",
+        emotion: "Calm / Healing",
+      },
+      {
+        name: "Chandragiri Fort",
+        description: "A 17th-century fort situated beside the Chandragiri river.",
+        category: "historical",
+        emotion: "Pride / History",
+      },
+      {
+        name: "Valiyaparamba Backwaters",
+        description: "A scenic backwater stretch fed by four rivers and dotted with small islands.",
+        category: "nature",
+        emotion: "Romantic / Dreamy",
+      },
+      {
+        name: "Madhur Temple",
+        description: "An ancient Shiva temple with unique architecture and copper plate roofing.",
+        category: "temple",
+        emotion: "Spiritual / Divine",
+      },
+    ]
+  }
+];
+
 export const getAllDestinations = () => [
   ...tamilNaduDestinations,
+  ...keralaDestinations,
 ];
 
 export const getDestinationByName = (name: string) => {
