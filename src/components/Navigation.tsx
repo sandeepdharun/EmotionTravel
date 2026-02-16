@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home, MapPin, Compass, LayoutDashboard, Sparkles, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -16,8 +16,6 @@ export const Navigation: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const [bubbleStyle, setBubbleStyle] = useState({ left: 0, width: 0 });
-  const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,20 +25,7 @@ export const Navigation: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const activeIndex = navItems.findIndex(item => item.path === location.pathname);
-    const activeElement = navRefs.current[activeIndex];
 
-    if (activeElement) {
-      const parent = activeElement.parentElement;
-      if (parent) {
-        setBubbleStyle({
-          left: activeElement.offsetLeft,
-          width: activeElement.offsetWidth
-        });
-      }
-    }
-  }, [location.pathname]);
 
   return (
     <>
@@ -69,49 +54,44 @@ export const Navigation: React.FC = () => {
 
           {/* Desktop Links with Ultra-Premium Liquid Bubble */}
           <div className="hidden md:flex items-center gap-1 relative">
-            {/* Animated Bubble Background */}
-            <motion.div
-              className="absolute rounded-full"
-              animate={{
-                left: bubbleStyle.left,
-                width: bubbleStyle.width
-              }}
-              transition={{
-                type: "spring",
-                bounce: 0.2,
-                duration: 0.6
-              }}
-              style={{
-                background: "rgba(255, 255, 255, 0.15)",
-                boxShadow: `
-                  0 4px 15px rgba(0, 0, 0, 0.1), 
-                  inset 0 0 20px rgba(255, 255, 255, 0.2), 
-                  inset 0 1px 2px rgba(255, 255, 255, 0.6)
-                `,
-                backdropFilter: "blur(8px)",
-                top: 0,
-                bottom: 0,
-                height: "100%"
-              }}
-            >
-              {/* Inner Shine for Liquid Effect */}
-              <div className="absolute top-1 left-4 right-4 h-1 bg-white/40 rounded-full blur-[2px] opacity-60" />
-              {/* Bottom Glow */}
-              <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-white/10 to-transparent rounded-b-full opacity-40" />
-            </motion.div>
-
-            {navItems.map((item, index) => {
+            {navItems.map((item) => {
               const isActive = location.pathname === item.path;
               return (
                 <Link
                   key={item.path}
                   to={item.path}
-                  ref={el => navRefs.current[index] = el}
                   className={cn(
                     "relative z-10 flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-300 group",
                     isActive ? "text-white" : "text-white/60 hover:text-white"
                   )}
                 >
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-bubble"
+                      className="absolute inset-0 rounded-full"
+                      transition={{
+                        type: "spring",
+                        bounce: 0.2,
+                        duration: 0.6
+                      }}
+                      style={{
+                        background: "rgba(255, 255, 255, 0.15)",
+                        boxShadow: `
+                          0 4px 15px rgba(0, 0, 0, 0.1), 
+                          inset 0 0 20px rgba(255, 255, 255, 0.2), 
+                          inset 0 1px 2px rgba(255, 255, 255, 0.6)
+                        `,
+                        backdropFilter: "blur(8px)",
+                        zIndex: -1
+                      }}
+                    >
+                      {/* Inner Shine for Liquid Effect */}
+                      <div className="absolute top-1 left-4 right-4 h-1 bg-white/40 rounded-full blur-[2px] opacity-60" />
+                      {/* Bottom Glow */}
+                      <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-white/10 to-transparent rounded-b-full opacity-40" />
+                    </motion.div>
+                  )}
+
                   <div className="relative z-10 flex items-center gap-2">
                     <item.icon
                       size={16}

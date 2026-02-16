@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { PortalHero } from "@/components/PortalHero";
 import { DestinationCard } from "@/components/DestinationCard";
@@ -76,10 +77,11 @@ export default function Index() {
                   }`}
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
-                <img
+                <OptimizedImage
                   src={dest.image}
                   alt={dest.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full"
+                  imageClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
 
                 <div className="absolute bottom-0 left-0 p-8 z-20 w-full">

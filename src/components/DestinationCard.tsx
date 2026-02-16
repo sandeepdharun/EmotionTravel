@@ -28,6 +28,10 @@ export interface DestinationCardProps {
   hideGetGoingPlans?: boolean;
 }
 
+import { OptimizedImage } from "@/components/ui/optimized-image";
+
+// ... (props interface remains same)
+
 export const DestinationCard = ({
   name,
   country,
@@ -44,7 +48,6 @@ export const DestinationCard = ({
   const { toast } = useToast();
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
 
   const isSelected = selectedPlans.some(
     (plan) => plan.name === name && plan.region === country
@@ -80,13 +83,6 @@ export const DestinationCard = ({
     });
   };
 
-  const handleImageError = (
-    e: React.SyntheticEvent<HTMLImageElement, Event>
-  ) => {
-    const target = e.currentTarget;
-    if (target.src !== "/placeholder.svg") target.src = "/placeholder.svg";
-  };
-
   return (
     <Card
       className="group relative h-[500px] w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-500 hover:border-white/20 hover:-translate-y-2 hover:shadow-2xl"
@@ -103,13 +99,11 @@ export const DestinationCard = ({
       <div className="absolute inset-0 z-0 h-full w-full">
         <div className="absolute inset-0 bg-black/10 z-10 transition-colors duration-500 group-hover:bg-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-20" />
-        <img
+        <OptimizedImage
           src={image || "/placeholder.svg"}
           alt={`${name}, ${country}`}
-          className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${imageLoaded ? "opacity-100" : "opacity-0"
-            }`}
-          onError={handleImageError}
-          onLoad={() => setImageLoaded(true)}
+          className="h-full w-full"
+          imageClassName="transition-transform duration-700 group-hover:scale-105"
         />
       </div>
 

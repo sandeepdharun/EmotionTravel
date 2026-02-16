@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowLeft, MapPin, Calendar, DollarSign, Cloud, Heart, Compass } from "lucide-react";
@@ -64,10 +65,12 @@ export default function DestinationDetail() {
         <motion.div style={{ scale: heroScale, opacity: heroOpacity }} className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-background z-10" />
           <div className="absolute inset-0 bg-black/20 z-10" />
-          <img
+          <OptimizedImage
             src={destination.image}
             alt={destination.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full"
+            imageClassName="w-full h-full object-cover"
+            priority={true}
           />
         </motion.div>
 

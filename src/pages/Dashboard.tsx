@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { ParticleBackground } from "@/components/ParticleBackground";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -83,10 +84,11 @@ const Dashboard = () => {
     return (
       <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col h-full">
         <div className="relative">
-          <img
+          <OptimizedImage
             src={plan.image}
             alt={plan.name}
-            className="w-full h-48 object-cover"
+            className="w-full h-48"
+            imageClassName="w-full h-full object-cover"
           />
           <div className="absolute top-4 left-4">
             <Badge variant="secondary" className="bg-black/50 text-white">
@@ -252,10 +254,11 @@ const Dashboard = () => {
                       <div className="space-y-4">
                         {selectedPlans.slice(0, 5).map((plan) => (
                           <div key={plan.id} className="flex items-center space-x-4 p-4 rounded-lg bg-muted/50">
-                            <img
+                            <OptimizedImage
                               src={plan.image}
                               alt={plan.name}
-                              className="w-16 h-16 rounded-lg object-cover"
+                              className="w-16 h-16 rounded-lg"
+                              imageClassName="w-full h-full object-cover"
                             />
                             <div className="flex-1">
                               <h4 className="font-semibold">{plan.name}</h4>

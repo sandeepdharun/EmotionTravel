@@ -1,4 +1,5 @@
 import type { Destination } from "@/data/destinations";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 interface HeroHeaderProps {
   destination: Destination;
@@ -27,10 +28,12 @@ export const HeroHeader = ({ destination }: HeroHeaderProps) => {
     <section className="relative w-full h-[80vh] min-h-[700px] overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
+        <OptimizedImage
           src={destination.image}
           alt={`${destination.name} landscape`}
-          className="w-full h-full object-cover"
+          className="w-full h-full"
+          imageClassName="w-full h-full object-cover"
+          priority={true}
         />
         {/* Dark Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
