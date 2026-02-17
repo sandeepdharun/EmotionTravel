@@ -19,52 +19,105 @@ export default function Index() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
   const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
 
-  // Mapped destinations logic
+  // Create a quick lookup map for destinations by name
+  const destinationMap = Object.fromEntries(
+    keralaDestinations.map((d) => [d.name, d])
+  );
+
+  // Month index: 0 = January, 11 = December
   const keralaDestinationsByMonth: Record<number, string[]> = {
-    0: ["Munnar", "Alleppey", "Wayanad", "Fort Kochi", "Varkala"],          // Jan
-    1: ["Munnar", "Kumarakom", "Wayanad", "Fort Kochi", "Kovalam"],         // Feb
-    2: ["Munnar", "Wayanad", "Thekkady", "Vagamon", "Varkala"],             // Mar
-    3: ["Munnar", "Wayanad", "Thekkady", "Athirappilly", "Vagamon"],        // Apr
-    4: ["Munnar", "Wayanad", "Thekkady", "Vagamon", "Varkala"],             // May
-    5: ["Munnar", "Wayanad", "Athirappilly", "Kumarakom", "Bekal"],         // Jun
-    6: ["Wayanad", "Athirappilly", "Munnar", "Kumarakom", "Gavi"],          // Jul
-    7: ["Alleppey", "Kumarakom", "Munnar", "Wayanad", "Fort Kochi"],        // Aug
-    8: ["Alleppey", "Kumarakom", "Munnar", "Wayanad", "Athirappilly"],      // Sep
-    9: ["Munnar", "Wayanad", "Thekkady", "Alleppey", "Varkala"],            // Oct
-    10: ["Munnar", "Alleppey", "Wayanad", "Fort Kochi", "Kovalam"],         // Nov
-    11: ["Munnar", "Alleppey", "Wayanad", "Fort Kochi", "Varkala"],         // Dec
+    0: [ // Jan
+      "Thiruvananthapuram",
+      "Kollam",
+      "Alappuzha",
+      "Ernakulam",
+      "Kozhikode",
+    ],
+    1: [ // Feb
+      "Kottayam",
+      "Idukki",
+      "Pathanamthitta",
+      "Wayanad",
+      "Kannur",
+    ],
+    2: [ // Mar
+      "Thrissur",
+      "Palakkad",
+      "Malappuram",
+      "Kasaragod",
+      "Thiruvananthapuram",
+    ],
+    3: [ // Apr
+      "Kollam",
+      "Alappuzha",
+      "Ernakulam",
+      "Wayanad",
+      "Kannur",
+    ],
+    4: [ // May
+      "Idukki",
+      "Kottayam",
+      "Pathanamthitta",
+      "Kozhikode",
+      "Kasaragod",
+    ],
+    5: [ // Jun
+      "Alappuzha",
+      "Kollam",
+      "Thrissur",
+      "Palakkad",
+      "Malappuram",
+    ],
+    6: [ // Jul
+      "Wayanad",
+      "Idukki",
+      "Kottayam",
+      "Kannur",
+      "Kasaragod",
+    ],
+    7: [ // Aug
+      "Thiruvananthapuram",
+      "Pathanamthitta",
+      "Ernakulam",
+      "Thrissur",
+      "Kozhikode",
+    ],
+    8: [ // Sep
+      "Kollam",
+      "Alappuzha",
+      "Palakkad",
+      "Malappuram",
+      "Wayanad",
+    ],
+    9: [ // Oct
+      "Kottayam",
+      "Idukki",
+      "Kannur",
+      "Kasaragod",
+      "Ernakulam",
+    ],
+    10: [ // Nov
+      "Thiruvananthapuram",
+      "Kollam",
+      "Alappuzha",
+      "Wayanad",
+      "Kozhikode",
+    ],
+    11: [ // Dec
+      "Pathanamthitta",
+      "Thrissur",
+      "Palakkad",
+      "Malappuram",
+      "Kannur",
+    ],
   };
 
   const monthIndex = new Date().getMonth();
   const curatedNames = keralaDestinationsByMonth[monthIndex] || keralaDestinationsByMonth[4];
 
-  const destinationResolver: Record<string, string> = {
-    "Munnar": "Idukki",
-    "Alleppey": "Alappuzha",
-    "Wayanad": "Wayanad",
-    "Fort Kochi": "Ernakulam",
-    "Varkala": "Thiruvananthapuram",
-    "Kumarakom": "Kottayam",
-    "Kovalam": "Thiruvananthapuram",
-    "Thekkady": "Idukki",
-    "Vagamon": "Idukki",
-    "Athirappilly": "Thrissur",
-    "Bekal": "Kasaragod",
-    "Gavi": "Pathanamthitta",
-  };
-
   const featured = curatedNames
-    .map((name) => {
-      const districtName = destinationResolver[name] || name;
-      const district = keralaDestinations.find((d) => d.name === districtName);
-      if (!district) return null;
-      return {
-        ...district,
-        name: name, // Override name with specific place name
-      };
-    })
-    .filter((check): check is NonNullable<typeof check> => check !== null)
-    .slice(0, 5);
+    .map((name) => destinationMap[name])
+    .filter((check): check is NonNullable<typeof check> => check !== undefined && check !== null);
 
   return (
     <div ref={containerRef} className="relative min-h-[200vh]">
@@ -188,25 +241,27 @@ export default function Index() {
                 className={`group relative overflow-hidden rounded-3xl border border-white/10 ${i === 0 || i === 3 ? "md:col-span-8" : "md:col-span-4"
                   }`}
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
-                <OptimizedImage
-                  src={dest.image}
-                  alt={dest.name}
-                  className="absolute inset-0 w-full h-full"
-                  imageClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+                <Link to={`/destination/${dest.country}/${dest.name}`} className="block w-full h-full relative cursor-pointer">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
+                  <OptimizedImage
+                    src={dest.image}
+                    alt={dest.name}
+                    className="absolute inset-0 w-full h-full"
+                    imageClassName="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
 
-                <div className="absolute bottom-0 left-0 p-8 z-20 w-full">
-                  <div className="flex justify-between items-end">
-                    <div>
-                      <p className="text-bio-cyan text-sm tracking-widest uppercase mb-2">{dest.emotionalMatch}</p>
-                      <h3 className="font-display text-3xl md:text-4xl text-white group-hover:text-bio-gold transition-colors">{dest.name}</h3>
-                    </div>
-                    <div className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                      →
+                  <div className="absolute bottom-0 left-0 p-8 z-20 w-full">
+                    <div className="flex justify-between items-end">
+                      <div>
+                        <p className="text-bio-cyan text-sm tracking-widest uppercase mb-2">{dest.emotionalMatch}</p>
+                        <h3 className="font-display text-3xl md:text-4xl text-white group-hover:text-bio-gold transition-colors">{dest.name}</h3>
+                      </div>
+                      <div className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                        →
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>
