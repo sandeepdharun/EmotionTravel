@@ -3,6 +3,7 @@ import { OptimizedImage } from "@/components/ui/optimized-image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { PortalHero } from "@/components/PortalHero";
 import { DestinationCard } from "@/components/DestinationCard";
+import { EmotionCameraSection } from "@/components/EmotionCameraSection";
 import { keralaDestinations } from "@/data/destinations";
 import { ArrowDown, ScanFace, Compass } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -202,6 +203,9 @@ export default function Index() {
               </motion.div>
             ))}
           </div>
+
+          {/* Live Emotion Camera Section */}
+          <EmotionCameraSection />
         </div>
       </div>
     </div>
