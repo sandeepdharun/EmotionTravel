@@ -96,7 +96,13 @@ export default function Index() {
             className="mt-10 flex flex-col sm:flex-row gap-6 items-center justify-center w-full"
           >
             {/* Primary CTA: Detect My Emotion */}
-            <button className="group relative px-8 py-4 bg-white/10 backdrop-blur-xl rounded-full border border-white/10 overflow-hidden transition-all duration-500 hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-[1.02] w-full sm:w-auto min-w-[200px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 active:scale-95">
+            <button
+              onClick={() => {
+                const element = document.getElementById("emotion-camera-section");
+                element?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="group relative px-8 py-4 bg-white/10 backdrop-blur-xl rounded-full border border-white/10 overflow-hidden transition-all duration-500 hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-[1.02] w-full sm:w-auto min-w-[200px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 active:scale-95"
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[200%] skew-x-12 transition-transform duration-1000 ease-in-out group-hover:translate-x-[200%]" />
               <div className="relative flex items-center justify-center gap-3 text-white">
                 <style>{`
@@ -109,6 +115,7 @@ export default function Index() {
                   .face-scan-line {
                     animation: face-scan 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
                     transform-origin: center;
+                    color: #4ade80;
                   }
                   .group:hover .face-scan-line {
                     animation-duration: 1.6s;
@@ -119,7 +126,7 @@ export default function Index() {
                   }
                 `}</style>
                 <svg
-                  className="w-5 h-5 text-indigo-300 group-hover:text-indigo-200 transition-colors shrink-0"
+                  className="w-5 h-5 text-green-400 group-hover:text-green-300 transition-colors shrink-0"
                   viewBox="0 0 24 24"
                   fill="none"
                   aria-hidden="true"
@@ -205,7 +212,9 @@ export default function Index() {
           </div>
 
           {/* Live Emotion Camera Section */}
-          <EmotionCameraSection />
+          <div id="emotion-camera-section">
+            <EmotionCameraSection />
+          </div>
         </div>
       </div>
     </div>
