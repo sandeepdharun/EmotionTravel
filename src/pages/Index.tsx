@@ -3,8 +3,9 @@ import { OptimizedImage } from "@/components/ui/optimized-image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { PortalHero } from "@/components/PortalHero";
 import { DestinationCard } from "@/components/DestinationCard";
-import { tamilNaduDestinations } from "@/data/destinations";
-import { ArrowDown } from "lucide-react";
+import { keralaDestinations } from "@/data/destinations";
+import { ArrowDown, ScanFace, Compass } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Index() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -17,8 +18,52 @@ export default function Index() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
   const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
 
-  // Featured destinations for Bento Grid
-  const featured = tamilNaduDestinations.slice(0, 5);
+  // Mapped destinations logic
+  const keralaDestinationsByMonth: Record<number, string[]> = {
+    0: ["Munnar", "Alleppey", "Wayanad", "Fort Kochi", "Varkala"],          // Jan
+    1: ["Munnar", "Kumarakom", "Wayanad", "Fort Kochi", "Kovalam"],         // Feb
+    2: ["Munnar", "Wayanad", "Thekkady", "Vagamon", "Varkala"],             // Mar
+    3: ["Munnar", "Wayanad", "Thekkady", "Athirappilly", "Vagamon"],        // Apr
+    4: ["Munnar", "Wayanad", "Thekkady", "Vagamon", "Varkala"],             // May
+    5: ["Munnar", "Wayanad", "Athirappilly", "Kumarakom", "Bekal"],         // Jun
+    6: ["Wayanad", "Athirappilly", "Munnar", "Kumarakom", "Gavi"],          // Jul
+    7: ["Alleppey", "Kumarakom", "Munnar", "Wayanad", "Fort Kochi"],        // Aug
+    8: ["Alleppey", "Kumarakom", "Munnar", "Wayanad", "Athirappilly"],      // Sep
+    9: ["Munnar", "Wayanad", "Thekkady", "Alleppey", "Varkala"],            // Oct
+    10: ["Munnar", "Alleppey", "Wayanad", "Fort Kochi", "Kovalam"],         // Nov
+    11: ["Munnar", "Alleppey", "Wayanad", "Fort Kochi", "Varkala"],         // Dec
+  };
+
+  const monthIndex = new Date().getMonth();
+  const curatedNames = keralaDestinationsByMonth[monthIndex] || keralaDestinationsByMonth[4];
+
+  const destinationResolver: Record<string, string> = {
+    "Munnar": "Idukki",
+    "Alleppey": "Alappuzha",
+    "Wayanad": "Wayanad",
+    "Fort Kochi": "Ernakulam",
+    "Varkala": "Thiruvananthapuram",
+    "Kumarakom": "Kottayam",
+    "Kovalam": "Thiruvananthapuram",
+    "Thekkady": "Idukki",
+    "Vagamon": "Idukki",
+    "Athirappilly": "Thrissur",
+    "Bekal": "Kasaragod",
+    "Gavi": "Pathanamthitta",
+  };
+
+  const featured = curatedNames
+    .map((name) => {
+      const districtName = destinationResolver[name] || name;
+      const district = keralaDestinations.find((d) => d.name === districtName);
+      if (!district) return null;
+      return {
+        ...district,
+        name: name, // Override name with specific place name
+      };
+    })
+    .filter((check): check is NonNullable<typeof check> => check !== null)
+    .slice(0, 5);
 
   return (
     <div ref={containerRef} className="relative min-h-[200vh]">
@@ -40,8 +85,67 @@ export default function Index() {
             transition={{ delay: 0.5, duration: 1 }}
             className="mt-6 text-xl md:text-2xl font-light text-white/70 max-w-lg"
           >
-            Discover the unseen emotions of Tamil Nadu & Kerala.
+            Let your emotion guide you to the perfect destination.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="mt-10 flex flex-col sm:flex-row gap-6 items-center justify-center w-full"
+          >
+            {/* Primary CTA: Detect My Emotion */}
+            <button className="group relative px-8 py-4 bg-white/10 backdrop-blur-xl rounded-full border border-white/10 overflow-hidden transition-all duration-500 hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-[1.02] w-full sm:w-auto min-w-[200px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 active:scale-95">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[200%] skew-x-12 transition-transform duration-1000 ease-in-out group-hover:translate-x-[200%]" />
+              <div className="relative flex items-center justify-center gap-3 text-white">
+                <style>{`
+                  @keyframes face-scan {
+                    0% { transform: translateY(4px); opacity: 0; }
+                    15% { opacity: 1; }
+                    85% { opacity: 1; }
+                    100% { transform: translateY(18px); opacity: 0; }
+                  }
+                  .face-scan-line {
+                    animation: face-scan 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+                    transform-origin: center;
+                  }
+                  .group:hover .face-scan-line {
+                    animation-duration: 1.6s;
+                    filter: drop-shadow(0 0 3px currentColor);
+                  }
+                  @media (prefers-reduced-motion: reduce) {
+                    .face-scan-line { animation: none; opacity: 1; transform: translateY(11px); }
+                  }
+                `}</style>
+                <svg
+                  className="w-5 h-5 text-indigo-300 group-hover:text-indigo-200 transition-colors shrink-0"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path d="M7 4H5C4.44772 4 4 4.44772 4 5V7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M17 4H19C19.5523 4 20 4.44772 20 5V7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M20 17V19C20 19.5523 19.5523 20 19 20H17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M7 20H5C4.44772 20 4 19.5523 4 19V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="9" cy="9" r="1.5" fill="currentColor" className="opacity-40" />
+                  <circle cx="15" cy="9" r="1.5" fill="currentColor" className="opacity-40" />
+                  <path d="M9 14.5C9 14.5 10 15.5 12 15.5C14 15.5 15 14.5 15 14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="opacity-40" />
+                  <rect x="3" y="0" width="18" height="2" rx="1" fill="currentColor" className="face-scan-line opacity-80" />
+                </svg>
+                <span className="font-medium tracking-wide">Detect My Emotion</span>
+              </div>
+            </button>
+
+            {/* Secondary CTA: Find My Escape */}
+            <Link to="/kerala">
+              <button className="group relative px-8 py-4 bg-transparent backdrop-blur-md rounded-full border border-white/20 overflow-hidden transition-all duration-500 hover:bg-white/5 hover:border-white/50 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:scale-[1.02] w-full sm:w-auto min-w-[200px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 active:scale-95">
+                <div className="relative flex items-center justify-center gap-3 text-white/80 group-hover:text-white transition-colors">
+                  <span className="font-medium tracking-wide">Find My Escape</span>
+                  <Compass className="w-5 h-5 transition-transform duration-500 group-hover:rotate-45" />
+                </div>
+              </button>
+            </Link>
+          </motion.div>
         </motion.div>
 
         <motion.div
@@ -87,7 +191,7 @@ export default function Index() {
                 <div className="absolute bottom-0 left-0 p-8 z-20 w-full">
                   <div className="flex justify-between items-end">
                     <div>
-                      <p className="text-bio-cyan text-sm tracking-widest uppercase mb-2">{dest.country}</p>
+                      <p className="text-bio-cyan text-sm tracking-widest uppercase mb-2">{dest.emotionalMatch}</p>
                       <h3 className="font-display text-3xl md:text-4xl text-white group-hover:text-bio-gold transition-colors">{dest.name}</h3>
                     </div>
                     <div className="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
