@@ -1,8 +1,23 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Camera, CameraOff, AlertCircle } from "lucide-react";
+import { Camera, CameraOff, AlertCircle, Mic, MicOff, Square, Edit2, Globe } from "lucide-react";
 import * as faceapi from "face-api.js";
+
+// Type definition for Web Speech API
+interface IWindow extends Window {
+    webkitSpeechRecognition: any;
+    SpeechRecognition: any;
+}
+
+// Supported text-to-speech languages
+const SUPPORTED_LANGUAGES = [
+    { code: 'en-US', name: 'English (US)' },
+    { code: 'en-GB', name: 'English (UK)' },
+    { code: 'ta-IN', name: 'Tamil' },
+    { code: 'hi-IN', name: 'Hindi' },
+    { code: 'ml-IN', name: 'Malayalam' },
+];
 
 export function EmotionCameraSection() {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -12,6 +27,23 @@ export function EmotionCameraSection() {
     const [detectedEmotion, setDetectedEmotion] = useState<string | null>(null);
     const detectionIntervalRef = useRef<NodeJS.Timeout | null>(null);
     const [modelsLoaded, setModelsLoaded] = useState(false);
+    const [emotionCaptured, setEmotionCaptured] = useState(false);
+
+    // Speech Recognition State
+    const [isListening, setIsListening] = useState(false);
+    const [speechText, setSpeechText] = useState("");
+    const [speechError, setSpeechError] = useState<string | null>(null);
+
+    // Initialize language with navigator language if supported, else en-US
+    const [speechLanguage, setSpeechLanguage] = useState<string>(() => {
+        const browserLang = navigator.language;
+        // Check if browserLang matches exactly or is a prefix of a supported language
+        const supported = SUPPORTED_LANGUAGES.find(l => l.code === browserLang || l.code.startsWith(browserLang));
+        return supported ? supported.code : "en-US";
+    });
+    const recognitionRef = useRef<any>(null);
+
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     useEffect(() => {
         // Load models on mount
@@ -56,10 +88,20 @@ export function EmotionCameraSection() {
 
                         if (dominant && dominant[1] > 0.5) { // Threshold
                             setDetectedEmotion(dominant[0]);
+
+                            // 🛑 FREEZE EMOTION & STOP DETECTION 🛑
+                            if (detectionIntervalRef.current) {
+                                clearInterval(detectionIntervalRef.current);
+                                detectionIntervalRef.current = null;
+                            }
+                            setEmotionCaptured(true);
                         } else {
-                            setDetectedEmotion(null);
+                            // Only reset if we haven't captured yet
+                            if (!emotionCaptured) {
+                                setDetectedEmotion(null);
+                            }
                         }
-                    } else {
+                    } else if (!emotionCaptured) {
                         setDetectedEmotion(null);
                     }
                 } catch (err) {
@@ -84,6 +126,8 @@ export function EmotionCameraSection() {
             videoRef.current.srcObject = null;
         }
         setDetectedEmotion(null);
+        setEmotionCaptured(false);
+        stopListening();
     };
 
     const startCamera = async () => {
@@ -94,6 +138,7 @@ export function EmotionCameraSection() {
 
         setLoading(true);
         setError(null);
+        setEmotionCaptured(false);
         try {
             const mediaStream = await navigator.mediaDevices.getUserMedia({
                 video: { facingMode: "user" },
@@ -118,6 +163,120 @@ export function EmotionCameraSection() {
 
     const handleStopCamera = () => {
         stopCameraAndDetection();
+    };
+
+    const handleRecapture = () => {
+        setDetectedEmotion(null);
+        setEmotionCaptured(false);
+        setSpeechText("");
+        setSpeechError(null);
+        startDetection();
+    };
+
+    // --- Speech Recognition Logic ---
+
+    const startListening = (retryLang?: string) => {
+        if (isListening) return;
+
+        setSpeechError(null);
+        const windowObj = window as unknown as IWindow;
+        const SpeechRecognition = windowObj.SpeechRecognition || windowObj.webkitSpeechRecognition;
+
+        if (!SpeechRecognition) {
+            setSpeechError("Voice recognition is not supported in this browser.");
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.continuous = true; // Enable continuous recording
+        recognition.interimResults = false;
+
+        // Determine language: explicit retry > navigator > default
+        // Ensure retryLang is actually a string (not an event object from onClick)
+        const targetLang = (typeof retryLang === 'string' && retryLang)
+            ? retryLang
+            : speechLanguage;
+
+        recognition.lang = targetLang;
+        if (retryLang && retryLang !== speechLanguage) setSpeechLanguage(retryLang);
+
+        console.log(`Starting speech recognition in: ${targetLang}`);
+
+        recognition.onstart = () => {
+            setIsListening(true);
+        };
+
+        recognition.onresult = (event: any) => {
+            const currentIndex = event.resultIndex;
+            const transcript = event.results[currentIndex][0].transcript;
+            setSpeechText(prev => prev ? `${prev} ${transcript}` : transcript);
+        };
+
+        recognition.onerror = (event: any) => {
+            console.error("Speech recognition error", event.error);
+
+            // Automatic Language Fallback
+            if (event.error === 'language-not-supported' && targetLang !== 'en-US') {
+                console.warn("Language not supported, retrying with en-US...");
+                setIsListening(false);
+                setTimeout(() => startListening('en-US'), 100);
+                return;
+            }
+
+            if (event.error === 'not-allowed') {
+                setSpeechError("Microphone blocked. Check permissions.");
+            } else if (event.error === 'no-speech') {
+                // Ignore no-speech in continuous mode, just keep listening
+                return;
+            } else if (event.error === 'network') {
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    setSpeechError("Chrome blocks local speech. Check console for fix.");
+                    console.warn("----------------------------------------------------------------");
+                    console.warn("SPEECH RECOGNITION FIX FOR LOCALHOST (CHROME):");
+                    console.warn("1. Go to: chrome://flags/#unsafely-treat-insecure-origin-as-secure");
+                    console.warn("2. Enable it.");
+                    console.warn(`3. Add "http://${window.location.host}" to the text box.`);
+                    console.warn("4. Relaunch Chrome.");
+                    console.warn("Alternatively, try using Microsoft Edge or Firefox.");
+                    console.warn("----------------------------------------------------------------");
+                } else {
+                    setSpeechError("Network error. Please check your connection.");
+                }
+            } else {
+                setSpeechError("Voice unavailable. Please type.");
+            }
+
+            // Only stop on fatal errors
+            if (event.error !== 'no-speech') {
+                setIsListening(false);
+                if (textareaRef.current) {
+                    textareaRef.current.focus();
+                }
+            }
+        };
+
+        recognition.onend = () => {
+            setIsListening(false);
+        };
+
+        recognitionRef.current = recognition;
+        recognition.start();
+    };
+
+    const stopListening = () => {
+        if (recognitionRef.current) {
+            recognitionRef.current.stop();
+            recognitionRef.current = null;
+        }
+        setIsListening(false);
+    };
+
+    const toggleListening = () => {
+        if (isListening) {
+            stopListening();
+        } else {
+            startListening();
+        }
     };
 
     return (
@@ -218,6 +377,23 @@ export function EmotionCameraSection() {
                                     {loading ? "Accessing Camera..." : (!modelsLoaded ? "Loading Models..." : "Turn On Camera")}
                                 </span>
                             </button>
+                        ) : emotionCaptured ? (
+                            <div className="flex gap-4">
+                                <button
+                                    onClick={handleRecapture}
+                                    className="px-8 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full font-medium border border-white/10 transition-all duration-300 hover:border-white/30 backdrop-blur-md flex items-center gap-2"
+                                >
+                                    <Camera className="w-4 h-4" />
+                                    Recapture
+                                </button>
+                                <button
+                                    onClick={handleStopCamera}
+                                    className="px-8 py-3 bg-red-500/20 hover:bg-red-500/30 text-red-200 rounded-full font-medium border border-red-500/30 transition-all duration-300 backdrop-blur-md flex items-center gap-2"
+                                >
+                                    <CameraOff className="w-4 h-4" />
+                                    Close
+                                </button>
+                            </div>
                         ) : (
                             <button
                                 onClick={handleStopCamera}
@@ -228,6 +404,80 @@ export function EmotionCameraSection() {
                             </button>
                         )}
                     </div>
+
+                    {/* Speech Recognition Section - Only after emotion is detected */}
+                    {stream && emotionCaptured && (
+                        <div className="mt-8 border-t border-white/10 pt-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                            <div className="flex flex-col items-center gap-6 max-w-2xl mx-auto">
+                                <p className="text-white/60 text-sm">
+                                    Describe your situation to personalize your recommendation
+                                </p>
+
+                                <div className="flex flex-col items-center gap-4 w-full">
+
+
+                                    {/* Language Selector */}
+                                    <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-full px-4 py-2 hover:bg-white/10 transition-colors mb-4">
+                                        <Globe className="w-4 h-4 text-indigo-400" />
+                                        <select
+                                            value={speechLanguage}
+                                            onChange={(e) => setSpeechLanguage(e.target.value)}
+                                            className="bg-transparent text-white text-sm focus:outline-none cursor-pointer [&>option]:bg-black [&>option]:text-white"
+                                            disabled={isListening}
+                                        >
+                                            {SUPPORTED_LANGUAGES.map((lang) => (
+                                                <option key={lang.code} value={lang.code}>
+                                                    {lang.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                    {/* Mic Button */}
+                                    <button
+                                        onClick={toggleListening}
+                                        className={`group relative p-4 rounded-full transition-all duration-300 ${isListening
+                                            ? "bg-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.5)] animate-pulse"
+                                            : "bg-white/5 text-white hover:bg-white/10 border border-white/10 hover:border-white/30"
+                                            }`}
+                                    >
+                                        {isListening ? (
+                                            <Square className="w-6 h-6 fill-current" />
+                                        ) : (
+                                            <Mic className="w-6 h-6" />
+                                        )}
+                                    </button>
+
+                                    {/* Status Text */}
+                                    <div className="h-6 text-sm font-medium tracking-wide">
+                                        {isListening ? (
+                                            <span className="text-red-400 font-semibold animate-pulse">Recording... Click stop to save</span>
+                                        ) : speechError ? (
+                                            <span className="text-amber-400">{speechError}</span>
+                                        ) : (
+                                            <span className="text-white/40">
+                                                {speechText ? "Edit your story below" : "Click mic to start recording"}
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    {/* Editable Text Area */}
+                                    <div className="w-full relative group">
+                                        <div className="absolute top-3 left-3 text-white/20 pointer-events-none">
+                                            <Edit2 className="w-4 h-4" />
+                                        </div>
+                                        <textarea
+                                            ref={textareaRef}
+                                            value={speechText}
+                                            onChange={(e) => setSpeechText(e.target.value)}
+                                            placeholder="Your story will appear here..."
+                                            className="w-full bg-black/40 hover:bg-black/60 focus:bg-black/80 border border-white/10 focus:border-indigo-500/50 rounded-xl py-4 pl-10 pr-4 text-white placeholder:text-white/20 outline-none transition-all duration-300 min-h-[100px] resize-none leading-relaxed"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </motion.div>
             </div>
         </section>
